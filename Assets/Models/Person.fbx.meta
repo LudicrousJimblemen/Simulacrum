@@ -1,43 +1,48 @@
 fileFormatVersion: 2
-guid: 3614ceda55121fd43a24c948a87c97fb
-timeCreated: 1455923066
+guid: ed45ee5e4cf91d640831b25a34cb0504
+timeCreated: 1455936654
 licenseType: Free
 ModelImporter:
-  serializedVersion: 18
+  serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Armature
-    100004: Bust
-    100006: Head
-    100008: Left Foot
-    100010: Left Foreleg
-    100012: Left Toes
-    100014: Left Upper Leg
-    100016: Mesh
-    100018: Neck
+    100000: Armature
+    100002: Bust
+    100004: Head
+    100006: Left Foot
+    100008: Left Foreleg
+    100010: Left Toes
+    100012: Left Upper Leg
+    100014: Mesh
+    100016: Neck
+    100018: //RootNode
     100020: Right Foot
     100022: Right Foreleg
     100024: Right Toes
     100026: Right Upper Leg
     100028: Root
-    400000: //RootNode
-    400002: Armature
-    400004: Bust
-    400006: Head
-    400008: Left Foot
-    400010: Left Foreleg
-    400012: Left Toes
-    400014: Left Upper Leg
-    400016: Mesh
-    400018: Neck
+    400000: Armature
+    400002: Bust
+    400004: Head
+    400006: Left Foot
+    400008: Left Foreleg
+    400010: Left Toes
+    400012: Left Upper Leg
+    400014: Mesh
+    400016: Neck
+    400018: //RootNode
     400020: Right Foot
     400022: Right Foreleg
     400024: Right Toes
     400026: Right Upper Leg
     400028: Root
-    2300000: Mesh
-    3300000: Mesh
     4300000: Mesh
+    7400000: Excited
+    7400002: Armature|Excited
+    7400004: Armature|Run
+    7400006: Armature|Running
+    7400008: Armature|Idle
+    9500000: //RootNode
+    13700000: Mesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -45,6 +50,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    resampleRotations: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
@@ -52,12 +58,186 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 1
-    animationRotationError: .5
-    animationPositionError: .5
-    animationScaleError: .5
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|Excited
+      takeName: Armature|Excited
+      firstFrame: 0
+      lastFrame: 44
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bust
+        weight: 1
+      - path: Armature/Root/Bust/Neck
+        weight: 1
+      - path: Armature/Root/Bust/Neck/Head
+        weight: 1
+      - path: Armature/Root/Left Upper Leg
+        weight: 1
+      - path: Armature/Root/Left Upper Leg/Left Foreleg
+        weight: 1
+      - path: Armature/Root/Left Upper Leg/Left Foreleg/Left Foot
+        weight: 1
+      - path: Armature/Root/Left Upper Leg/Left Foreleg/Left Foot/Left Toes
+        weight: 1
+      - path: Armature/Root/Right Upper Leg
+        weight: 1
+      - path: Armature/Root/Right Upper Leg/Right Foreleg
+        weight: 1
+      - path: Armature/Root/Right Upper Leg/Right Foreleg/Right Foot
+        weight: 1
+      - path: Armature/Root/Right Upper Leg/Right Foreleg/Right Foot/Right Toes
+        weight: 1
+      - path: Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Running
+      takeName: Armature|Running
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bust
+        weight: 1
+      - path: Armature/Root/Bust/Neck
+        weight: 1
+      - path: Armature/Root/Bust/Neck/Head
+        weight: 1
+      - path: Armature/Root/Left Upper Leg
+        weight: 1
+      - path: Armature/Root/Left Upper Leg/Left Foreleg
+        weight: 1
+      - path: Armature/Root/Left Upper Leg/Left Foreleg/Left Foot
+        weight: 1
+      - path: Armature/Root/Left Upper Leg/Left Foreleg/Left Foot/Left Toes
+        weight: 1
+      - path: Armature/Root/Right Upper Leg
+        weight: 1
+      - path: Armature/Root/Right Upper Leg/Right Foreleg
+        weight: 1
+      - path: Armature/Root/Right Upper Leg/Right Foreleg/Right Foot
+        weight: 1
+      - path: Armature/Root/Right Upper Leg/Right Foreleg/Right Foot/Right Toes
+        weight: 1
+      - path: Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Idle
+      takeName: Armature|Idle
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bust
+        weight: 1
+      - path: Armature/Root/Bust/Neck
+        weight: 1
+      - path: Armature/Root/Bust/Neck/Head
+        weight: 1
+      - path: Armature/Root/Left Upper Leg
+        weight: 1
+      - path: Armature/Root/Left Upper Leg/Left Foreleg
+        weight: 1
+      - path: Armature/Root/Left Upper Leg/Left Foreleg/Left Foot
+        weight: 1
+      - path: Armature/Root/Left Upper Leg/Left Foreleg/Left Foot/Left Toes
+        weight: 1
+      - path: Armature/Root/Right Upper Leg
+        weight: 1
+      - path: Armature/Root/Right Upper Leg/Right Foreleg
+        weight: 1
+      - path: Armature/Root/Right Upper Leg/Right Foreleg/Right Foot
+        weight: 1
+      - path: Armature/Root/Right Upper Leg/Right Foreleg/Right Foot/Right Toes
+        weight: 1
+      - path: Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -78,25 +258,24 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 1
+    tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
     skeleton: []
-    armTwist: .5
-    foreArmTwist: .5
-    upperLegTwist: .5
-    legTwist: .5
-    armStretch: .0500000007
-    legStretch: .0500000007
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

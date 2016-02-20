@@ -3,7 +3,7 @@ guid: 9f83fbf987b7f774ebc52955a0753daf
 timeCreated: 1454971067
 licenseType: Free
 ModelImporter:
-  serializedVersion: 18
+  serializedVersion: 19
   fileIDToRecycleName:
     100000: Armature
     100002: Bone
@@ -20,6 +20,19 @@ ModelImporter:
     100024: Bone_012
     100026: Cube
     100028: //RootNode
+    100030: Bust
+    100032: Head
+    100034: Left_Foot
+    100036: Left_Foreleg
+    100038: Left_Toes
+    100040: Left_Upper_Leg
+    100042: Mesh
+    100044: Neck
+    100046: Right_Foot
+    100048: Right_Foreleg
+    100050: Right_Toes
+    100052: Right_Upper_Leg
+    100054: Root
     400000: Armature
     400002: Bone
     400004: Bone_001
@@ -35,10 +48,31 @@ ModelImporter:
     400024: Bone_012
     400026: Cube
     400028: //RootNode
+    400030: Bust
+    400032: Head
+    400034: Left_Foot
+    400036: Left_Foreleg
+    400038: Left_Toes
+    400040: Left_Upper_Leg
+    400042: Mesh
+    400044: Neck
+    400046: Right_Foot
+    400048: Right_Foreleg
+    400050: Right_Toes
+    400052: Right_Upper_Leg
+    400054: Root
+    2300000: Mesh
+    3300000: Mesh
     4300000: Cube
+    4300002: Mesh
     7400000: Default Take
+    7400002: Excited
+    7400004: Run
+    7400006: Run0
+    7400008: Running
     9500000: //RootNode
     13700000: Cube
+    13700002: Mesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -46,19 +80,136 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    resampleRotations: 1
     optimizeGameObjects: 0
-    motionNodeName: 
+    motionNodeName: Armature/Root
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
-    animationRotationError: .5
-    animationPositionError: .5
-    animationScaleError: .5
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Excited
+      takeName: Excited
+      firstFrame: -1
+      lastFrame: 43
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bust
+        weight: 1
+      - path: Armature/Root/Bust/Neck
+        weight: 1
+      - path: Armature/Root/Bust/Neck/Head
+        weight: 1
+      - path: Armature/Root/Left_Upper_Leg
+        weight: 1
+      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg
+        weight: 1
+      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg/Left_Foot
+        weight: 1
+      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg/Left_Foot/Left_Toes
+        weight: 1
+      - path: Armature/Root/Right_Upper_Leg
+        weight: 1
+      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg
+        weight: 1
+      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg/Right_Foot
+        weight: 1
+      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg/Right_Foot/Right_Toes
+        weight: 1
+      - path: Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Running
+      takeName: Running
+      firstFrame: -1
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bust
+        weight: 1
+      - path: Armature/Root/Bust/Neck
+        weight: 1
+      - path: Armature/Root/Bust/Neck/Head
+        weight: 1
+      - path: Armature/Root/Left_Upper_Leg
+        weight: 1
+      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg
+        weight: 1
+      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg/Left_Foot
+        weight: 1
+      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg/Left_Foot/Left_Toes
+        weight: 1
+      - path: Armature/Root/Right_Upper_Leg
+        weight: 1
+      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg
+        weight: 1
+      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg/Right_Foot
+        weight: 1
+      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg/Right_Foot/Right_Toes
+        weight: 1
+      - path: Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -79,25 +230,24 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 1
+    tangentImportMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
     skeleton: []
-    armTwist: .5
-    foreArmTwist: .5
-    upperLegTwist: .5
-    legTwist: .5
-    armStretch: .0500000007
-    legStretch: .0500000007
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
