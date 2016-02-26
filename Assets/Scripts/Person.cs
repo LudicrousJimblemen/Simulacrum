@@ -3,16 +3,14 @@ using System.Collections;
 
 public class Person : MonoBehaviour {
 
-    public Animator personAnimator;
+    public Animator personAnimator; //Animator
 
-    // Use this for initialization
-    void Start() {
+    void Start() { //Initially called
         personAnimator.enabled = true;
     }
-	
-	// Update is called once per frame
-	void Update() {
-        personAnimator.SetBool("spaceKeyDown", Input.GetKeyDown(KeyCode.Space));
-        personAnimator.SetBool("wKeyHeld", Input.GetKey(KeyCode.W));
+
+	void Update() { //Called once per frame (60FPS)
+		personAnimator.SetBool ("spaceKeyDown", Input.GetKeyDown (KeyCode.Space)); //Triggers when Space key is pressed; used for Excited state
+		personAnimator.SetBool ("wKeyHeld", Input.GetKey (KeyCode.W)); //True when W is held; used for Running state
     }
 }
