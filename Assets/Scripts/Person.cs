@@ -2,7 +2,6 @@
 using UnityEngine;
 
 public class Person : MonoBehaviour {
-
     public Animator personAnimator;
     public GameObject Selector;
     bool inWalk = false;
