@@ -2,16 +2,19 @@
 using UnityEngine;
 
 public class Person : MonoBehaviour {
+
     public Animator personAnimator;
     public GameObject Selector;
     bool inWalk = false;
     Vector3 walkStart;
     Vector3 walkEnd;
     float walkStartTime;
+    Rigidbody rb;
 
     // Use this for initialization
     void Awake() {
         personAnimator.enabled = true;
+        
     }
 	
 	// Update is called once per frame

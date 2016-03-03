@@ -1,0 +1,19 @@
+namespace User
+	class Info
+		list<units>
+			type
+			current position
+			target position
+			upgrades
+		list<buildings>
+			type
+			position
+			upgrades
+		list<resources>
+			r1
+			r2
+			r3
+			...
+namespace stuff
+	struct units
+		
