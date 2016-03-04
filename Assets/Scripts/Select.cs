@@ -6,18 +6,36 @@ using Simulengine;
 public class Select : MonoBehaviour {
 	public Vector3 position;
 	public Vector3 selection;
-	GameObject persons;
+	GameObject PersonParent;
+	GameObject[] persons;
 	
 	bool startBox;
 	
 	void Awake () {
-		persons = GameObject.Find ("Persons");
+		PersonParent = GameObject.Find ("Persons");
+		persons = new GameObject[200];
 	}
 	
 	void Update () {
-		RaycastHit hit;
-		if (Physics.Raycast (OrthoRay (), out hit) ) {
-			position = hit.point;
+		for (int i = 0; i < PersonParent.transform.childCount; i ++) {
+			persons[i] = PersonParent.transform.GetChild (i).gameObject;
+		}
+		RaycastHit TerrainHit;
+		if (Physics.Raycast (OrthoRay (), out TerrainHit, Mathf.Infinity, 1<<8)) {
+			position = TerrainHit.point;
+		}
+		RaycastHit UnitHit;
+		if (Input.GetMouseButtonDown (0)) {
+		    if (Physics.Raycast (OrthoRay (), out UnitHit, Mathf.Infinity, 1<<9)) {
+				UnitHit.collider.gameObject.GetComponent<Generic> ().Selected = true;
+			} else {
+				foreach (GameObject p in persons) {
+					if (p == null) {
+						break;
+					}
+					if (p.GetComponent<Generic> ().Selected) p.GetComponent<Generic> ().Selected = false;
+				}
+			}
 		}
 		if (Input.GetMouseButton (1)) {
 			selection = position;
@@ -38,13 +56,20 @@ public class Select : MonoBehaviour {
 			obj.GetComponent<Person> ().SetDestination (selection);
 		}
 		*/
-		NavMeshAgent[] PersonAgents = new NavMeshAgent[persons.transform.childCount];
-		for (int i = 0; i < PersonAgents.Length; i ++) {
-			PersonAgents[i] = (persons.transform.GetChild (i).GetComponent <NavMeshAgent> ());
+		List<NavMeshAgent> Agents = new List<NavMeshAgent> ();
+		foreach (GameObject person in persons) {
+			if (person == null) {
+				break;
+			} 
+			if (person.GetComponent<Generic> ().Selected) {
+				Agents.Add (person.GetComponent<NavMeshAgent> ());
+			}
 		}
-		Vector3[] Destinations = UnitOrganization.Organize (PersonAgents, selection);
-		for (int i = 0; i < PersonAgents.Length; i++) {
-			PersonAgents[i].destination = Destinations[i];
+		if (Agents.Count > 0) {
+			Vector3[] Destinations = UnitOrganization.Organize (Agents.ToArray (), selection);
+			for (int i = 0; i < Agents.Count; i++) {
+				Agents[i].destination = Destinations[i];
+			}
 		}
 	}
 }

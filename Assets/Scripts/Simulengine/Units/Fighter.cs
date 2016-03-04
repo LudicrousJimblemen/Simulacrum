@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Person : MonoBehaviour {
+public class Fighter : MonoBehaviour {
 
     Animator PersonAnimator;
     NavMeshAgent agent;
@@ -13,9 +13,11 @@ public class Person : MonoBehaviour {
     	agent = GetComponent<NavMeshAgent> ();
     }
     
-	void Update() {
-		PersonAnimator.SetBool("spaceKeyDown", Input.GetKeyDown(KeyCode.Space));
-		PersonAnimator.SetBool("wKeyHeld", agent.velocity.sqrMagnitude > 0.01f);
+    void Update() {
+    	if (GetComponent<Generic> ().Selected) {
+    		PersonAnimator.SetBool("spaceKeyDown", Input.GetKeyDown(KeyCode.Space));
+    		PersonAnimator.SetBool("wKeyHeld", agent.velocity.sqrMagnitude > 0.0001f);
+    	}    	
     }
 	
 	public void SetDestination (Vector3 destination) {
