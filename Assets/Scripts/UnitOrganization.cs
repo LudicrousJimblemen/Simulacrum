@@ -7,29 +7,37 @@ public static class UnitOrganization {
 	static int FullRows;
 	static int Remainder;
 	public static int MaxRowWidth = 7;
-	public static float UnitDistance = 1f;
-	public static List<Vector3> Organize (List<NavMeshAgent> Units, Vector3 Destination) {
-		List<int> UnitIndices = SortIndicesByProximity (Units, Destination);
-		List<Vector3> Destinations = new List<Vector3> (Units.Count);
-		//Vector3 Direction = (Destination - Units[UnitIndices[0]].transform.position).normalized;
-		Vector3 Direction = Vector3.right;
+	public static float UnitDistance = 2;
+	public static Vector3[] Organize (NavMeshAgent[] Units, Vector3 Destination) {
+		int[] UnitIndices = SortIndicesByProximity (Units, Destination);
+		Vector3[] Destinations = new Vector3[Units.Length];
+		
+		Vector3 Direction = (Destination - Units[0].transform.position).normalized;
+		//Vector3 Direction = Vector3.right;
 		Vector3 PerpendicularDirection = Vector3.Cross (Direction, Vector3.up);
-		Units[UnitIndices[0]].destination = Destination;
-		GetDimensionsFromCount (Units.Count);
-		for (int r = 0; r < FullRows; r ++) {
-			for (int c = 0; c < MaxRowWidth; c ++) {
-				Destinations[UnitIndices[r*MaxRowWidth + c]] = (Destination
-					+ GetOffset (r*MaxRowWidth + c) * Direction * UnitDistance 
-					+ r * UnitDistance * PerpendicularDirection);
+		Destinations[0] = Destination;
+		GetDimensionsFromCount (Units.Length);
+		string[] DebugLines = new string[1];
+		if (FullRows > 0) {
+			for (int r = 0; r < FullRows; r++) {
+				for (int c = 0; c < MaxRowWidth; c++) {
+					Destinations[r * MaxRowWidth + c] = (Destination
+						+ GetOffset (r * MaxRowWidth + c + 1) * -PerpendicularDirection * UnitDistance
+						+ r * UnitDistance * Direction);
+					DebugLines[0] += GetOffset (r * MaxRowWidth + c + 1).ToString () + " \n";
+					//DebugLines[0] += (r * MaxRowWidth + c + 1).ToString () + " \n";
+				}
 			}
 		}
-		
-		for (int i = 0; i < Remainder; i ++) {
-			Destinations[UnitIndices[FullRows*MaxRowWidth + i]] = (Destination
-				+ GetOffset (FullRows * MaxRowWidth + i) * Direction * UnitDistance
-				+ FullRows * UnitDistance * PerpendicularDirection);
+		for (int i = 0; i < Remainder; i++) {
+			Destinations[FullRows * MaxRowWidth + i] = (Destination
+				+ GetOffset (FullRows * MaxRowWidth + i + 1) * -PerpendicularDirection * UnitDistance
+				+ FullRows * UnitDistance * Direction);
+			DebugLines[0] += GetOffset (FullRows * MaxRowWidth + i + 1).ToString () + " \n";
+			//DebugLines[0] += (FullRows * MaxRowWidth + i + 1).ToString () + " \n";
 		}
-		
+		System.IO.File.WriteAllLines (@"D:\Documents\test.txt",DebugLines);
+		//Debug (Destinations);
 		return Destinations;
 	}
 	
@@ -38,30 +46,40 @@ public static class UnitOrganization {
 		float z = a.z - b.z;
 		return x * x + z * z;
 	}
-	static List<int> SortIndicesByProximity (List<NavMeshAgent> Units, Vector3 Point) {
+	static int[] SortIndicesByProximity (NavMeshAgent[] Units, Vector3 Point) {
 		Dictionary<int, float> Entries = new Dictionary<int, float> ();
-		List<int> Temp = new List<int> ();
-		for (int i = 0; i < Units.Count; i ++) {
+		for (int i = 0; i < Units.Length; i ++) {
 			float CurrentCheck = SqrDistance (Units[i].transform.position, Point);
 			Entries.Add (i, CurrentCheck);
 		}
-		
-		foreach (KeyValuePair<int, float> Unit in Entries.OrderBy (key => key.Value)) {
-			Temp.Add (Unit.Key);
-		}
+		int[] Temp = (from c in Entries orderby c.Value select c.Key).ToArray ();
 		return Temp;
 	}
 	static void GetDimensionsFromCount (int Count) {
-		FullRows = (Count-Count%MaxRowWidth)/MaxRowWidth;
-		Remainder = Count%MaxRowWidth;
+		FullRows = (Count - Count % MaxRowWidth) / MaxRowWidth;
+		Remainder = Count % MaxRowWidth;
 	}
 	static int GetOffset (int UnitIndex) {
 		int RowPosition;
-		if (UnitIndex != MaxRowWidth) {
-			RowPosition = UnitIndex%MaxRowWidth;
+		if (UnitIndex % MaxRowWidth != 0) {
+			RowPosition = UnitIndex % MaxRowWidth;
+		} else if (UnitIndex == MaxRowWidth) {
+			RowPosition = MaxRowWidth;
 		} else {
-			RowPosition = UnitIndex;
+			RowPosition = UnitIndex / FullRows;
 		}
-		return (RowPosition-RowPosition%2)/2 * -(UnitIndex%2);
+		if (RowPosition % 2 == 0) {
+			return RowPosition / 2;
+		} else {
+			return -(RowPosition - 1) / 2;
+		}
+		//return -(RowPosition - RowPosition % 2) / 2 * (RowPosition % 2);
+	}
+	static void Debug (Vector3[] indices) {
+		string[] lines = new string[indices.Length];
+		for (int i = 0; i < indices.Length; i++) {
+			lines[i] = indices[i].ToString ();
+		}
+		System.IO.File.WriteAllLines (@"D:\Documents\test.txt",lines);
 	}
 }

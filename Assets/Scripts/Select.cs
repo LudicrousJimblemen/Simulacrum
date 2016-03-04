@@ -25,19 +25,19 @@ public class Select : MonoBehaviour {
 		Gizmos.DrawSphere (selection, 1);
 	}
 	void movePersons () {
+		/*
 		for (int i = 0; i < persons.transform.childCount; i++) {
 			GameObject obj = persons.transform.GetChild (i).gameObject;
 			obj.GetComponent<Person> ().SetDestination (selection);
 		}
-		/*
-		List<NavMeshAgent> PersonAgents = new List<NavMeshAgent> (persons.transform.childCount);
-		for (int i = 0; i < PersonAgents.Count; i ++) {
+		*/
+		NavMeshAgent[] PersonAgents = new NavMeshAgent[persons.transform.childCount];
+		for (int i = 0; i < PersonAgents.Length; i ++) {
 			PersonAgents[i] = (persons.transform.GetChild (i).GetComponent <NavMeshAgent> ());
 		}
-		List<Vector3> Destinations = UnitOrganization.Organize (PersonAgents, selection);
-		for (int i = 0; i < PersonAgents.Count; i ++) {
+		Vector3[] Destinations = UnitOrganization.Organize (PersonAgents, selection);
+		for (int i = 0; i < PersonAgents.Length; i++) {
 			PersonAgents[i].destination = Destinations[i];
 		}
-		*/
 	}
 }
