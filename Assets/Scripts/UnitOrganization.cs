@@ -6,7 +6,7 @@ using System.Linq;
 public static class UnitOrganization {
 	static int FullRows;
 	static int Remainder;
-	public static int MaxRowWidth = 35;
+	public static int MaxRowWidth = 21;
 	public static float UnitDistance = 1.5f;
 	public static Vector3[] Organize (NavMeshAgent[] Units, Vector3 Destination) {
 		int[] UnitIndices = SortIndicesByProximity (Units, Destination);
@@ -25,7 +25,7 @@ public static class UnitOrganization {
 						+ GetOffset (r * MaxRowWidth + c) * PerpendicularDirection * UnitDistance
 						+ r * UnitDistance * -Direction);
 					//DebugLines[0] += (GetOffset (r * MaxRowWidth + c) * PerpendicularDirection * UnitDistance + r * UnitDistance * -Direction).ToString () + " \n";
-					DebugLines[0] += GetOffset (r * MaxRowWidth + c).ToString () + " \n";
+					//DebugLines[1] += GetOffset (r * MaxRowWidth + c).ToString () + " \n";
 				}
 			}
 		}
@@ -34,7 +34,7 @@ public static class UnitOrganization {
 				+ GetOffset (FullRows * MaxRowWidth + i) * PerpendicularDirection * UnitDistance
 				+ FullRows * UnitDistance * -Direction);
 			//DebugLines[0] += (GetOffset (FullRows * MaxRowWidth + i) * PerpendicularDirection * UnitDistance + FullRows * UnitDistance * -Direction).ToString () + " \n";
-			DebugLines[0] += GetOffset (FullRows * MaxRowWidth + i).ToString () + " \n";
+			//DebugLines[1] += GetOffset (FullRows * MaxRowWidth + i).ToString () + " \n";
 		}
 		System.IO.File.WriteAllLines (@"C:\Users\s-ssoetomo\Desktop\test.txt",DebugLines);
 		//Debug (Destinations);

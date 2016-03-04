@@ -1,28 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Simulengine;
 
 public class Select : MonoBehaviour {
 	public Vector3 position;
 	public Vector3 selection;
 	GameObject persons;
+	
+	bool startBox;
+	
 	void Awake () {
 		persons = GameObject.Find ("Persons");
 	}
 	
 	void Update () {
-		Ray ray = new Ray (Camera.main.ScreenToWorldPoint (Input.mousePosition), transform.forward);
 		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit) ){
+		if (Physics.Raycast (OrthoRay (), out hit) ) {
 			position = hit.point;
 		}
-		if (Input.GetMouseButton (0)) {
+		if (Input.GetMouseButton (1)) {
 			selection = position;
 			movePersons ();
 		}
 	}
 	void OnDrawGizmosSelected () {
 		Gizmos.DrawSphere (selection, 1);
+	}
+	Ray OrthoRay () {
+		Ray ray = new Ray (Camera.main.ScreenToWorldPoint (Input.mousePosition), Camera.main.gameObject.transform.forward);
+		return ray;
 	}
 	void movePersons () {
 		/*
