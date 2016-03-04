@@ -6,7 +6,7 @@ using System.Linq;
 public static class UnitOrganization {
 	static int FullRows;
 	static int Remainder;
-	public static int MaxRowWidth = 21;
+	public static int MaxRowWidth = 7;
 	public static float UnitDistance = 1.5f;
 	public static Vector3[] Organize (NavMeshAgent[] Units, Vector3 Destination) {
 		int[] UnitIndices = SortIndicesByProximity (Units, Destination);
