@@ -6,22 +6,22 @@ using System.Linq;
 public static class UnitOrganization {
 	static int FullRows;
 	static int Remainder;
-	public static int MaxRowWidth = 7;
-	public static float UnitDistance = 2.5f;
+	public static int MaxRowWidth = 35;
+	public static float UnitDistance = 1.5f;
 	public static Vector3[] Organize (NavMeshAgent[] Units, Vector3 Destination) {
 		int[] UnitIndices = SortIndicesByProximity (Units, Destination);
 		Vector3[] Destinations = new Vector3[Units.Length];
 		
-		Vector3 Direction = (Destination - Units[0].transform.position).normalized;
+		Vector3 Direction = (Destination - Units[UnitIndices[0]].transform.position).normalized;
 		//Vector3 Direction = Vector3.right;
 		Vector3 PerpendicularDirection = Vector3.Cross (Direction, Vector3.up);
-		Destinations[0] = Destination;
+		Destinations[UnitIndices[0]] = Destination;
 		GetDimensionsFromCount (Units.Length);
 		string[] DebugLines = new string[1];
 		if (FullRows > 0) {
 			for (int r = 0; r < FullRows; r++) {
 				for (int c = 0; c < MaxRowWidth; c++) {
-					Destinations[r * MaxRowWidth + c] = (Destination
+					Destinations[UnitIndices[r * MaxRowWidth + c]] = (Destination
 						+ GetOffset (r * MaxRowWidth + c) * PerpendicularDirection * UnitDistance
 						+ r * UnitDistance * -Direction);
 					//DebugLines[0] += (GetOffset (r * MaxRowWidth + c) * PerpendicularDirection * UnitDistance + r * UnitDistance * -Direction).ToString () + " \n";
@@ -30,7 +30,7 @@ public static class UnitOrganization {
 			}
 		}
 		for (int i = 0; i < Remainder; i++) {
-			Destinations[FullRows * MaxRowWidth + i] = (Destination
+			Destinations[UnitIndices[FullRows * MaxRowWidth + i]] = (Destination
 				+ GetOffset (FullRows * MaxRowWidth + i) * PerpendicularDirection * UnitDistance
 				+ FullRows * UnitDistance * -Direction);
 			//DebugLines[0] += (GetOffset (FullRows * MaxRowWidth + i) * PerpendicularDirection * UnitDistance + FullRows * UnitDistance * -Direction).ToString () + " \n";
