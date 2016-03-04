@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Text : MonoBehaviour {
+public class TextFollow : MonoBehaviour {
 
 	GameObject Cam;
 	public GameObject person;
