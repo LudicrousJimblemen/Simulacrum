@@ -22,19 +22,19 @@ public static class UnitOrganization {
 			for (int r = 0; r < FullRows; r++) {
 				for (int c = 0; c < MaxRowWidth; c++) {
 					Destinations[UnitIndices[r * MaxRowWidth + c]] = (Destination
-						+ GetOffset (r * MaxRowWidth + c) * PerpendicularDirection * UnitDistance
+						+ GetOffset (GetRowPosition (r * MaxRowWidth + c)) * PerpendicularDirection * UnitDistance
 						+ r * UnitDistance * -Direction);
 					//DebugLines[0] += (GetOffset (r * MaxRowWidth + c) * PerpendicularDirection * UnitDistance + r * UnitDistance * -Direction).ToString () + " \n";
-					//DebugLines[1] += GetOffset (r * MaxRowWidth + c).ToString () + " \n";
+					DebugLines[0] += GetRowPosition (r * MaxRowWidth + c).ToString () + " \n";
 				}
 			}
 		}
 		for (int i = 0; i < Remainder; i++) {
 			Destinations[UnitIndices[FullRows * MaxRowWidth + i]] = (Destination
-				+ GetOffset (FullRows * MaxRowWidth + i) * PerpendicularDirection * UnitDistance
+				+ GetOffset (GetRowPosition (FullRows * MaxRowWidth + i)) * PerpendicularDirection * UnitDistance
 				+ FullRows * UnitDistance * -Direction);
 			//DebugLines[0] += (GetOffset (FullRows * MaxRowWidth + i) * PerpendicularDirection * UnitDistance + FullRows * UnitDistance * -Direction).ToString () + " \n";
-			//DebugLines[1] += GetOffset (FullRows * MaxRowWidth + i).ToString () + " \n";
+			DebugLines[0] += GetRowPosition (FullRows * MaxRowWidth + i).ToString () + " \n";
 		}
 		System.IO.File.WriteAllLines (@"C:\Users\s-ssoetomo\Desktop\test.txt",DebugLines);
 		//Debug (Destinations);
@@ -59,15 +59,15 @@ public static class UnitOrganization {
 		FullRows = (Count - Count % MaxRowWidth) / MaxRowWidth;
 		Remainder = Count % MaxRowWidth;
 	}
-	static int GetOffset (int UnitIndex) {
+	static int GetRowPosition (int UnitIndex) {
 		int temp = UnitIndex + 1;
-		int RowPosition;
-		
-		if (UnitIndex % MaxRowWidth == 0) {
-			RowPosition = MaxRowWidth;
+		if (temp % MaxRowWidth == 0) {
+			return MaxRowWidth;
 		} else {
-			RowPosition = UnitIndex % MaxRowWidth;
+			return temp % MaxRowWidth;
 		}
+	}
+	static int GetOffset (int RowPosition) {
 		if (RowPosition % 2 == 0) {
 			return RowPosition / 2;
 		} else {
