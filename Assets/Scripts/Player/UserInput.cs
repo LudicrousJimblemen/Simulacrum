@@ -4,14 +4,13 @@ using Simulengine;
 
 public class UserInput : MonoBehaviour {
 	private Player player;
-	private bool isLooping;
 	
 	void Start() { //Initially called
 		player = transform.root.GetComponent<Player>();
 	}
 	
 	void Update() { //Called once per frame (60FPS)
-		if(player && player.isHuman  && !isLooping) {
+		if(player && player.isHuman) {
 			MoveCamera();
 		}
 	}

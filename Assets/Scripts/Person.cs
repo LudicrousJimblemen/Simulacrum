@@ -3,37 +3,22 @@ using UnityEngine;
 
 public class Person : MonoBehaviour {
 
-    public Animator personAnimator;
+    Animator PersonAnimator;
+    NavMeshAgent agent;
     public GameObject Selector;
-    bool inWalk = false;
-    Vector3 walkStart;
-    Vector3 walkEnd;
-    float walkStartTime;
-    Rigidbody rb;
 
-    // Use this for initialization
     void Awake() {
-        personAnimator.enabled = true;
-        
+    	//PersonAnimator.enabled = true;
+    	PersonAnimator = GetComponent<Animator> ();
+    	agent = GetComponent<NavMeshAgent> ();
     }
-	
-	// Update is called once per frame
+    
 	void Update() {
-        personAnimator.SetBool("spaceKeyDown", Input.GetKeyDown(KeyCode.Space));
-        personAnimator.SetBool("wKeyHeld", inWalk);
-        if (inWalk) {
-        	float distance = Vector3.Distance (walkStart, walkEnd);
-        	transform.position = Vector3.Lerp (walkStart, walkEnd, (Time.time-walkStartTime)*5/distance);
-        	if (transform.position == walkEnd) inWalk = false;
-        	transform.LookAt (walkEnd);
-        }
+		PersonAnimator.SetBool("spaceKeyDown", Input.GetKeyDown(KeyCode.Space));
+		PersonAnimator.SetBool("wKeyHeld", agent.velocity.sqrMagnitude > 0.01f);
     }
 	
-	public void startWalk (Vector3 goal) {
-		print (goal);
-		walkStart = transform.position;
-		walkEnd = goal;
-		walkStartTime = Time.time;
-		inWalk = true;
+	public void SetDestination (Vector3 destination) {
+		agent.destination = destination;
 	}
 }
