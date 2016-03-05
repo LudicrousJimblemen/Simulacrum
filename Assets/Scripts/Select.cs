@@ -50,12 +50,6 @@ public class Select : MonoBehaviour {
 		return ray;
 	}
 	void movePersons () {
-		/*
-		for (int i = 0; i < persons.transform.childCount; i++) {
-			GameObject obj = persons.transform.GetChild (i).gameObject;
-			obj.GetComponent<Person> ().SetDestination (selection);
-		}
-		*/
 		List<NavMeshAgent> Agents = new List<NavMeshAgent> ();
 		foreach (GameObject person in persons) {
 			if (person == null) {
@@ -66,7 +60,7 @@ public class Select : MonoBehaviour {
 			}
 		}
 		if (Agents.Count > 0) {
-			Vector3[] Destinations = UnitOrganization.Organize (Agents.ToArray (), selection);
+			Vector3[] Destinations = UnitOrganization.OrganizeFighters (Agents.ToArray (), selection);
 			for (int i = 0; i < Agents.Count; i++) {
 				Agents[i].destination = Destinations[i];
 			}

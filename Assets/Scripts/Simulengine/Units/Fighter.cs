@@ -14,10 +14,8 @@ public class Fighter : MonoBehaviour {
     }
     
     void Update() {
-    	if (GetComponent<Generic> ().Selected) {
-    		PersonAnimator.SetBool("spaceKeyDown", Input.GetKeyDown(KeyCode.Space));
-    		PersonAnimator.SetBool("wKeyHeld", agent.velocity.sqrMagnitude > 0.0001f);
-    	}    	
+    	PersonAnimator.SetBool("spaceKeyDown", Input.GetKeyDown(KeyCode.Space));
+    	PersonAnimator.SetBool("wKeyHeld", agent.velocity.sqrMagnitude > .5f);
     }
 	
 	public void SetDestination (Vector3 destination) {
