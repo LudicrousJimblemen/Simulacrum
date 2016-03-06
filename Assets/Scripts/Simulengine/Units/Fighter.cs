@@ -3,22 +3,21 @@ using UnityEngine;
 
 public class Fighter : MonoBehaviour {
 
-    Animator PersonAnimator;
-    NavMeshAgent agent;
-    public GameObject Selector;
+	private Animator personAnimator;
+	private NavMeshAgent agent;
 
     void Awake() {
-    	//PersonAnimator.enabled = true;
-    	PersonAnimator = GetComponent<Animator> ();
-    	agent = GetComponent<NavMeshAgent> ();
+		//PersonAnimator.enabled = true;
+		personAnimator = GetComponent<Animator>();
+    	agent = GetComponent<NavMeshAgent>();
     }
     
     void Update() {
-    	PersonAnimator.SetBool("spaceKeyDown", Input.GetKeyDown(KeyCode.Space));
-    	PersonAnimator.SetBool("wKeyHeld", agent.velocity.sqrMagnitude > .5f);
+		personAnimator.SetBool("spaceKeyDown", Input.GetKeyDown(KeyCode.Space));
+		personAnimator.SetBool("wKeyHeld", agent.velocity.sqrMagnitude > 0.5f);
     }
 	
-	public void SetDestination (Vector3 destination) {
+	public void SetDestination(Vector3 destination) {
 		agent.destination = destination;
 	}
 }

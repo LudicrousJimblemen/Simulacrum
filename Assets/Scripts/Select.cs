@@ -14,110 +14,110 @@ public class Select : MonoBehaviour {
 	public bool inMarquee = false;
 	Rect MarqueeRect;
 	
-	void Awake () {
+	void Awake() {
 		PersonParent = GameObject.Find ("Persons");
 		persons = new GameObject[200];
-		MarqueeRect = new Rect ();
+		MarqueeRect = new Rect();
 	}
 	
 	void Update () {
 		for (int i = 0; i < PersonParent.transform.childCount; i ++) {
-			persons[i] = PersonParent.transform.GetChild (i).gameObject;
+			persons[i] = PersonParent.transform.GetChild(i).gameObject;
 		}
 		RaycastHit TerrainHit;
-		if (Physics.Raycast (OrthoRay (), out TerrainHit, Mathf.Infinity,~(1 << 9))) {
+		if (Physics.Raycast (OrthoRay(), out TerrainHit, Mathf.Infinity,~(1 << 9))) {
 			position = TerrainHit.point;
 		}
 		RaycastHit UnitHit;
-		if (Input.GetMouseButtonDown (0)) {
-		    if (Physics.Raycast (OrthoRay (), out UnitHit, Mathf.Infinity,~(1 << 8))) {
-				UnitHit.collider.gameObject.GetComponent<Generic> ().Selected = true;
+		if (Input.GetMouseButtonDown(0)) {
+		    if (Physics.Raycast(OrthoRay(), out UnitHit, Mathf.Infinity,~(1 << 8))) {
+				UnitHit.collider.gameObject.GetComponent<Generic>().Selected = true;
 				foreach (GameObject p in persons) {
 					if (p == null) {
 						break;
 					}
-					if (p.GetComponent<Generic> ().Selected && p != UnitHit.collider.gameObject) p.GetComponent<Generic> ().Selected = false;
+					if (p.GetComponent<Generic>().Selected && p != UnitHit.collider.gameObject) p.GetComponent<Generic>().Selected = false;
 				}
 			} else {
 				foreach (GameObject p in persons) {
 					if (p == null) {
 						break;
 					}
-					if (p.GetComponent<Generic> ().Selected) p.GetComponent<Generic> ().Selected = false;
+					if (p.GetComponent<Generic>().Selected) p.GetComponent<Generic>().Selected = false;
 				}
 				inMarquee = true;
 				Marquee1 = Input.mousePosition;
 			}
 		}
 		if (inMarquee) {
-			MarqueeSelection ();
+			MarqueeSelection();
 			foreach (GameObject unit in persons) {
 				if (unit == null) {
 					break;
 				} else {
 					Vector3 unitScreenPosition = Camera.main.WorldToScreenPoint (unit.transform.position);
 					Vector3 unitScreenPoint = new Vector3 (unitScreenPosition.x,Screen.height - unitScreenPosition.y);
-					unit.GetComponent<Generic> ().Selected = MarqueeRect.Contains (unitScreenPoint);
+					unit.GetComponent<Generic>().Selected = MarqueeRect.Contains (unitScreenPoint);
 				}
 			}
 		}
-		if (Input.GetMouseButtonUp (0) && inMarquee) {
+		if (Input.GetMouseButtonUp(0) && inMarquee) {
 			inMarquee = false;
 		}
-		if (Input.GetMouseButton (1)) {
+		if (Input.GetMouseButton(1)) {
 			selection = position;
-			movePersons ();
+			movePersons();
 		}
 	}
-	void OnDrawGizmosSelected () {
-		Gizmos.DrawSphere (selection, 1);
-		Gizmos.DrawSphere (Camera.main.ScreenToWorldPoint (Marquee1),.1f);
-		Gizmos.DrawSphere (Camera.main.ScreenToWorldPoint (Marquee2),.1f);
+	void OnDrawGizmosSelected() {
+		Gizmos.DrawSphere(selection, 1);
+		Gizmos.DrawSphere(Camera.main.ScreenToWorldPoint (Marquee1),.1f);
+		Gizmos.DrawSphere(Camera.main.ScreenToWorldPoint (Marquee2),.1f);
 	}
-	Ray OrthoRay () {
-		Ray ray = new Ray (Camera.main.ScreenToWorldPoint (Input.mousePosition), Camera.main.gameObject.transform.forward);
+	Ray OrthoRay() {
+		Ray ray = new Ray(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.gameObject.transform.forward);
 		return ray;
 	}
 
-	void MarqueeSelection () {
+	void MarqueeSelection() {
 		Marquee2 = Input.mousePosition;
 	}
 
-	void OnGUI () {
+	void OnGUI() {
 		if (inMarquee) {
-			float[] maxmin = {Mathf.Max (Marquee1.x, Marquee2.x), //Max x
-							Mathf.Min (Marquee1.x, Marquee2.x), //Min x
-							Mathf.Max (Screen.height - Marquee1.y, Screen.height - Marquee2.y), //Max y
-							Mathf.Min (Screen.height - Marquee1.y, Screen.height - Marquee2.y), //Min y
+			float[] maxmin = {Mathf.Max(Marquee1.x, Marquee2.x), //Max x
+							Mathf.Min(Marquee1.x, Marquee2.x), //Min x
+							Mathf.Max(Screen.height - Marquee1.y, Screen.height - Marquee2.y), //Max y
+							Mathf.Min(Screen.height - Marquee1.y, Screen.height - Marquee2.y), //Min y
 			};
 			MarqueeRect.xMax = maxmin[0];
 			MarqueeRect.xMin = maxmin[1];
 			MarqueeRect.yMax = maxmin[2];
 			MarqueeRect.yMin = maxmin[3];
-			GUI.DrawTexture (MarqueeRect,MarqueeTexture ());
+			GUI.DrawTexture (MarqueeRect,MarqueeTexture());
 		}
 	}
 
-	Texture2D MarqueeTexture () {
-		Texture2D marquee = new Texture2D (1,1,TextureFormat.ARGB32,false);
-		Color32[] pixels = { new Color32 (0,0,255,50) };
+	Texture2D MarqueeTexture() {
+		Texture2D marquee = new Texture2D(1,1,TextureFormat.ARGB32,false);
+		Color32[] pixels = { new Color32(0,0,255,50) };
 		marquee.SetPixels32 (pixels);
-		marquee.Apply ();
+		marquee.Apply();
 		return marquee;
 	}
 
-	void movePersons () {
-		List<NavMeshAgent> Agents = new List<NavMeshAgent> ();
+	void movePersons() {
+		List<NavMeshAgent> Agents = new List<NavMeshAgent>();
 		foreach (GameObject person in persons) {
 			if (person == null) {
 				break;
 			} 
-			if (person.GetComponent<Generic> ().Selected) {
-				Agents.Add (person.GetComponent<NavMeshAgent> ());
+			if (person.GetComponent<Generic>().Selected) {
+				Agents.Add (person.GetComponent<NavMeshAgent>());
 			}
 		}
 		if (Agents.Count > 0) {
-			Vector3[] Destinations = UnitOrganization.FighterOrganization.OrganizeFighters (Agents.ToArray (), selection);
+			Vector3[] Destinations = UnitOrganization.FighterOrganization.OrganizeFighters (Agents.ToArray(), selection);
 			for (int i = 0; i < Agents.Count; i++) {
 				Agents[i].destination = Destinations[i];
 			}
