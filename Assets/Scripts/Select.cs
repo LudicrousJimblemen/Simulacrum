@@ -36,14 +36,14 @@ public class Select : MonoBehaviour {
 					if (p == null) {
 						break;
 					}
-					if (p.GetComponent<Generic>().Selected && p != UnitHit.collider.gameObject) p.GetComponent<Generic>().Selected = false;
+					if (p.GetComponent<Generic>().Selected && p != UnitHit.collider.gameObject && !Input.GetKey (KeyCode.LeftShift)) p.GetComponent<Generic>().Selected = false;
 				}
 			} else {
 				foreach (GameObject p in persons) {
 					if (p == null) {
 						break;
 					}
-					if (p.GetComponent<Generic>().Selected) p.GetComponent<Generic>().Selected = false;
+					if (p.GetComponent<Generic>().Selected && !Input.GetKey (KeyCode.LeftShift)) p.GetComponent<Generic>().Selected = false;
 				}
 				inMarquee = true;
 				Marquee1 = Input.mousePosition;
@@ -57,7 +57,11 @@ public class Select : MonoBehaviour {
 				} else {
 					Vector3 unitScreenPosition = Camera.main.WorldToScreenPoint (unit.transform.position);
 					Vector3 unitScreenPoint = new Vector3 (unitScreenPosition.x,Screen.height - unitScreenPosition.y);
-					unit.GetComponent<Generic>().Selected = MarqueeRect.Contains (unitScreenPoint);
+					if (MarqueeRect.Contains (unitScreenPoint) || (Input.GetKey (KeyCode.LeftShift) && unit.GetComponent<Generic> ().Selected)) {
+						unit.GetComponent<Generic> ().Selected = true;
+					} else {
+						unit.GetComponent<Generic> ().Selected = false;
+					}
 				}
 			}
 		}
