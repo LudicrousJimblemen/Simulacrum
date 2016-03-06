@@ -1,0 +1,4 @@
+﻿enum BehaviourType
+{
+	Breadman
+}
