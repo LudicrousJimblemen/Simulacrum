@@ -30,7 +30,7 @@ public class Select : MonoBehaviour {
 		}
 		RaycastHit UnitHit;
 		if (Input.GetMouseButtonDown (0)) {
-		    if (Physics.Raycast (OrthoRay (), out UnitHit, Mathf.Infinity,~(1 << 8)) && !UnitHit.collider.gameObject.GetComponent<Generic> ().Selected) {
+		    if (Physics.Raycast (OrthoRay (), out UnitHit, Mathf.Infinity,~(1 << 8))) {
 				UnitHit.collider.gameObject.GetComponent<Generic> ().Selected = true;
 				foreach (GameObject p in persons) {
 					if (p == null) {
@@ -45,9 +45,9 @@ public class Select : MonoBehaviour {
 					}
 					if (p.GetComponent<Generic> ().Selected) p.GetComponent<Generic> ().Selected = false;
 				}
+				inMarquee = true;
+				Marquee1 = Input.mousePosition;
 			}
-			inMarquee = true;
-			Marquee1 = Input.mousePosition;
 		}
 		if (inMarquee) {
 			MarqueeSelection ();
@@ -57,9 +57,7 @@ public class Select : MonoBehaviour {
 				} else {
 					Vector3 unitScreenPosition = Camera.main.WorldToScreenPoint (unit.transform.position);
 					Vector3 unitScreenPoint = new Vector3 (unitScreenPosition.x,Screen.height - unitScreenPosition.y);
-					if (MarqueeRect.Contains (unitScreenPoint)) {
-						unit.GetComponent<Generic> ().Selected = true;
-					}
+					unit.GetComponent<Generic> ().Selected = MarqueeRect.Contains (unitScreenPoint);
 				}
 			}
 		}
