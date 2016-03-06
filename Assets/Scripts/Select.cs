@@ -7,7 +7,7 @@ public class Select : MonoBehaviour {
 	public Vector3 position;
 	public Vector3 selection;
 	GameObject PersonParent;
-	GameObject[] persons;
+	public GameObject[] persons;
 
 	public Vector3 Marquee1;
 	public Vector3 Marquee2;
@@ -61,26 +61,6 @@ public class Select : MonoBehaviour {
 				}
 			}
 		}
-		/*
-		RaycastHit Marquee;
-		if (Input.GetMouseButton (0)) {
-			if (Physics.Raycast (OrthoRay (),out Marquee,Mathf.Infinity,~(1<<9))) {
-				if (!inMarquee) {
-					Marquee1 = Marquee.point;
-					inMarquee = true;
-				} else {
-					Marquee2 = Marquee.point;
-				}
-			}
-		}
-		foreach (GameObject unit in persons) {
-			if (unit == null) {
-				break;
-			} else {
-				//unit.GetComponent<Generic> ().Selected = true;
-			}
-		}
-		*/
 		if (Input.GetMouseButtonUp (0) && inMarquee) {
 			inMarquee = false;
 		}
@@ -137,7 +117,7 @@ public class Select : MonoBehaviour {
 			}
 		}
 		if (Agents.Count > 0) {
-			Vector3[] Destinations = UnitOrganization.OrganizeFighters (Agents.ToArray (), selection);
+			Vector3[] Destinations = UnitOrganization.FighterOrganization.OrganizeFighters (Agents.ToArray (), selection);
 			for (int i = 0; i < Agents.Count; i++) {
 				Agents[i].destination = Destinations[i];
 			}
