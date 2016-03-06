@@ -8,8 +8,4 @@ public class Generic : MonoBehaviour {
 	void Update () {
 		transform.GetChild (2).gameObject.SetActive (Selected);
 	}
-	
-	void CollectResources () {
-		
-	}
 }

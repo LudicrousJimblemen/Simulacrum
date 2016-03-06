@@ -17,7 +17,7 @@ public static class UnitOrganization {
 		Vector3 PerpendicularDirection = Vector3.Cross (Direction, Vector3.up);
 		Destinations[UnitIndices[0]] = Destination;
 		GetDimensionsFromCount (Units.Length);
-		string[] DebugLines = new string[1];
+		//string[] DebugLines = new string[1];
 		if (FullRows > 0) {
 			for (int r = 0; r < FullRows; r++) {
 				for (int c = 0; c < MaxRowWidth; c++) {
@@ -25,7 +25,7 @@ public static class UnitOrganization {
 						+ GetOffset (GetRowPosition (r * MaxRowWidth + c)) * PerpendicularDirection * UnitDistance
 						+ r * UnitDistance * -Direction);
 					//DebugLines[0] += (GetOffset (r * MaxRowWidth + c) * PerpendicularDirection * UnitDistance + r * UnitDistance * -Direction).ToString () + " \n";
-					DebugLines[0] += GetRowPosition (r * MaxRowWidth + c).ToString () + " \n";
+					//DebugLines[0] += GetRowPosition (r * MaxRowWidth + c).ToString () + " \n";
 				}
 			}
 		}
@@ -34,9 +34,9 @@ public static class UnitOrganization {
 				+ GetOffset (GetRowPosition (FullRows * MaxRowWidth + i)) * PerpendicularDirection * UnitDistance
 				+ FullRows * UnitDistance * -Direction);
 			//DebugLines[0] += (GetOffset (FullRows * MaxRowWidth + i) * PerpendicularDirection * UnitDistance + FullRows * UnitDistance * -Direction).ToString () + " \n";
-			DebugLines[0] += GetRowPosition (FullRows * MaxRowWidth + i).ToString () + " \n";
+			//DebugLines[0] += GetRowPosition (FullRows * MaxRowWidth + i).ToString () + " \n";
 		}
-		System.IO.File.WriteAllLines (@"C:\Users\s-ssoetomo\Desktop\test.txt",DebugLines);
+		//System.IO.File.WriteAllLines (@"C:\Users\s-ssoetomo\Desktop\test.txt",DebugLines);
 		//Debug (Destinations);
 		return Destinations;
 	}
