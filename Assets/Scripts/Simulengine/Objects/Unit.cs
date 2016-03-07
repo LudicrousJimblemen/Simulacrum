@@ -7,7 +7,4 @@ public class Unit : BasicObject {
 
 	public float Sight = 15f;
 	public float Vision = 13f;
-
-	public Animator animator;
-	public NavMeshAgent navMeshAgent;
 }

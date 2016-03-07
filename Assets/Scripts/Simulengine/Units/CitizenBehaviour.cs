@@ -3,25 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+//stop it
+
 public class CitizenBehaviour : MonoBehaviour {
 	
 	public GameObject target;
 	Citizen citizen;
 	
 	public void Awake() {
-		citizen = GetComponent<Citizen> ();
-		citizen.animator = GetComponent<Animator>();
-		citizen.navMeshAgent = GetComponent<NavMeshAgent>();
-
 		//Behaviour = BehaviourType.Idle;
 		citizen.CurrentAction = CitizenState.Idle;
 	}
 	
 	void Update () {
-		citizen.animator.SetBool("running", citizen.navMeshAgent.velocity.sqrMagnitude > 0.5f);
+		GetComponent<Animator>().SetBool("running", GetComponent<NavMeshAgent>().velocity.sqrMagnitude > 0.5f);
 
-		citizen.navMeshAgent.speed = citizen.Speed;
-		citizen.navMeshAgent.angularSpeed = citizen.Speed * 216;
+		GetComponent<NavMeshAgent>().speed = citizen.Speed;
+		GetComponent<NavMeshAgent>().angularSpeed = citizen.Speed * 216;
 
 		if (citizen.Behaviour == BehaviourType.StoneMiner) {
 			if (citizen.CurrentAction == CitizenState.Idle) {
@@ -46,7 +44,7 @@ public class CitizenBehaviour : MonoBehaviour {
 				}
 
 				if (closestTarget != null) {
-					citizen.navMeshAgent.destination = closestTarget.transform.position;
+					GetComponent<NavMeshAgent>().destination = closestTarget.transform.position;
 					citizen.CurrentAction = CitizenState.Seeking;
 				}
 			} else if (citizen.CurrentAction == CitizenState.Seeking) {

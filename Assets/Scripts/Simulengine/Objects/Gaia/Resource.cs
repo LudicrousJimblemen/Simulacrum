@@ -7,11 +7,11 @@ public class Resource : Gaia {
 	public int MaxStock = 100;
 	public int Stock = 100;
 
-	public void Awake() {
+	public virtual void Awake() {
 		VisualChildren = GetComponentsInChildren<Transform>();
 	}
 
-	public void Update() {
+	public virtual void Update() {
 		for (int i = 0; i < VisualChildren.Length; i++) {
 			int stockPerChild = Stock / VisualChildren.Length;
 
