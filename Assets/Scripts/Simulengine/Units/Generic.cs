@@ -2,15 +2,15 @@
 using System.Collections;
 
 public class Generic : MonoBehaviour {
-	public int[] Resources = {0, 0, 0};
+	public int[] Resources = { 0, 0, 0 };
 	public bool Selected;
 	Unit unit;
 	NavMeshAgent agent;
 
 	void Awake () {
-		unit = GetComponent<Unit> ();
+		unit = GetComponent<Unit>();
 		agent = GetComponent<NavMeshAgent> ();
-    }
+    	}
 
 	void Update() {
 		agent.speed = unit.Speed;
