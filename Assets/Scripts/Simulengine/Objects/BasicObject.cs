@@ -8,14 +8,10 @@ public class BasicObject : MonoBehaviour
 	public Material defaultMaterial;
 	public Material outlineMaterial;
 
-	void Update()
-	{
-		if (Selected)
-		{
+	void Update() {
+		if (Selected) {
 			GetComponentInChildren<SkinnedMeshRenderer>().material = outlineMaterial;
-		}
-		else
-		{
+		} else {
 			GetComponentInChildren<SkinnedMeshRenderer>().material = defaultMaterial;
 		}
 	}
