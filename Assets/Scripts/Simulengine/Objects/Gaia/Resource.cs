@@ -13,7 +13,7 @@ public class Resource : Gaia {
 
 	public virtual void Update() {
 		for (int i = 0; i < VisualChildren.Length; i++) {
-			int stockPerChild = Stock / VisualChildren.Length;
+			//int stockPerChild = Stock / VisualChildren.Length;
 
 			//do some funky magic to make each rock smaller when need to be
 			//e.g.
