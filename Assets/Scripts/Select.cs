@@ -31,19 +31,19 @@ public class Select : MonoBehaviour {
 		RaycastHit UnitHit;
 		if (Input.GetMouseButtonDown(0)) {
 		    if (Physics.Raycast(OrthoRay(), out UnitHit, Mathf.Infinity,~(1 << 8))) {
-				UnitHit.collider.gameObject.GetComponent<Generic>().Selected = true;
+				UnitHit.collider.gameObject.GetComponent<Unit> ().Selected = true;
 				foreach (GameObject p in persons) {
 					if (p == null) {
 						break;
 					}
-					if (p.GetComponent<Generic>().Selected && p != UnitHit.collider.gameObject && !Input.GetKey (KeyCode.LeftShift)) p.GetComponent<Generic>().Selected = false;
+					if (p.GetComponent<Unit> ().Selected && p != UnitHit.collider.gameObject && !Input.GetKey (KeyCode.LeftShift)) p.GetComponent<Unit> ().Selected = false;
 				}
 			} else {
 				foreach (GameObject p in persons) {
 					if (p == null) {
 						break;
 					}
-					if (p.GetComponent<Generic>().Selected && !Input.GetKey (KeyCode.LeftShift)) p.GetComponent<Generic>().Selected = false;
+					if (p.GetComponent<Unit> ().Selected && !Input.GetKey (KeyCode.LeftShift)) p.GetComponent<Unit> ().Selected = false;
 				}
 				inMarquee = true;
 				Marquee1 = Input.mousePosition;
@@ -116,7 +116,7 @@ public class Select : MonoBehaviour {
 			if (person == null) {
 				break;
 			} 
-			if (person.GetComponent<Generic>().Selected) {
+			if (person.GetComponent<Unit> ().Selected) {
 				Agents.Add (person.GetComponent<NavMeshAgent>());
 			}
 		}
