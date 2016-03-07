@@ -1,3 +1,4 @@
-﻿enum BehaviourType {
+﻿public enum BehaviourType {
+	Idle,
 	StoneMiner
 }

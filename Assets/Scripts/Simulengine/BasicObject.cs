@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class BasicObject : MonoBehaviour {
-	public bool Selectable;
 	public bool Selected;
+
 	public Material defaultMaterial;
 	public Material outlineMaterial;
 

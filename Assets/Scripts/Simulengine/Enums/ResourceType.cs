@@ -1,3 +1,3 @@
-﻿enum ResourceType {
+﻿public enum ResourceType {
 	Stone
 }

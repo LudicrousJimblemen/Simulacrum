@@ -16,8 +16,4 @@ public class Fighter : MonoBehaviour {
 		personAnimator.SetBool("spaceKeyDown", Input.GetKeyDown(KeyCode.Space));
 		personAnimator.SetBool("wKeyHeld", agent.velocity.sqrMagnitude > 0.5f);
     }
-	
-	public void SetDestination(Vector3 destination) {
-		agent.destination = destination;
-	}
 }
