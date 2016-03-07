@@ -16,7 +16,7 @@ public class Select : MonoBehaviour {
 	
 	void Awake() {
 		PersonParent = GameObject.Find ("Persons");
-		persons = new GameObject[200];
+		persons = new GameObject[1000];
 		MarqueeRect = new Rect();
 	}
 	

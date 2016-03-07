@@ -1,4 +1,3 @@
-﻿enum BehaviourType
-{
-	Breadman
+﻿enum BehaviourType {
+	StoneMiner
 }

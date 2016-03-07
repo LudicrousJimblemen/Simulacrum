@@ -1,4 +1,3 @@
-﻿enum ResourceType
-{
-	Bread
+﻿enum ResourceType {
+	Stone
 }
