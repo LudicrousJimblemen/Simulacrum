@@ -31,19 +31,19 @@ public class Select : MonoBehaviour {
 		RaycastHit UnitHit;
 		if (Input.GetMouseButtonDown(0)) {
 		    if (Physics.Raycast(OrthoRay(), out UnitHit, Mathf.Infinity,~(1 << 8))) {
-				UnitHit.collider.gameObject.GetComponent<Unit> ().Selected = true;
+				UnitHit.collider.gameObject.GetComponent<Citizen> ().Selected = true;
 				foreach (GameObject p in persons) {
 					if (p == null) {
 						break;
 					}
-					if (p.GetComponent<Unit> ().Selected && p != UnitHit.collider.gameObject && !Input.GetKey (KeyCode.LeftShift)) p.GetComponent<Unit> ().Selected = false;
+					if (p.GetComponent<Citizen> ().Selected && p != UnitHit.collider.gameObject && !Input.GetKey (KeyCode.LeftShift)) p.GetComponent<Citizen> ().Selected = false;
 				}
 			} else {
 				foreach (GameObject p in persons) {
 					if (p == null) {
 						break;
 					}
-					if (p.GetComponent<Unit> ().Selected && !Input.GetKey (KeyCode.LeftShift)) p.GetComponent<Unit> ().Selected = false;
+					if (p.GetComponent<Citizen> ().Selected && !Input.GetKey (KeyCode.LeftShift)) p.GetComponent<Citizen> ().Selected = false;
 				}
 				inMarquee = true;
 				Marquee1 = Input.mousePosition;
@@ -55,13 +55,13 @@ public class Select : MonoBehaviour {
 				if (unit == null) {
 					break;
 				} else {
+					//If the screen position of the unit is within the marquee, select it.
+					//If the screen position of the uniti is not within the marquee, but the user is holding shift and it is already selected, stay selected
+					//Otherwise, unselect it
 					Vector3 unitScreenPosition = Camera.main.WorldToScreenPoint (unit.transform.position);
 					Vector3 unitScreenPoint = new Vector3 (unitScreenPosition.x,Screen.height - unitScreenPosition.y);
-					if (MarqueeRect.Contains (unitScreenPoint) || (Input.GetKey (KeyCode.LeftShift) && unit.GetComponent<Generic> ().Selected)) {
-						unit.GetComponent<Generic> ().Selected = true;
-					} else {
-						unit.GetComponent<Generic> ().Selected = false;
-					}
+					unit.GetComponent<Citizen> ().Selected = MarqueeRect.Contains (unitScreenPoint) 
+						|| (Input.GetKey (KeyCode.LeftShift) && unit.GetComponent<Generic> ().Selected); 
 				}
 			}
 		}
@@ -116,7 +116,7 @@ public class Select : MonoBehaviour {
 			if (person == null) {
 				break;
 			} 
-			if (person.GetComponent<Unit> ().Selected) {
+			if (person.GetComponent<Citizen> ().Selected) {
 				Agents.Add (person.GetComponent<NavMeshAgent>());
 			}
 		}

@@ -3,7 +3,7 @@ using System.Collections;
 using Simulengine;
 
 public class Resource : MonoBehaviour {
-	ResourceType resourceType = ResourceType.Bread;
+	ResourceType resourceType;
 	[Range (0,100)]
 	public float collectionRadius; //How far away should a unit be able to collect from this resource
 	[Range (0,100)]

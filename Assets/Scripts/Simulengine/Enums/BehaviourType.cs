@@ -1,3 +1,3 @@
 ﻿enum BehaviourType {
-	StoneMiner
+	BasicResource
 }

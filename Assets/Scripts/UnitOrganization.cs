@@ -15,19 +15,15 @@ namespace UnitOrganization {
 			Vector3[] Destinations = new Vector3[Units.Length];
 
 			Vector3 Direction = (Destination - Units[UnitIndices[0]].transform.position).normalized;
-			//Vector3 Direction = Vector3.right;
 			Vector3 PerpendicularDirection = Vector3.Cross(Direction, Vector3.up);
 			Destinations[UnitIndices[0]] = Destination;
 			GetDimensionsFromCount(Units.Length);
-			//string[] DebugLines = new string[1];
 			if (FullRows > 0) {
 				for (int r = 0; r < FullRows; r++) {
 					for (int c = 0; c < MaxRowWidth; c++) {
 						Destinations[UnitIndices[r * MaxRowWidth + c]] = (Destination
 							+ GetOffset(GetRowPosition(r * MaxRowWidth + c)) * PerpendicularDirection * UnitDistance
 							+ r * UnitDistance * -Direction);
-						//DebugLines[0] += (GetOffset (r * MaxRowWidth + c) * PerpendicularDirection * UnitDistance + r * UnitDistance * -Direction).ToString () + " \n";
-						//DebugLines[0] += GetRowPosition (r * MaxRowWidth + c).ToString () + " \n";
 					}
 				}
 			}
@@ -35,11 +31,7 @@ namespace UnitOrganization {
 				Destinations[UnitIndices[FullRows * MaxRowWidth + i]] = (Destination
 					+ GetOffset(GetRowPosition(FullRows * MaxRowWidth + i)) * PerpendicularDirection * UnitDistance
 					+ FullRows * UnitDistance * -Direction);
-				//DebugLines[0] += (GetOffset (FullRows * MaxRowWidth + i) * PerpendicularDirection * UnitDistance + FullRows * UnitDistance * -Direction).ToString () + " \n";
-				//DebugLines[0] += GetRowPosition (FullRows * MaxRowWidth + i).ToString () + " \n";
 			}
-			//System.IO.File.WriteAllLines (@"C:\Users\s-ssoetomo\Desktop\test.txt",DebugLines);
-			//Debug (Destinations);
 			return Destinations;
 		}
 
@@ -75,14 +67,6 @@ namespace UnitOrganization {
 			} else {
 				return -(RowPosition - 1) / 2;
 			}
-			//return -(RowPosition - RowPosition % 2) / 2 * (RowPosition % 2);
-		}
-		static void Debug(Vector3[] indices) {
-			string[] lines = new string[indices.Length];
-			for (int i = 0; i < indices.Length; i++) {
-				lines[i] = indices[i].ToString();
-			}
-			System.IO.File.WriteAllLines(@"C:\Users\s-ssoetomo\Desktop\test.txt", lines);
 		}
 	}
 }

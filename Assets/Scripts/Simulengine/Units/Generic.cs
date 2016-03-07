@@ -5,13 +5,15 @@ public class Generic : MonoBehaviour {
 	public int[] Resources = {0, 0, 0};
 	public bool Selected;
 	Unit unit;
+	NavMeshAgent agent;
 
 	void Awake () {
 		unit = GetComponent<Unit> ();
+		agent = GetComponent<NavMeshAgent> ();
     }
 
 	void Update() {
-		GetComponent<NavMeshAgent> ().speed = unit.Speed;
-		GetComponent<NavMeshAgent> ().angularSpeed = unit.Speed*216;
+		agent.speed = unit.Speed;
+		agent.angularSpeed = unit.Speed*216;
 	}
 }
