@@ -62,7 +62,7 @@ public class Select : MonoBehaviour {
 					Vector3 unitScreenPosition = Camera.main.WorldToScreenPoint(unit.transform.position);
 					Vector3 unitScreenPoint = new Vector3(unitScreenPosition.x,Screen.height - unitScreenPosition.y);
 					unit.GetComponent<Citizen>().Selected = MarqueeRect.Contains(unitScreenPoint) 
-						|| (Input.GetKey(KeyCode.LeftShift) && unit.GetComponent<Generic>().Selected);
+						|| (Input.GetKey(KeyCode.LeftShift) && unit.GetComponent<Citizen>().Selected);
 				}
 			}
 		}
