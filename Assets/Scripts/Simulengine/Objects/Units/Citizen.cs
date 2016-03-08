@@ -29,6 +29,7 @@ public class Citizen : Unit {
 		} else if (Behaviour == BehaviourType.StoneMiner) {
 			StoneMinerBehaviour ();
 		} else if (Behaviour == BehaviourType.Fighter) {
+			GetComponent<NavMeshAgent> ().stoppingDistance = 0;
 			//eg
 		}
 	}
@@ -43,6 +44,7 @@ public class Citizen : Unit {
 
 	void StoneMinerBehaviour () {
 		if (CurrentAction == CitizenState.Idle) {
+			GetComponent<NavMeshAgent> ().stoppingDistance = 2;
 			GetComponent<Animator> ().SetBool ("working",false);
 
 			List<GameObject> nearbyResources = GameObject.FindGameObjectsWithTag ("Gaia").Where (x => x.GetComponent<Resource> () != null).ToList ();
@@ -71,6 +73,7 @@ public class Citizen : Unit {
 				CurrentAction = CitizenState.Seeking;
 			}
 		} else if (CurrentAction == CitizenState.Seeking) {
+			GetComponent<NavMeshAgent> ().stoppingDistance = 0;
 			if (CurrentTarget != null) {
 				Vector3 directionToTarget = CurrentTarget.transform.position - transform.position;
 				float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
