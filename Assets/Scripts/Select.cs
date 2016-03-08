@@ -27,10 +27,10 @@ public class Select : MonoBehaviour {
 		}
 		RaycastHit UnitHit;
 		if (Input.GetMouseButtonDown(0)) {
-			if (Physics.Raycast(OrthoRay(), out UnitHit, Mathf.Infinity, ~(1 << 8))) {
+			if (Physics.Raycast(OrthoRay(), out UnitHit, Mathf.Infinity, 1 << 9)) {
 				UnitHit.collider.gameObject.GetComponent<BasicObject>().Selected = true;
-				foreach (GameObject p in persons.Where (x => x != null)) {
-					if (p.GetComponent<BasicObject>().Selected && p != UnitHit.collider.gameObject && !Input.GetKey(KeyCode.LeftShift))
+				foreach (GameObject p in persons.Where (x => x != null && x != UnitHit.collider.gameObject)) {
+					if (p.GetComponent<BasicObject>().Selected && !Input.GetKey(KeyCode.LeftShift))
 						p.GetComponent<BasicObject>().Selected = false;
 				}
 			} else {
@@ -60,15 +60,23 @@ public class Select : MonoBehaviour {
 		if (Input.GetMouseButton(1)) {
 			RaycastHit TerrainHit;
 			RaycastHit ResourceHit;
-			if (Physics.Raycast (OrthoRay (),out TerrainHit,Mathf.Infinity,~(1 << 9))) {
-				selection = TerrainHit.point;
-				movePersons();
-			} else if (Physics.Raycast (OrthoRay (),out ResourceHit, Mathf.Infinity, ~(1 << 10))) {
+			if (Physics.Raycast (OrthoRay (),out ResourceHit, Mathf.Infinity, 1 << 10)) {
 				SelectedResource = ResourceHit.collider.gameObject;
+				SelectedResource.GetComponent<Resource> ().Selected = true;
+				movePersons ();
+			} else if (Physics.Raycast (OrthoRay (),out TerrainHit,Mathf.Infinity,1 << 8)) {
+				selection = TerrainHit.point;
+				if (SelectedResource != null) {
+					SelectedResource.GetComponent<Resource> ().Selected = false;
+					SelectedResource = null;
+				}
+				movePersons();
 			} else {
+				SelectedResource.GetComponent<Resource> ().Selected = false;
 				SelectedResource = null;
 			}
 		}
+		ChangeUnitBehaviour ();
 	}
 	void OnDrawGizmosSelected() {
 		Gizmos.DrawSphere(selection, 1);
@@ -118,8 +126,6 @@ public class Select : MonoBehaviour {
 						break;
 					case BehaviourType.StoneMiner:
 						StonerAgents.Add (person.GetComponent<NavMeshAgent> ());
-						break;
-					default:
 						break;
 				}
 			}

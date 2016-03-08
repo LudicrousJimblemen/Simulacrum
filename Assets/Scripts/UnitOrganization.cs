@@ -38,9 +38,9 @@ namespace UnitOrganization {
 			Vector3[] destinations = new Vector3[Units.Length];
 			for (int i = 0; i < Units.Length; i++) {
 				Vector3 tempDestination = Destination;
-				Vector3 offset = new Vector3 ((Random.value * 2) - 1,0,(Random.value*2)-1);
-				offset.Normalize ();
-				offset *= Random.value * 2 + UnitDistance;
+				Vector3 offset = new Vector3 (((Random.value * 2) - 1) * Units.Length/(UnitDistance*20f),0,((Random.value * 2) - 1) * Units.Length/(UnitDistance*20f));
+				//offset.Normalize ();
+				offset *= Random.value * UnitDistance + UnitDistance;
 				tempDestination += offset;
 				destinations[i] = tempDestination;
 			}
