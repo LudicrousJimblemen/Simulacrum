@@ -11,6 +11,7 @@ public class SpawnPersons : MonoBehaviour {
 	void Start() {
 		player = GameObject.Find("Player");
 		workers = player.transform.GetChild(0);
+		fighters = player.transform.GetChild (1);
 	}
 
 	void Update() {
@@ -25,6 +26,7 @@ public class SpawnPersons : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.E)) {
 			GameObject newUnit = (GameObject) Instantiate (citizenPrefab,Vector3.zero,Quaternion.identity);
 			newUnit.GetComponent<Citizen> ().Behaviour = BehaviourType.Fighter;
+			newUnit.transform.parent = fighters.transform;
 		}
 	}
 }

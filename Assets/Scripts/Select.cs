@@ -24,7 +24,7 @@ public class Select : MonoBehaviour {
 	void Update() {
 		for (int j = 0; j < 2; j++) {
 			for (int i = 0; i < PersonParent.transform.GetChild (j).childCount; i++) {
-				persons[i] = PersonParent.transform.GetChild (j).GetChild (i).gameObject;
+				persons[i+j * PersonParent.transform.GetChild (j).childCount] = PersonParent.transform.GetChild (j).GetChild (i).gameObject;
 			}
 		}
 		RaycastHit UnitHit;
