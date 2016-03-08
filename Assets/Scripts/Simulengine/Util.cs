@@ -6,5 +6,7 @@ public static class Util {
 		Ray ray = new Ray (Camera.main.ScreenToWorldPoint (MousePosition), Camera.main.transform.forward);
 		return ray;
 	}
-
+	public static bool EvaluateResource (BehaviourType CitizenBehaviour, ResourceType Resource) {
+		return (CitizenBehaviour == BehaviourType.StoneMiner && Resource == ResourceType.Stone) /* || (b == btype && r = rtype) || ...*/;
+	}
 }

@@ -3,27 +3,28 @@ using System;
 using System.Collections;
 
 public class SpawnPersons : MonoBehaviour {
-
-	public GameObject fighterPrefab;
+	public GameObject citizenPrefab;
 	private GameObject player;
+	private Transform workers;
+	private Transform fighters;
 
 	void Start() {
-		player = GameObject.Find("Persons");
+		player = GameObject.Find("Player");
+		workers = player.transform.GetChild(0);
 	}
 
 	void Update() {
-		//spawn single new unit
+		//spawn single new worker
 		if (Input.GetKeyDown(KeyCode.Q)) {
-			GameObject newUnit = (GameObject) Instantiate(fighterPrefab, Vector3.zero, Quaternion.identity);
-			newUnit.transform.parent = player.transform;
+			GameObject newUnit = (GameObject) Instantiate(citizenPrefab, Vector3.zero, Quaternion.identity);
+			newUnit.GetComponent<Citizen> ().Behaviour = BehaviourType.StoneMiner;
+			newUnit.transform.parent = workers.transform;
 		}
 
-		//spawn mass of new units
+		//spawn single new fighter
 		if (Input.GetKeyDown(KeyCode.E)) {
-			for (int i = 0; i < 5; i++) {
-				GameObject newUnit = (GameObject) Instantiate(fighterPrefab, Vector3.zero, Quaternion.identity);
-				newUnit.transform.parent = player.transform;
-			}
+			GameObject newUnit = (GameObject) Instantiate (citizenPrefab,Vector3.zero,Quaternion.identity);
+			newUnit.GetComponent<Citizen> ().Behaviour = BehaviourType.Fighter;
 		}
 	}
 }

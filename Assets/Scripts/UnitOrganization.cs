@@ -34,6 +34,18 @@ namespace UnitOrganization {
 			return Destinations;
 		}
 
+		public static Vector3[] OrganizeWorkers (NavMeshAgent[] Units,Vector3 Destination) {
+			Vector3[] destinations = new Vector3[Units.Length];
+			for (int i = 0; i < Units.Length; i++) {
+				Vector3 tempDestination = Destination;
+				Vector3 offset = new Vector3 ((Random.value * 2) - 1,0,(Random.value*2)-1);
+				offset.Normalize ();
+				offset *= Random.value * 2 + UnitDistance;
+				tempDestination += offset;
+				destinations[i] = tempDestination;
+			}
+			return destinations;
+		}
 		static float SqrDistance(Vector3 a, Vector3 b) {
 			float x = a.x - b.x;
 			float z = a.z - b.z;
