@@ -517,8 +517,12 @@ MonoBehaviour:
   Sight: 15
   Vision: 13
   Behaviour: 1
-  MaxLoad: 0
+  Load: 0
+  CollectionDelay: 20
+  CollectionTimer: 0
+  MaxLoad: 10
   CurrentAction: 0
+  CurrentTarget: {fileID: 0}
 --- !u!136 &13637898
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -635,6 +639,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: Behaviour
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MaxLoad
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

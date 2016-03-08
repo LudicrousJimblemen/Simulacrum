@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class Select : MonoBehaviour {
@@ -29,22 +28,22 @@ public class Select : MonoBehaviour {
 		}
 		RaycastHit UnitHit;
 		if (Input.GetMouseButtonDown(0)) {
-			if (Physics.Raycast(OrthoRay(), out UnitHit, Mathf.Infinity,~(1 << 8))) {
-				UnitHit.collider.gameObject.GetComponent<Citizen>().Selected = true;
+			if (Physics.Raycast(OrthoRay(), out UnitHit, Mathf.Infinity, ~(1 << 8))) {
+				UnitHit.collider.gameObject.GetComponent<BasicObject>().Selected = true;
 				foreach (GameObject p in persons) {
 					if (p == null) {
 						break;
 					}
-					if (p.GetComponent<Citizen>().Selected && p != UnitHit.collider.gameObject && !Input.GetKey (KeyCode.LeftShift)) 
-						p.GetComponent<Citizen> ().Selected = false;
+					if (p.GetComponent<BasicObject>().Selected && p != UnitHit.collider.gameObject && !Input.GetKey(KeyCode.LeftShift))
+						p.GetComponent<BasicObject>().Selected = false;
 				}
 			} else {
 				foreach (GameObject p in persons) {
 					if (p == null) {
 						break;
 					}
-					if (p.GetComponent<Citizen>().Selected && !Input.GetKey (KeyCode.LeftShift)) 
-						p.GetComponent<Citizen> ().Selected = false;
+					if (p.GetComponent<BasicObject>().Selected && !Input.GetKey(KeyCode.LeftShift))
+						p.GetComponent<BasicObject>().Selected = false;
 				}
 				inMarquee = true;
 				Marquee1 = Input.mousePosition;
@@ -60,9 +59,9 @@ public class Select : MonoBehaviour {
 					//If the screen position of the uniti is not within the marquee, but the user is holding shift and it is already selected, stay selected
 					//Otherwise, unselect it
 					Vector3 unitScreenPosition = Camera.main.WorldToScreenPoint(unit.transform.position);
-					Vector3 unitScreenPoint = new Vector3(unitScreenPosition.x,Screen.height - unitScreenPosition.y);
-					unit.GetComponent<Citizen>().Selected = MarqueeRect.Contains(unitScreenPoint) 
-						|| (Input.GetKey(KeyCode.LeftShift) && unit.GetComponent<Citizen>().Selected);
+					Vector3 unitScreenPoint = new Vector3(unitScreenPosition.x, Screen.height - unitScreenPosition.y);
+					unit.GetComponent<BasicObject>().Selected = MarqueeRect.Contains(unitScreenPoint)
+						|| (Input.GetKey(KeyCode.LeftShift) && unit.GetComponent<BasicObject>().Selected);
 				}
 			}
 		}
@@ -116,9 +115,9 @@ public class Select : MonoBehaviour {
 		foreach (GameObject person in persons) {
 			if (person == null) {
 				break;
-			} 
-			if (person.GetComponent<Citizen>().Selected) 
-				Agents.Add (person.GetComponent<NavMeshAgent>());
+			}
+			if (person.GetComponent<BasicObject>().Selected)
+				Agents.Add(person.GetComponent<NavMeshAgent>());
 		}
 		if (Agents.Count > 0) {
 			Vector3[] Destinations = UnitOrganization.FighterOrganization.OrganizeFighters(Agents.ToArray(), selection);

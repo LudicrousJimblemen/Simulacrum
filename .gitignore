@@ -17,11 +17,14 @@ ExportedObj/
 *.pidb
 *.booproj
 *.svd
+
+# Blender + Unity3D generated meta files
 *.blend1
+*.blend1.meta
 
 
 # Unity3D generated meta files
 *.pidb.meta
 
-# Unity3D Generated File On Crash Reports
+# Unity3D generated file on crash reports
 sysinfo.txt
