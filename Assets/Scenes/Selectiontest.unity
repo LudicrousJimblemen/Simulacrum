@@ -265,8 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f188d9b21b3f2324d85b7f0b37c59fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  workerPrefab: {fileID: 0}
-  fighterPrefab: {fileID: 152176, guid: 39d62915d2ff65b47950119892dfb0d9, type: 2}
+  citizenPrefab: {fileID: 152176, guid: 39d62915d2ff65b47950119892dfb0d9, type: 2}
 --- !u!1 &1410504371
 GameObject:
   m_ObjectHideFlags: 0
