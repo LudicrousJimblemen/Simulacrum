@@ -61,8 +61,23 @@ namespace UnitOrganization {
 			return Temp;
 		}
 		static void GetDimensionsFromCount(int Count) {
-			FullRows = (Count - Count % MaxRowWidth) / MaxRowWidth;
-			Remainder = Count % MaxRowWidth;
+			string[] lines = {""};
+			int i = 1;
+			while (Count < i * i) {
+				i++;
+			}
+			i--;
+			FullRows = i-1;
+			
+			Remainder = Count % FullRows;
+			
+			MaxRowWidth = (Count-Remainder)/FullRows;
+			
+			lines[0] = FullRows + ", " + MaxRowWidth + ", " + Remainder;
+			System.IO.File.WriteAllLines ("C:/Users/s-ssoetomo/Desktop/output.txt", lines);
+			
+			//FullRows = (Count - Count % MaxRowWidth) / MaxRowWidth;
+			//Remainder = Count % MaxRowWidth;
 		}
 		static int GetRowPosition(int UnitIndex) {
 			int temp = UnitIndex + 1;
