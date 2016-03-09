@@ -63,15 +63,18 @@ namespace UnitOrganization {
 		static void GetDimensionsFromCount(int Count) {
 			string[] lines = {""};
 			int i = 1;
-			while (Count < i * i) {
+			while (Count > i * i) {
 				i++;
 			}
-			i--;
-			FullRows = i-1;
+			//i--;
+			MaxRowWidth = i;
+			if (MaxRowWidth == 0) {
+				Remainder = Count;
+			} else {
+				Remainder = Count % MaxRowWidth;
+			}
+			FullRows = (Count-Remainder)/MaxRowWidth;
 			
-			Remainder = Count % FullRows;
-			
-			MaxRowWidth = (Count-Remainder)/FullRows;
 			
 			lines[0] = FullRows + ", " + MaxRowWidth + ", " + Remainder;
 			System.IO.File.WriteAllLines ("C:/Users/s-ssoetomo/Desktop/output.txt", lines);

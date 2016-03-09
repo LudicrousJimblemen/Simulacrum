@@ -344,13 +344,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
+  defaultMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 0}
   Type: 0
   MaxStock: 20
-  Stock: 6
+  Stock: 20
   StockPercentage: 0
-  Range: 1.6
+  Range: 2
 --- !u!65 &491773511
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -433,13 +433,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
+  defaultMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 0}
   Type: 0
   MaxStock: 20
-  Stock: 6
+  Stock: 20
   StockPercentage: 0
-  Range: 1.6
+  Range: 2
 --- !u!65 &679075542
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -522,13 +522,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
+  defaultMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 0}
   Type: 0
   MaxStock: 20
-  Stock: 6
+  Stock: 20
   StockPercentage: 0
-  Range: 1.6
+  Range: 2
 --- !u!65 &775447037
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -557,13 +557,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
+  defaultMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 0}
   Type: 0
   MaxStock: 20
-  Stock: 6
+  Stock: 20
   StockPercentage: 0
-  Range: 1.6
+  Range: 2
 --- !u!65 &848227709
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -592,13 +592,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
+  defaultMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 0}
   Type: 0
   MaxStock: 20
-  Stock: 6
+  Stock: 20
   StockPercentage: 0
-  Range: 1.6
+  Range: 2
 --- !u!65 &970537697
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -627,13 +627,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
+  defaultMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 0}
   Type: 0
   MaxStock: 20
-  Stock: 6
+  Stock: 20
   StockPercentage: 0
-  Range: 1.6
+  Range: 2
 --- !u!65 &1007301859
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -770,13 +770,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
+  defaultMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 0}
   Type: 0
   MaxStock: 20
   Stock: 20
   StockPercentage: 0
-  Range: 1.6
+  Range: 2
 --- !u!65 &1339870438
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -805,13 +805,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
+  defaultMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 0}
   Type: 0
   MaxStock: 20
-  Stock: 6
+  Stock: 20
   StockPercentage: 0
-  Range: 1.6
+  Range: 2
 --- !u!65 &1372631195
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1179,13 +1179,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
+  defaultMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 0}
   Type: 0
   MaxStock: 20
-  Stock: 6
+  Stock: 20
   StockPercentage: 0
-  Range: 1.6
+  Range: 2
 --- !u!65 &1699975505
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1333,13 +1333,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
+  defaultMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 0}
   Type: 0
   MaxStock: 20
-  Stock: 6
+  Stock: 20
   StockPercentage: 0
-  Range: 1.6
+  Range: 2
 --- !u!65 &1873629042
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1368,13 +1368,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
+  defaultMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 0}
   Type: 0
   MaxStock: 20
-  Stock: 6
+  Stock: 20
   StockPercentage: 0
-  Range: 1.6
+  Range: 2
 --- !u!65 &2096758188
 BoxCollider:
   m_ObjectHideFlags: 0
