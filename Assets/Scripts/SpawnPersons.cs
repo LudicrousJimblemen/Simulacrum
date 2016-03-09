@@ -15,18 +15,24 @@ public class SpawnPersons : MonoBehaviour {
 	}
 
 	void Update() {
-		//spawn single new worker
-		if (Input.GetKeyDown(KeyCode.Q)) {
-			GameObject newUnit = (GameObject) Instantiate(citizenPrefab, Vector3.zero, Quaternion.identity);
-			newUnit.GetComponent<Citizen> ().Behaviour = BehaviourType.StoneMiner;
-			newUnit.transform.parent = units.transform;
-		}
-
-		//spawn single new fighter
-		if (Input.GetKeyDown(KeyCode.E)) {
-			GameObject newUnit = (GameObject) Instantiate (citizenPrefab,Vector3.zero,Quaternion.identity);
-			newUnit.GetComponent<Citizen> ().Behaviour = BehaviourType.Fighter;
-			newUnit.transform.parent = units.transform;
+		try {
+			if (units.childCount < Camera.main.GetComponent<Select> ().persons.Length) {
+				//spawn single new worker
+				if (Input.GetKeyDown(KeyCode.Q)) {
+					GameObject newUnit = (GameObject) Instantiate(citizenPrefab, Vector3.zero, Quaternion.identity);
+					newUnit.GetComponent<Citizen> ().Behaviour = BehaviourType.StoneMiner;
+					newUnit.transform.parent = units.transform;
+				}
+			
+				//spawn single new fighter
+				if (Input.GetKey(KeyCode.E)) {
+					GameObject newUnit = (GameObject) Instantiate (citizenPrefab,Vector3.zero,Quaternion.identity);
+					newUnit.GetComponent<Citizen> ().Behaviour = BehaviourType.Fighter;	
+					newUnit.transform.parent = units.transform;
+				}
+			}
+		} catch (IndexOutOfRangeException e) {
+			print ("too much, dummy");
 		}
 	}
 }

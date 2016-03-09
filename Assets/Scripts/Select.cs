@@ -17,7 +17,7 @@ public class Select : MonoBehaviour {
 
 	void Awake() {
 		PersonParent = GameObject.Find("Player");
-		persons = new GameObject[1000];
+		persons = new GameObject[500];
 		MarqueeRect = new Rect();
 	}
 
@@ -72,8 +72,10 @@ public class Select : MonoBehaviour {
 				}
 				movePersons();
 			} else {
-				SelectedResource.GetComponent<Resource> ().Selected = false;
-				SelectedResource = null;
+				if (SelectedResource != null) {
+					SelectedResource.GetComponent<Resource> ().Selected = false;
+					SelectedResource = null;
+				}
 			}
 		}
 		ChangeUnitBehaviour ();
