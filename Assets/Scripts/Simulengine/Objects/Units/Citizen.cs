@@ -17,6 +17,7 @@ public class Citizen : Unit {
 	public virtual void Awake() {
 		Behaviour = BehaviourType.Idle;
 		CurrentAction = CitizenState.Idle;
+		base.Awake ();
 	}
 
 	public virtual void Update() {
@@ -32,6 +33,8 @@ public class Citizen : Unit {
 			GetComponent<NavMeshAgent> ().stoppingDistance = 0;
 			//eg
 		}
+		
+		base.Update ();
 	}
 
 	public void ChangeBehaviour (BehaviourType NewBehaviour) {
