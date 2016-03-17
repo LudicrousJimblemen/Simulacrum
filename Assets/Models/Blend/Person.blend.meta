@@ -66,7 +66,9 @@ ModelImporter:
     400056: Center
     400058: Waist
     2300000: Mesh
+    2300002: //RootNode
     3300000: Mesh
+    3300002: //RootNode
     4300000: Cube
     4300002: Mesh
     7400000: Default Take
