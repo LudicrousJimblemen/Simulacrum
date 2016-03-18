@@ -77,7 +77,6 @@ namespace UnitOrganization {
 			
 			
 			lines[0] = FullRows + ", " + MaxRowWidth + ", " + Remainder;
-			System.IO.File.WriteAllLines ("C:/Users/s-ssoetomo/Desktop/output.txt", lines);
 			
 			//FullRows = (Count - Count % MaxRowWidth) / MaxRowWidth;
 			//Remainder = Count % MaxRowWidth;

@@ -31,8 +31,8 @@ public class SpawnPersons : MonoBehaviour {
 					newUnit.transform.parent = units.transform;
 				}
 			}
-		} catch (IndexOutOfRangeException e) {
-			print ("too much, dummy");
+		} catch (IndexOutOfRangeException) {
+			print ("too many, dummy");
 		}
 	}
 }

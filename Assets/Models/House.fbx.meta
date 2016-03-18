@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: cd4264808fe68b64e9e93c6650cc57c2
-timeCreated: 1457317341
+guid: 8080e968ef4cac44682bc7a8974cec7a
+timeCreated: 1458317910
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,10 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Icosphere
-    4300002: Mesh
-    7400000: Default Take
-    9500000: //RootNode
+    4300000: Plane
   materials:
     importMaterials: 1
     materialName: 0
@@ -71,7 +68,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

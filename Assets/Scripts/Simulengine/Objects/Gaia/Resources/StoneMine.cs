@@ -9,5 +9,11 @@ public class StoneMine : Resource {
 
 	public override void Update() {
 		base.Update();
+		
+		transform.localScale = new Vector3(
+			StockPercentage,
+			StockPercentage,
+			StockPercentage
+		);
 	}
 }

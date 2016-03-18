@@ -8,11 +8,11 @@
 
 	public float Range = 2f;
 
-	public virtual void Awake() {
+	public override void Awake() {
 		//
 	}
 
-	public virtual void Update() {
+	public override void Update() {
 		if (Stock <= 0) {
 			Destroy(this.gameObject);
 		} else {
