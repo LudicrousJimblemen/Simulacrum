@@ -82,7 +82,7 @@ ModelImporter:
       name: Armature|Working
       takeName: Armature|Working
       firstFrame: 0
-      lastFrame: 16
+      lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -110,6 +110,10 @@ ModelImporter:
         weight: 1
       - path: Armature/Root/Center
         weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone/Left Leg IK Target
+        weight: 1
       - path: Armature/Root/Center/Left Upper Leg
         weight: 1
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg
@@ -117,6 +121,10 @@ ModelImporter:
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot
         weight: 1
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot/Left Toes
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone/Right Leg IK Target
         weight: 1
       - path: Armature/Root/Center/Right Upper Leg
         weight: 1
@@ -143,7 +151,7 @@ ModelImporter:
       name: Armature|Running
       takeName: Armature|Running
       firstFrame: 0
-      lastFrame: 23
+      lastFrame: 22
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -171,6 +179,10 @@ ModelImporter:
         weight: 1
       - path: Armature/Root/Center
         weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone/Left Leg IK Target
+        weight: 1
       - path: Armature/Root/Center/Left Upper Leg
         weight: 1
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg
@@ -178,6 +190,10 @@ ModelImporter:
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot
         weight: 1
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot/Left Toes
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone/Right Leg IK Target
         weight: 1
       - path: Armature/Root/Center/Right Upper Leg
         weight: 1
@@ -232,6 +248,10 @@ ModelImporter:
         weight: 1
       - path: Armature/Root/Center
         weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone/Left Leg IK Target
+        weight: 1
       - path: Armature/Root/Center/Left Upper Leg
         weight: 1
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg
@@ -239,6 +259,10 @@ ModelImporter:
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot
         weight: 1
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot/Left Toes
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone/Right Leg IK Target
         weight: 1
       - path: Armature/Root/Center/Right Upper Leg
         weight: 1
@@ -265,7 +289,7 @@ ModelImporter:
       name: Armature|Dying
       takeName: Armature|Dying
       firstFrame: 0
-      lastFrame: 51
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -293,6 +317,10 @@ ModelImporter:
         weight: 1
       - path: Armature/Root/Center
         weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone/Left Leg IK Target
+        weight: 1
       - path: Armature/Root/Center/Left Upper Leg
         weight: 1
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg
@@ -300,6 +328,10 @@ ModelImporter:
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot
         weight: 1
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot/Left Toes
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone/Right Leg IK Target
         weight: 1
       - path: Armature/Root/Center/Right Upper Leg
         weight: 1
@@ -326,7 +358,7 @@ ModelImporter:
       name: Armature|Excited
       takeName: Armature|Excited
       firstFrame: 0
-      lastFrame: 44
+      lastFrame: 43
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -354,6 +386,10 @@ ModelImporter:
         weight: 1
       - path: Armature/Root/Center
         weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone/Left Leg IK Target
+        weight: 1
       - path: Armature/Root/Center/Left Upper Leg
         weight: 1
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg
@@ -361,6 +397,10 @@ ModelImporter:
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot
         weight: 1
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot/Left Toes
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone/Right Leg IK Target
         weight: 1
       - path: Armature/Root/Center/Right Upper Leg
         weight: 1
@@ -387,7 +427,7 @@ ModelImporter:
       name: Armature|Depositing
       takeName: Armature|Depositing
       firstFrame: 0
-      lastFrame: 18
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -474,7 +514,7 @@ ModelImporter:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 2
+    tangentImportMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

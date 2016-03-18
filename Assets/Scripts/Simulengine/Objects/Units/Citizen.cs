@@ -15,9 +15,10 @@ public class Citizen : Unit {
 	public GameObject CurrentTarget = null;
 
 	public override void Awake() {
+		base.Awake ();
+		
 		Behaviour = BehaviourType.Idle;
 		CurrentAction = CitizenState.Idle;
-		base.Awake ();
 	}
 
 	public override void Update() {
