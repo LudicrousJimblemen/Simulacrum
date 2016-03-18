@@ -6,8 +6,6 @@
 
 	public float StockPercentage;
 
-	public float Range = 2f;
-
 	public override void Awake() {
 		//
 	}

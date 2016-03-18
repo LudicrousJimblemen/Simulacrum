@@ -47,7 +47,11 @@ public class Citizen : Unit {
 
 	void StoneMinerBehaviour () {
 		if (CurrentAction == CitizenState.Idle) {
-			//GetComponent<NavMeshAgent> ().stoppingDistance = 2;
+			if (GetComponent<Animator> ().GetCurrentAnimatorClipInfo(0).First().clip.name == "CitizenDepositingState") {
+				return;
+			}
+			
+			GetComponent<Animator> ().SetBool ("depositing",false);
 			GetComponent<Animator> ().SetBool ("working",false);
 			
 			if (Load < MaxLoad) {
@@ -80,7 +84,7 @@ public class Citizen : Unit {
 			} else {
 				//GetComponent<NavMeshAgent> ().stoppingDistance = 2;
 				GetComponent<Animator> ().SetBool ("working",false);
-				List<GameObject> nearbyBuildings = GameObject.FindGameObjectsWithTag ("Building").Where (x => x.GetComponent<Resource> () != null).ToList ();
+				List<GameObject> nearbyBuildings = GameObject.FindGameObjectsWithTag ("Building").Where (x => x.GetComponent<Storehouse> () != null).ToList ();
 				List<GameObject> nearbyStorehouses = nearbyBuildings.Where (x => x.GetComponent<Storehouse> ().Type == ResourceType.Stone).ToList ();
 	
 				Vector3 currentPosition = transform.position;
@@ -108,7 +112,7 @@ public class Citizen : Unit {
 			}
 		} else if (CurrentAction == CitizenState.Seeking) {
 			//GetComponent<NavMeshAgent> ().stoppingDistance = 0;
-			if (CurrentTarget == null) {
+			if (CurrentTarget != null) {
 				Vector3 directionToTarget = CurrentTarget.transform.position - transform.position;
 				float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
 
@@ -145,13 +149,14 @@ public class Citizen : Unit {
 
 			CollectionTimer++;
 		} else if (CurrentAction == CitizenState.Depositing) {
-			if (CurrentTarget == null) {
+			if (CurrentTarget != null) {
 				Vector3 directionToTarget = CurrentTarget.transform.position - transform.position;
 				float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
 
-				if (distanceSquaredToTarget < Mathf.Pow(CurrentTarget.GetComponent<Resource>().Range, 2)) {
+				if (distanceSquaredToTarget < Mathf.Pow(CurrentTarget.GetComponent<Storehouse>().Range, 2)) {
+					GetComponent<Animator> ().SetBool ("depositing",true);
 					Load = 0;
-					//GIVE PLAYER THE STUFF
+					CurrentAction = CitizenState.Idle;
 				}
 			} else {
 				CurrentAction = CitizenState.Idle;

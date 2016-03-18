@@ -7,14 +7,16 @@ public class BasicObject : MonoBehaviour {
 	public Material outlineMaterial;
 	SkinnedMeshRenderer mesh;
 
+	public float Range = 2f;
+
 	public virtual void Awake () {
 		mesh = GetComponentInChildren<SkinnedMeshRenderer>();
 	}
 	
 	public virtual void Update() {
-		if (Selected && mesh.material != outlineMaterial) {
+		if (Selected) {
 			mesh.material = outlineMaterial;
-		} else if (!Selected && mesh.material != defaultMaterial) {
+		} else if (!Selected) {
 			mesh.material = defaultMaterial;
 		}
 	}

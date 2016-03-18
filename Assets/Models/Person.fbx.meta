@@ -22,6 +22,10 @@ ModelImporter:
     100028: Root
     100030: Center
     100032: Waist
+    100034: Left Leg IK Bone
+    100036: Left Leg IK Target
+    100038: Right Leg IK Bone
+    100040: Right Leg IK Target
     400000: Armature
     400002: Bust
     400004: Head
@@ -39,6 +43,10 @@ ModelImporter:
     400028: Root
     400030: Center
     400032: Waist
+    400034: Left Leg IK Bone
+    400036: Left Leg IK Target
+    400038: Right Leg IK Bone
+    400040: Right Leg IK Target
     4300000: Mesh
     7400000: Excited
     7400002: Armature|Excited
@@ -47,6 +55,7 @@ ModelImporter:
     7400008: Armature|Idle
     7400010: Armature|Working
     7400012: Armature|Dying
+    7400014: Armature|Depositing
     9500000: //RootNode
     13700000: Mesh
   materials:
@@ -352,6 +361,75 @@ ModelImporter:
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot
         weight: 1
       - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot/Left Toes
+        weight: 1
+      - path: Armature/Root/Center/Right Upper Leg
+        weight: 1
+      - path: Armature/Root/Center/Right Upper Leg/Right Foreleg
+        weight: 1
+      - path: Armature/Root/Center/Right Upper Leg/Right Foreleg/Right Foot
+        weight: 1
+      - path: Armature/Root/Center/Right Upper Leg/Right Foreleg/Right Foot/Right
+          Toes
+        weight: 1
+      - path: Armature/Root/Center/Waist
+        weight: 1
+      - path: Armature/Root/Center/Waist/Bust
+        weight: 1
+      - path: Armature/Root/Center/Waist/Bust/Neck
+        weight: 1
+      - path: Armature/Root/Center/Waist/Bust/Neck/Head
+        weight: 1
+      - path: Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Armature|Depositing
+      takeName: Armature|Depositing
+      firstFrame: 0
+      lastFrame: 18
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Center
+        weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Left Leg IK Bone/Left Leg IK Target
+        weight: 1
+      - path: Armature/Root/Center/Left Upper Leg
+        weight: 1
+      - path: Armature/Root/Center/Left Upper Leg/Left Foreleg
+        weight: 1
+      - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot
+        weight: 1
+      - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot/Left Toes
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone
+        weight: 1
+      - path: Armature/Root/Center/Right Leg IK Bone/Right Leg IK Target
         weight: 1
       - path: Armature/Root/Center/Right Upper Leg
         weight: 1

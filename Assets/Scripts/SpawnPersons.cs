@@ -25,7 +25,7 @@ public class SpawnPersons : MonoBehaviour {
 				}
 			
 				//spawn single new fighter
-				if (Input.GetKey(KeyCode.E)) {
+				if (Input.GetKeyDown(KeyCode.E)) {
 					GameObject newUnit = (GameObject) Instantiate (citizenPrefab,Vector3.zero,Quaternion.identity);
 					newUnit.GetComponent<Citizen> ().Behaviour = BehaviourType.Fighter;	
 					newUnit.transform.parent = units.transform;

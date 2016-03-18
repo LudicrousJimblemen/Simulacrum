@@ -2,4 +2,9 @@
 
 public class Storehouse : Building {
 	public ResourceType Type;
+	public override void Awake() {
+		base.Awake();
+
+		Range = 3f;
+	}
 }
