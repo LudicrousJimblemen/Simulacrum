@@ -35,6 +35,10 @@ ModelImporter:
     100054: Root
     100056: Center
     100058: Waist
+    100060: Left_Leg_IK_Bone
+    100062: Left_Leg_IK_Target
+    100064: Right_Leg_IK_Bone
+    100066: Right_Leg_IK_Target
     400000: Armature
     400002: Bone
     400004: Bone_001
@@ -65,6 +69,10 @@ ModelImporter:
     400054: Root
     400056: Center
     400058: Waist
+    400060: Left_Leg_IK_Bone
+    400062: Left_Leg_IK_Target
+    400064: Right_Leg_IK_Bone
+    400066: Right_Leg_IK_Target
     2300000: Mesh
     2300002: //RootNode
     3300000: Mesh
