@@ -4,16 +4,18 @@ public class StoneMine : Resource {
 	public override void Awake() {
 		base.Awake();
 
-		Range = 1.6f;
+		InteractRange = 2f;
 	}
 
 	public override void Update() {
 		base.Update();
 		
+		float scale = Mathf.Ceil(StockPercentage * 5) / 5;
+		
 		transform.localScale = new Vector3(
-			StockPercentage,
-			StockPercentage,
-			StockPercentage
+			scale,
+			scale,
+			scale
 		);
 	}
 }

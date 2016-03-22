@@ -19,9 +19,17 @@ public class Citizen : Unit {
 		
 		Behaviour = BehaviourType.Idle;
 		CurrentAction = CitizenState.Idle;
+		
+		GetComponent<NavMeshAgent> ().stoppingDistance = 0;
 	}
 
 	public override void Update() {
+		base.Update ();
+		
+		if (GetComponent<NavMeshAgent>().remainingDistance < InteractRange) {
+			
+		}
+		
 		GetComponent<Animator>().SetBool("running", GetComponent<NavMeshAgent>().velocity.sqrMagnitude > 0.5f);
 
 		GetComponent<NavMeshAgent>().speed = Speed;
@@ -31,95 +39,50 @@ public class Citizen : Unit {
 		} else if (Behaviour == BehaviourType.StoneMiner) {
 			StoneMinerBehaviour ();
 		} else if (Behaviour == BehaviourType.Fighter) {
-			//GetComponent<NavMeshAgent> ().stoppingDistance = 0;
 			//eg
 		}
-		
-		base.Update ();
-	}
-
-	public void ChangeBehaviour (BehaviourType NewBehaviour) {
-		Behaviour = NewBehaviour;
 	}
 
 	public void SelectResource (GameObject ResourceObj) {
 		if (Util.EvaluateResource (Behaviour, ResourceObj.GetComponent<Resource> ().Type)) CurrentTarget = ResourceObj;
-	}
+	} //TODO make more of these
 
 	void StoneMinerBehaviour () {
 		if (CurrentAction == CitizenState.Idle) {
-			if (GetComponent<Animator> ().GetCurrentAnimatorClipInfo(0).First().clip.name == "CitizenDepositingState") {
-				return;
+			if (GetComponent<Animator>().GetBool("depositing")) {
+				if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("CitizenIdleState")) {
+					GetComponent<Animator> ().SetBool ("depositing",false);
+				} else {
+			    	return;
+				}
 			}
 			
 			GetComponent<Animator> ().SetBool ("depositing",false);
 			GetComponent<Animator> ().SetBool ("working",false);
 			
 			if (Load < MaxLoad) {
-				List<GameObject> nearbyResources = GameObject.FindGameObjectsWithTag ("Gaia").Where (x => x.GetComponent<Resource> () != null).ToList ();
-				List<GameObject> nearbyStoneMines = nearbyResources.Where (x => x.GetComponent<Resource> ().Type == ResourceType.Stone).ToList ();
-	
-				Vector3 currentPosition = transform.position;
-				float currentClosestDistanceSquaredToTarget = Mathf.Infinity;
-	
-				foreach (var potentialTarget in nearbyStoneMines) {
-					Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
-					float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
-	
-					if (distanceSquaredToTarget > Mathf.Pow (Sight,2)) {
-						break;
-					}
-	
-					if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget) {
-						currentClosestDistanceSquaredToTarget = distanceSquaredToTarget;
-						CurrentTarget = potentialTarget;
-					}
-				}
-	
-				if ((CurrentTarget != null) &&
-					(Load < MaxLoad)) {
-					GetComponent<NavMeshAgent> ().ResetPath ();
+				CurrentTarget = FindClosestObject<StoneMine>();
+				if (CurrentTarget == null) {
+					CurrentAction = CitizenState.Depositing;
+					return;
+				} else {
 					GetComponent<NavMeshAgent> ().destination = CurrentTarget.transform.position;
+					GetComponent<NavMeshAgent> ().stoppingDistance = CurrentTarget.GetComponent<BasicObject>().InteractRange;
 					CurrentAction = CitizenState.Seeking;
 				}
 			} else {
-				//GetComponent<NavMeshAgent> ().stoppingDistance = 2;
+				CurrentTarget = FindClosestObject<Storehouse>();
 				GetComponent<Animator> ().SetBool ("working",false);
-				List<GameObject> nearbyBuildings = GameObject.FindGameObjectsWithTag ("Building").Where (x => x.GetComponent<Storehouse> () != null).ToList ();
-				List<GameObject> nearbyStorehouses = nearbyBuildings.Where (x => x.GetComponent<Storehouse> ().Type == ResourceType.Stone).ToList ();
-	
-				Vector3 currentPosition = transform.position;
-				float currentClosestDistanceSquaredToTarget = Mathf.Infinity;
-	
-				foreach (var potentialTarget in nearbyStorehouses) {
-					Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
-					float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
-	
-					if (distanceSquaredToTarget > Mathf.Pow (Sight,2)) {
-						break;
-					}
-	
-					if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget) {
-						currentClosestDistanceSquaredToTarget = distanceSquaredToTarget;
-						CurrentTarget = potentialTarget;
-					}
-				}
 	
 				if (CurrentTarget != null) {
-					GetComponent<NavMeshAgent> ().ResetPath ();
 					GetComponent<NavMeshAgent> ().destination = CurrentTarget.transform.position;
 					CurrentAction = CitizenState.Depositing;
 				}
 			}
 		} else if (CurrentAction == CitizenState.Seeking) {
-			//GetComponent<NavMeshAgent> ().stoppingDistance = 0;
 			if (CurrentTarget != null) {
-				Vector3 directionToTarget = CurrentTarget.transform.position - transform.position;
-				float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
-
-				if (distanceSquaredToTarget < Mathf.Pow(CurrentTarget.GetComponent<Resource>().Range, 2)) {
+				if (GetComponent<NavMeshAgent>().remainingDistance < CurrentTarget.GetComponent<BasicObject>().InteractRange) {
 					CurrentAction = CitizenState.Working;
-					GetComponent<NavMeshAgent> ().ResetPath ();
 					GetComponent<Animator> ().SetBool ("working",true);
 				}
 			} else {
@@ -141,7 +104,7 @@ public class Citizen : Unit {
 				CollectionTimer = 0;
 
 				if (Load + 1 <= MaxLoad) {
-					CurrentTarget.GetComponent<Resource> ().Stock--;
+					CurrentTarget.GetComponent<Resource>().Stock--;
 					Load++;
 				} else {
 					CurrentAction = CitizenState.Idle;
@@ -151,10 +114,7 @@ public class Citizen : Unit {
 			CollectionTimer++;
 		} else if (CurrentAction == CitizenState.Depositing) {
 			if (CurrentTarget != null) {
-				Vector3 directionToTarget = CurrentTarget.transform.position - transform.position;
-				float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
-
-				if (distanceSquaredToTarget < Mathf.Pow(CurrentTarget.GetComponent<Storehouse>().Range, 2)) {
+				if (GetComponent<NavMeshAgent>().remainingDistance < CurrentTarget.GetComponent<BasicObject>().InteractRange) {
 					GetComponent<Animator> ().SetBool ("depositing",true);
 					Load = 0;
 					CurrentAction = CitizenState.Idle;
