@@ -22,19 +22,19 @@ public class Select : MonoBehaviour {
 	}
 
 	void Update() {
-		for (int i = 0; i < PersonParent.transform.GetChild (0).childCount; i++) {
-			persons[i] = PersonParent.transform.GetChild (0).GetChild (i).gameObject;
+		for (int i = 0; i < PersonParent.transform.GetChild(0).childCount; i++) {
+			persons[i] = PersonParent.transform.GetChild(0).GetChild(i).gameObject;
 		}
 		RaycastHit UnitHit;
 		if (Input.GetMouseButtonDown(0)) {
 			if (Physics.Raycast(OrthoRay(), out UnitHit, Mathf.Infinity, 1 << 9)) {
 				UnitHit.collider.gameObject.GetComponent<BasicObject>().Selected = true;
-				foreach (GameObject p in persons.Where (x => x != null && x != UnitHit.collider.gameObject)) {
+				foreach (GameObject p in persons.Where(x => x != null && x != UnitHit.collider.gameObject)) {
 					if (p.GetComponent<BasicObject>().Selected && !Input.GetKey(KeyCode.LeftShift))
 						p.GetComponent<BasicObject>().Selected = false;
 				}
 			} else {
-				foreach (GameObject p in persons.Where (x => x != null)) {
+				foreach (GameObject p in persons.Where(x => x != null)) {
 					if (p.GetComponent<BasicObject>().Selected && !Input.GetKey(KeyCode.LeftShift))
 						p.GetComponent<BasicObject>().Selected = false;
 				}
@@ -44,10 +44,10 @@ public class Select : MonoBehaviour {
 		}
 		if (inMarquee) {
 			MarqueeSelection();
-			foreach (GameObject unit in persons.Where (x => x != null)) {
-					//If the screen position of the unit is within the marquee, select it.
-					//If the screen position of the uniti is not within the marquee, but the user is holding shift and it is already selected, stay selected
-					//Otherwise, unselect it
+			foreach (GameObject unit in persons.Where(x => x != null)) {
+				//If the screen position of the unit is within the marquee, select it.
+				//If the screen position of the uniti is not within the marquee, but the user is holding shift and it is already selected, stay selected
+				//Otherwise, unselect it
 				Vector3 unitScreenPosition = Camera.main.WorldToScreenPoint(unit.transform.position);
 				Vector3 unitScreenPoint = new Vector3(unitScreenPosition.x, Screen.height - unitScreenPosition.y);
 				unit.GetComponent<BasicObject>().Selected = MarqueeRect.Contains(unitScreenPoint)
@@ -60,25 +60,25 @@ public class Select : MonoBehaviour {
 		if (Input.GetMouseButton(1)) {
 			RaycastHit TerrainHit;
 			RaycastHit ResourceHit;
-			if (Physics.Raycast (OrthoRay (),out ResourceHit, Mathf.Infinity, 1 << 10)) {
+			if (Physics.Raycast(OrthoRay(), out ResourceHit, Mathf.Infinity, 1 << 10)) {
 				SelectedResource = ResourceHit.collider.gameObject;
-				SelectedResource.GetComponent<Resource> ().Selected = true;
-				movePersons ();
-			} else if (Physics.Raycast (OrthoRay (),out TerrainHit,Mathf.Infinity,1 << 8)) {
+				SelectedResource.GetComponent<Resource>().Selected = true;
+				movePersons();
+			} else if (Physics.Raycast(OrthoRay(), out TerrainHit, Mathf.Infinity, 1 << 8)) {
 				selection = TerrainHit.point;
 				if (SelectedResource != null) {
-					SelectedResource.GetComponent<Resource> ().Selected = false;
+					SelectedResource.GetComponent<Resource>().Selected = false;
 					SelectedResource = null;
 				}
 				movePersons();
 			} else {
 				if (SelectedResource != null) {
-					SelectedResource.GetComponent<Resource> ().Selected = false;
+					SelectedResource.GetComponent<Resource>().Selected = false;
 					SelectedResource = null;
 				}
 			}
 		}
-		ChangeUnitBehaviour ();
+		ChangeUnitBehaviour();
 	}
 	void OnDrawGizmosSelected() {
 		Gizmos.DrawSphere(selection, 1);
@@ -118,17 +118,17 @@ public class Select : MonoBehaviour {
 	}
 
 	void movePersons() {
-		List<NavMeshAgent> FighterAgents = new List<NavMeshAgent> ();
-		List<NavMeshAgent> StonerAgents = new List<NavMeshAgent> (); //420 blaze it
-		foreach (GameObject person in persons.Where (x => x != null)) {
+		List<NavMeshAgent> FighterAgents = new List<NavMeshAgent>();
+		List<NavMeshAgent> StonerAgents = new List<NavMeshAgent>(); //420 blaze it
+		foreach (GameObject person in persons.Where(x => x != null)) {
 			if (person.GetComponent<BasicObject>().Selected) {
-				switch (person.GetComponent<Citizen> ().Behaviour) {
+				switch (person.GetComponent<Citizen>().Behaviour) {
 					case BehaviourType.Fighter:
-						FighterAgents.Add (person.GetComponent<NavMeshAgent> ());
-						break;
+					FighterAgents.Add(person.GetComponent<NavMeshAgent>());
+					break;
 					case BehaviourType.StoneMiner:
-						StonerAgents.Add (person.GetComponent<NavMeshAgent> ());
-						break;
+					StonerAgents.Add(person.GetComponent<NavMeshAgent>());
+					break;
 				}
 			}
 		}
@@ -140,29 +140,29 @@ public class Select : MonoBehaviour {
 		}
 		if (StonerAgents.Count > 0) {
 			if (SelectedResource == null) {
-				Vector3[] Destinations = UnitOrganization.FighterOrganization.OrganizeWorkers (StonerAgents.ToArray (),selection);
+				Vector3[] Destinations = UnitOrganization.FighterOrganization.OrganizeWorkers(StonerAgents.ToArray(), selection);
 				for (int i = 0; i < StonerAgents.Count; i++) {
 					StonerAgents[i].destination = Destinations[i];
 				}
 			} else {
 				for (int i = 0; i < StonerAgents.Count; i++) {
-					StonerAgents[i].GetComponent<Citizen> ().SelectResource (SelectedResource);
+					StonerAgents[i].GetComponent<Citizen>().SelectResource(SelectedResource);
 				}
 			}
 		}
 	}
 
-	void ChangeUnitBehaviour () {
+	void ChangeUnitBehaviour() {
 		BehaviourType newBehaviour = BehaviourType.Idle;
-		bool didChangeBehaviour = Input.GetKeyDown (KeyCode.Alpha1) || Input.GetKeyDown (KeyCode.Alpha2);
-        if (Input.GetKeyDown (KeyCode.Alpha1)) {
+		bool didChangeBehaviour = Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2);
+		if (Input.GetKeyDown(KeyCode.Alpha1)) {
 			newBehaviour = BehaviourType.Fighter;
-		} else if (Input.GetKeyDown (KeyCode.Alpha2)) {
+		} else if (Input.GetKeyDown(KeyCode.Alpha2)) {
 			newBehaviour = BehaviourType.StoneMiner;
 		}
 		if (didChangeBehaviour) {
-			foreach (GameObject unit in persons.Where (x => x.GetComponent<Citizen> ().Selected)) {
-				unit.GetComponent<Citizen> ().Behaviour = newBehaviour;
+			foreach (GameObject unit in persons.Where(x => x.GetComponent<Citizen>().Selected)) {
+				unit.GetComponent<Citizen>().Behaviour = newBehaviour;
 			}
 		}
 	}

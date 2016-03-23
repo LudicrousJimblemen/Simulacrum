@@ -6,7 +6,7 @@ public class CameraMove : MonoBehaviour {
 
 	public float PanSpeed = 1.5f;
 	public float ZoomSpeed = 6.5f;
-	
+
 	public enum ZoomControl {
 		Scrollwheel,
 		Keys

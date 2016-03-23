@@ -9,9 +9,9 @@ public class StoneMine : Resource {
 
 	public override void Update() {
 		base.Update();
-		
+
 		float scale = Mathf.Ceil(StockPercentage * 5) / 5;
-		
+
 		transform.localScale = new Vector3(
 			scale,
 			scale,

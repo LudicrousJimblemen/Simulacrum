@@ -34,11 +34,11 @@ namespace UnitOrganization {
 			return Destinations;
 		}
 
-		public static Vector3[] OrganizeWorkers (NavMeshAgent[] Units,Vector3 Destination) {
+		public static Vector3[] OrganizeWorkers(NavMeshAgent[] Units, Vector3 Destination) {
 			Vector3[] destinations = new Vector3[Units.Length];
 			for (int i = 0; i < Units.Length; i++) {
 				Vector3 tempDestination = Destination;
-				Vector3 offset = new Vector3 (((Random.value * 2) - 1) * Units.Length/(UnitDistance*20f),0,((Random.value * 2) - 1) * Units.Length/(UnitDistance*20f));
+				Vector3 offset = new Vector3(((Random.value * 2) - 1) * Units.Length / (UnitDistance * 20f), 0, ((Random.value * 2) - 1) * Units.Length / (UnitDistance * 20f));
 				//offset.Normalize ();
 				offset *= Random.value * UnitDistance + UnitDistance;
 				tempDestination += offset;
@@ -61,7 +61,7 @@ namespace UnitOrganization {
 			return Temp;
 		}
 		static void GetDimensionsFromCount(int Count) {
-			string[] lines = {""};
+			string[] lines = { "" };
 			int i = 1;
 			while (Count > i * i) {
 				i++;
@@ -73,11 +73,11 @@ namespace UnitOrganization {
 			} else {
 				Remainder = Count % MaxRowWidth;
 			}
-			FullRows = (Count-Remainder)/MaxRowWidth;
-			
-			
+			FullRows = (Count - Remainder) / MaxRowWidth;
+
+
 			lines[0] = FullRows + ", " + MaxRowWidth + ", " + Remainder;
-			
+
 			//FullRows = (Count - Count % MaxRowWidth) / MaxRowWidth;
 			//Remainder = Count % MaxRowWidth;
 		}

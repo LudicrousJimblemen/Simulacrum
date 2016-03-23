@@ -4,7 +4,7 @@ using System.Linq;
 
 public class BasicObject : MonoBehaviour {
 	public bool Selected;
-	
+
 	public float Sight = 9f;
 
 	public Material defaultMaterial;
@@ -13,10 +13,10 @@ public class BasicObject : MonoBehaviour {
 
 	public float InteractRange = 2f;
 
-	public virtual void Awake () {
+	public virtual void Awake() {
 		//mesh = GetComponentInChildren<SkinnedMeshRenderer>();
 	}
-	
+
 	public virtual void Update() {
 		if (Selected) {
 			//mesh.material = outlineMaterial;
@@ -24,10 +24,10 @@ public class BasicObject : MonoBehaviour {
 			//mesh.material = defaultMaterial;
 		}
 	}
-	
+
 	public GameObject FindClosestObject<Type>() {
 		GameObject finalObject = null;
-		
+
 		Vector3 currentPosition = transform.position;
 		float currentClosestDistanceSquaredToTarget = Mathf.Infinity;
 
@@ -35,7 +35,7 @@ public class BasicObject : MonoBehaviour {
 			Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
 			float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
 
-			if (distanceSquaredToTarget > Mathf.Pow (Sight,2)) {
+			if (distanceSquaredToTarget > Mathf.Pow(Sight, 2)) {
 				break;
 			}
 
@@ -44,7 +44,7 @@ public class BasicObject : MonoBehaviour {
 				finalObject = potentialTarget;
 			}
 		}
-		
+
 		return finalObject;
 	}
 }

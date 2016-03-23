@@ -7,13 +7,13 @@ public class Generic : MonoBehaviour {
 	Unit unit;
 	NavMeshAgent agent;
 
-	void Awake () {
+	void Awake() {
 		unit = GetComponent<Unit>();
-		agent = GetComponent<NavMeshAgent> ();
-    	}
+		agent = GetComponent<NavMeshAgent>();
+	}
 
 	void Update() {
 		agent.speed = unit.Speed;
-		agent.angularSpeed = unit.Speed*216;
+		agent.angularSpeed = unit.Speed * 216;
 	}
 }

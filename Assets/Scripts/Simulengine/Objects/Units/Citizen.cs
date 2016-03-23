@@ -15,21 +15,21 @@ public class Citizen : Unit {
 	public GameObject CurrentTarget = null;
 
 	public override void Awake() {
-		base.Awake ();
-		
+		base.Awake();
+
 		Behaviour = BehaviourType.Idle;
 		CurrentAction = CitizenState.Idle;
-		
-		GetComponent<NavMeshAgent> ().stoppingDistance = 0;
+
+		GetComponent<NavMeshAgent>().stoppingDistance = 0;
 	}
 
 	public override void Update() {
-		base.Update ();
-		
+		base.Update();
+
 		if (GetComponent<NavMeshAgent>().remainingDistance < InteractRange) {
-			
+
 		}
-		
+
 		GetComponent<Animator>().SetBool("running", GetComponent<NavMeshAgent>().velocity.sqrMagnitude > 0.5f);
 
 		GetComponent<NavMeshAgent>().speed = Speed;
@@ -37,45 +37,46 @@ public class Citizen : Unit {
 		if (Behaviour == BehaviourType.Idle) {
 			//eg
 		} else if (Behaviour == BehaviourType.StoneMiner) {
-			StoneMinerBehaviour ();
+			StoneMinerBehaviour();
 		} else if (Behaviour == BehaviourType.Fighter) {
 			//eg
 		}
 	}
 
-	public void SelectResource (GameObject ResourceObj) {
-		if (Util.EvaluateResource (Behaviour, ResourceObj.GetComponent<Resource> ().Type)) CurrentTarget = ResourceObj;
+	public void SelectResource(GameObject ResourceObj) {
+		if (Util.EvaluateResource(Behaviour, ResourceObj.GetComponent<Resource>().Type))
+			CurrentTarget = ResourceObj;
 	} //TODO make more of these
 
-	void StoneMinerBehaviour () {
+	void StoneMinerBehaviour() {
 		if (CurrentAction == CitizenState.Idle) {
 			if (GetComponent<Animator>().GetBool("depositing")) {
 				if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("CitizenIdleState")) {
-					GetComponent<Animator> ().SetBool ("depositing",false);
+					GetComponent<Animator>().SetBool("depositing", false);
 				} else {
-			    	return;
+					return;
 				}
 			}
-			
-			GetComponent<Animator> ().SetBool ("depositing",false);
-			GetComponent<Animator> ().SetBool ("working",false);
-			
+
+			GetComponent<Animator>().SetBool("depositing", false);
+			GetComponent<Animator>().SetBool("working", false);
+
 			if (Load < MaxLoad) {
 				CurrentTarget = FindClosestObject<StoneMine>();
 				if (CurrentTarget == null) {
 					CurrentAction = CitizenState.Depositing;
 					return;
 				} else {
-					GetComponent<NavMeshAgent> ().destination = CurrentTarget.transform.position;
-					GetComponent<NavMeshAgent> ().stoppingDistance = CurrentTarget.GetComponent<BasicObject>().InteractRange;
+					GetComponent<NavMeshAgent>().destination = CurrentTarget.transform.position;
+					GetComponent<NavMeshAgent>().stoppingDistance = CurrentTarget.GetComponent<BasicObject>().InteractRange;
 					CurrentAction = CitizenState.Seeking;
 				}
 			} else {
 				CurrentTarget = FindClosestObject<Storehouse>();
-				GetComponent<Animator> ().SetBool ("working",false);
-	
+				GetComponent<Animator>().SetBool("working", false);
+
 				if (CurrentTarget != null) {
-					GetComponent<NavMeshAgent> ().destination = CurrentTarget.transform.position;
+					GetComponent<NavMeshAgent>().destination = CurrentTarget.transform.position;
 					CurrentAction = CitizenState.Depositing;
 				}
 			}
@@ -83,7 +84,7 @@ public class Citizen : Unit {
 			if (CurrentTarget != null) {
 				if (GetComponent<NavMeshAgent>().remainingDistance < CurrentTarget.GetComponent<BasicObject>().InteractRange) {
 					CurrentAction = CitizenState.Working;
-					GetComponent<Animator> ().SetBool ("working",true);
+					GetComponent<Animator>().SetBool("working", true);
 				}
 			} else {
 				CurrentAction = CitizenState.Idle;
@@ -94,7 +95,7 @@ public class Citizen : Unit {
 				return;
 			}
 
-			transform.LookAt (new Vector3 (
+			transform.LookAt(new Vector3(
 				CurrentTarget.transform.position.x,
 				0,
 				CurrentTarget.transform.position.z
@@ -115,7 +116,7 @@ public class Citizen : Unit {
 		} else if (CurrentAction == CitizenState.Depositing) {
 			if (CurrentTarget != null) {
 				if (GetComponent<NavMeshAgent>().remainingDistance < CurrentTarget.GetComponent<BasicObject>().InteractRange) {
-					GetComponent<Animator> ().SetBool ("depositing",true);
+					GetComponent<Animator>().SetBool("depositing", true);
 					Load = 0;
 					CurrentAction = CitizenState.Idle;
 				}
