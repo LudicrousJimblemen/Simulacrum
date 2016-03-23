@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 
 class NetworkManager : MonoBehaviour {
 	private const string typeName = "JimblemenSimulacrum";
@@ -57,7 +58,7 @@ class NetworkManager : MonoBehaviour {
 			RefreshHostList();
 
 			if (hostList != null) {
-				StartServer();
+				JoinServer(hostList.First());
 			}
 		}
 	}
