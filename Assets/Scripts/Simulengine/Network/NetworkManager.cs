@@ -22,6 +22,7 @@ class NetworkManager : MonoBehaviour {
 
 	private void RefreshHostList() {
 		MasterServer.RequestHostList(typeName);
+		Debug.Log("refreshed servers");
 	}
 
 	void OnMasterServerEvent(MasterServerEvent msEvent) {
@@ -31,6 +32,7 @@ class NetworkManager : MonoBehaviour {
 
 	private void JoinServer(HostData hostData) {
 		Network.Connect(hostData);
+		Debug.Log("joined server");
 	}
 
 	void Update() {
@@ -49,7 +51,10 @@ class NetworkManager : MonoBehaviour {
 				for (int i = 0; i < hostList.Length; i++) {
 					s += hostList[i].gameName + " ";
 				}
+				Debug.Log("yes servers");
 				Debug.Log(s);
+			} else {
+				Debug.Log("no servers");
 			}
 		}
 		if (Input.GetKeyDown(KeyCode.J) &&
