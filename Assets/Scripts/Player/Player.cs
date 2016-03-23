@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class Player : MonoBehaviour {
+	public int Stone;
 
-	public string username;
-	public bool isHuman;
-
-	void Start() { //Initially called
+	void Start() {
 		//
 	}
 
-	void Update() { //Called once per frame (60FPS)
-		//
+	void Update() {
+		GameObject.Find("UIStoneText").GetComponent<Text>().text = String.Format("Stone\n{0}", Stone);
 	}
 }

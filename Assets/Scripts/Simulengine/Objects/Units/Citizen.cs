@@ -50,20 +50,17 @@ public class Citizen : Unit {
 
 	void StoneMinerBehaviour() {
 		if (CurrentAction == CitizenState.Idle) {
-			if (GetComponent<Animator>().GetBool("depositing")) {
-				if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("CitizenIdleState")) {
-					GetComponent<Animator>().SetBool("depositing", false);
-				} else {
-					return;
-				}
+			if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("CitizenDepositingState")) {
+				return;
 			}
 
-			GetComponent<Animator>().SetBool("depositing", false);
 			GetComponent<Animator>().SetBool("working", false);
 
 			if (Load < MaxLoad) {
 				CurrentTarget = FindClosestObject<StoneMine>();
+
 				if (CurrentTarget == null) {
+					CurrentTarget = FindClosestObject<Storehouse>();
 					CurrentAction = CitizenState.Depositing;
 					return;
 				} else {
@@ -72,11 +69,12 @@ public class Citizen : Unit {
 					CurrentAction = CitizenState.Seeking;
 				}
 			} else {
-				CurrentTarget = FindClosestObject<Storehouse>();
 				GetComponent<Animator>().SetBool("working", false);
+				CurrentTarget = FindClosestObject<Storehouse>();
 
 				if (CurrentTarget != null) {
 					GetComponent<NavMeshAgent>().destination = CurrentTarget.transform.position;
+					GetComponent<NavMeshAgent>().stoppingDistance = CurrentTarget.GetComponent<BasicObject>().InteractRange;
 					CurrentAction = CitizenState.Depositing;
 				}
 			}
@@ -116,7 +114,7 @@ public class Citizen : Unit {
 		} else if (CurrentAction == CitizenState.Depositing) {
 			if (CurrentTarget != null) {
 				if (GetComponent<NavMeshAgent>().remainingDistance < CurrentTarget.GetComponent<BasicObject>().InteractRange) {
-					GetComponent<Animator>().SetBool("depositing", true);
+					transform.parent.transform.GetComponentInParent<Player>().Stone += Load;
 					Load = 0;
 					CurrentAction = CitizenState.Idle;
 				}

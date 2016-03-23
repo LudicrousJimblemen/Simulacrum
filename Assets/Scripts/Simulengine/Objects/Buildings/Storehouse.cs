@@ -6,6 +6,6 @@ public class Storehouse : Building {
 	public override void Awake() {
 		base.Awake();
 
-		InteractRange = 5.5f;
+		InteractRange = 2.5f;
 	}
 }
