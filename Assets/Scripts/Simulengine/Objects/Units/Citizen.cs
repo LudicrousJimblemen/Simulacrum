@@ -60,7 +60,7 @@ public class Citizen : Unit {
 				CurrentTarget = FindClosestObject<StoneMine>();
 
 				if (CurrentTarget == null) {
-					CurrentTarget = FindClosestObject<Storehouse>();
+					CurrentTarget = FindClosestChildOf<Storehouse>(transform.parent.parent);
 					CurrentAction = CitizenState.Depositing;
 					return;
 				} else {
@@ -70,7 +70,7 @@ public class Citizen : Unit {
 				}
 			} else {
 				GetComponent<Animator>().SetBool("working", false);
-				CurrentTarget = FindClosestObject<Storehouse>();
+				CurrentTarget = FindClosestChildOf<Storehouse>(transform.parent.parent);
 
 				if (CurrentTarget != null) {
 					GetComponent<NavMeshAgent>().destination = CurrentTarget.transform.position;
