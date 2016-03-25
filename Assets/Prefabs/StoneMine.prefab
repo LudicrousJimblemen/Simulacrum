@@ -10,11 +10,10 @@ GameObject:
   - 4: {fileID: 401908}
   - 33: {fileID: 3356166}
   - 23: {fileID: 2373352}
-  - 65: {fileID: 6549770}
   - 114: {fileID: 11421854}
   m_Layer: 10
   m_Name: StoneMine
-  m_TagString: Gaia
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,18 +61,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136692}
   m_Mesh: {fileID: 4300002, guid: b55893bfa92662d439ae58354d327d38, type: 3}
---- !u!65 &6549770
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136692}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .0130000003, y: .0130000003, z: .00499999989}
-  m_Center: {x: 0, y: 0, z: .00100000005}
 --- !u!114 &11421854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,9 +73,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
-  defaultMaterial: {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 1b7313197ed5d964d8b8dda502735c5f, type: 2}
-  Range: 2
+  Sight: 9
+  InteractRange: 2
   Type: 0
   MaxStock: 20
   Stock: 20
@@ -119,6 +105,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
