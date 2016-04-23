@@ -14,26 +14,24 @@ public class Citizen : Unit {
 	public CitizenState CurrentAction;
 	public GameObject CurrentTarget = null;
 
+	NavMeshAgent navAgent;
+
 	public override void Awake() {
 		base.Awake();
 
 		Behaviour = BehaviourType.Idle;
 		CurrentAction = CitizenState.Idle;
-
-		GetComponent<NavMeshAgent>().stoppingDistance = 0;
+		navAgent = GetComponent<NavMeshAgent> ();
+		navAgent.stoppingDistance = 0;
 	}
 
 	public override void Update() {
 		base.Update();
 
-		if (GetComponent<NavMeshAgent>().remainingDistance < InteractRange) {
+		GetComponent<Animator>().SetBool("running", navAgent.velocity.sqrMagnitude > 0.3f);
 
-		}
-
-		GetComponent<Animator>().SetBool("running", GetComponent<NavMeshAgent>().velocity.sqrMagnitude > 0.5f);
-
-		GetComponent<NavMeshAgent>().speed = Speed;
-		GetComponent<NavMeshAgent>().angularSpeed = Speed * 216;
+		navAgent.speed = Speed;
+		navAgent.angularSpeed = Speed * 216;
 		if (Behaviour == BehaviourType.Idle) {
 			//eg
 		} else if (Behaviour == BehaviourType.StoneMiner) {
@@ -50,22 +48,26 @@ public class Citizen : Unit {
 
 	void StoneMinerBehaviour() {
 		if (CurrentAction == CitizenState.Idle) {
+			/*
 			if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("CitizenDepositingState")) {
 				return;
 			}
+			*/
 
 			GetComponent<Animator>().SetBool("working", false);
 
 			if (Load < MaxLoad) {
-				CurrentTarget = FindClosestObject<StoneMine>();
+				CurrentTarget = FindClosestChildOf<StoneMine>(GameObject.Find ("Resources").transform);
 
 				if (CurrentTarget == null) {
-					CurrentTarget = FindClosestChildOf<Storehouse>(transform.parent.parent);
-					CurrentAction = CitizenState.Depositing;
-					return;
+					if (Load > 0) {
+						CurrentTarget = FindClosestChildOf<Storehouse> (transform.parent.parent);
+						CurrentAction = CitizenState.Depositing;
+						return;
+					}
 				} else {
-					GetComponent<NavMeshAgent>().destination = CurrentTarget.transform.position;
-					GetComponent<NavMeshAgent>().stoppingDistance = CurrentTarget.GetComponent<BasicObject>().InteractRange;
+					navAgent.destination = CurrentTarget.transform.position;
+					navAgent.stoppingDistance = CurrentTarget.GetComponent<BasicObject>().InteractRange;
 					CurrentAction = CitizenState.Seeking;
 				}
 			} else {
@@ -73,14 +75,14 @@ public class Citizen : Unit {
 				CurrentTarget = FindClosestChildOf<Storehouse>(transform.parent.parent);
 
 				if (CurrentTarget != null) {
-					GetComponent<NavMeshAgent>().destination = CurrentTarget.transform.position;
-					GetComponent<NavMeshAgent>().stoppingDistance = CurrentTarget.GetComponent<BasicObject>().InteractRange;
+					navAgent.destination = CurrentTarget.transform.position;
+					navAgent.stoppingDistance = CurrentTarget.GetComponent<BasicObject>().InteractRange;
 					CurrentAction = CitizenState.Depositing;
 				}
 			}
 		} else if (CurrentAction == CitizenState.Seeking) {
 			if (CurrentTarget != null) {
-				if (GetComponent<NavMeshAgent>().remainingDistance < CurrentTarget.GetComponent<BasicObject>().InteractRange) {
+				if (navAgent.remainingDistance < CurrentTarget.GetComponent<BasicObject>().InteractRange) {
 					CurrentAction = CitizenState.Working;
 					GetComponent<Animator>().SetBool("working", true);
 				}
@@ -113,7 +115,7 @@ public class Citizen : Unit {
 			CollectionTimer++;
 		} else if (CurrentAction == CitizenState.Depositing) {
 			if (CurrentTarget != null) {
-				if (GetComponent<NavMeshAgent>().remainingDistance < CurrentTarget.GetComponent<BasicObject>().InteractRange) {
+				if (navAgent.remainingDistance < CurrentTarget.GetComponent<BasicObject>().InteractRange) {
 					transform.parent.transform.GetComponentInParent<Player>().Stone += Load;
 					Load = 0;
 					CurrentAction = CitizenState.Idle;
