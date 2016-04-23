@@ -20,6 +20,11 @@ public class SpawnPersons : MonoBehaviour {
 				SummonCitizen(BehaviourType.StoneMiner);
             }
 		}
+		if (units.childCount < Camera.main.GetComponent<Select> ().persons.Length) {
+			if (Input.GetKeyDown (KeyCode.E)) {
+				SummonCitizen (BehaviourType.Fighter);
+			}
+		}
 	}
 
 	public void SummonCitizen(BehaviourType type) {

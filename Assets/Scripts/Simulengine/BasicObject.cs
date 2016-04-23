@@ -13,7 +13,6 @@ public class BasicObject : MonoBehaviour {
 	}
 
 	public virtual void Update() {
-		//
 	}
 
 	public GameObject FindClosestObject<Type>() {
@@ -21,16 +20,18 @@ public class BasicObject : MonoBehaviour {
 
 		Vector3 currentPosition = transform.position;
 		float currentClosestDistanceSquaredToTarget = Mathf.Infinity;
+		foreach (GameObject potentialTarget in GameObject.FindObjectsOfType<GameObject>().ToList()
+			.Where(x => x.GetComponent<Type>() != null)) {
+			Vector3 heading = potentialTarget.transform.position - currentPosition;
+			float distanceSquaredToTarget = heading.sqrMagnitude;
 
-		foreach (GameObject potentialTarget in Object.FindObjectsOfType<GameObject>().ToList().Where(x => x.GetComponent<Type>() != null)) {
-			Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
-			float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
-
-			if (distanceSquaredToTarget > Mathf.Pow(Sight, 2)) {
+			/*
+			if (distanceSquaredToTarget > Sight * Sight) {
 				break;
 			}
+			*/
 
-			if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget) {
+			if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget && distanceSquaredToTarget < Sight * Sight) {
 				currentClosestDistanceSquaredToTarget = distanceSquaredToTarget;
 				finalObject = potentialTarget;
 			}
@@ -43,19 +44,20 @@ public class BasicObject : MonoBehaviour {
 		GameObject finalObject = null;
 
 		Vector3 currentPosition = transform.position;
-		float currentClosestDistanceSquaredToTarget = Mathf.Infinity;
+		float currentClosestDistanceSquaredToTarget = Mathf.Infinity; 
 
-		foreach (GameObject potentialTarget in Object.FindObjectsOfType<GameObject>().ToList()
+		foreach (GameObject potentialTarget in GameObject.FindObjectsOfType<GameObject>().ToList()
 			.Where(x => x.GetComponent<Type>() != null)
 			.Where(x => x.transform.IsChildOf(input))) {
 			Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
 			float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
-
-			if (distanceSquaredToTarget > Mathf.Pow(Sight, 2)) {
+			/*
+			if (distanceSquaredToTarget > Sight * Sight) { //dumb
 				break;
 			}
+			*/
 
-			if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget) {
+			if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget && distanceSquaredToTarget < Sight * Sight) {
 				currentClosestDistanceSquaredToTarget = distanceSquaredToTarget;
 				finalObject = potentialTarget;
 			}
