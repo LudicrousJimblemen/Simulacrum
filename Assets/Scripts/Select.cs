@@ -142,6 +142,7 @@ public class Select : MonoBehaviour {
 			if (SelectedResource == null) {
 				Vector3[] Destinations = UnitOrganization.FighterOrganization.OrganizeWorkers(StonerAgents.ToArray(), selection);
 				for (int i = 0; i < StonerAgents.Count; i++) {
+					StonerAgents[i].GetComponent<Citizen> ().CurrentAction = CitizenState.Idle;
 					StonerAgents[i].destination = Destinations[i];
 				}
 			} else {
