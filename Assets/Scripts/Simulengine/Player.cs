@@ -7,9 +7,4 @@ public class Player : MonoBehaviour {
 	public bool IsHuman;
 	
 	public int Stone;
-	
-	public Player(string username, bool isHuman) {
-		this.Username = username;
-		this.IsHuman = isHuman;
-	}
 }

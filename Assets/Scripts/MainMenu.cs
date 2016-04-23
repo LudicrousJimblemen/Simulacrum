@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class MainMenu : MonoBehaviour {
-	public void CreateGame() {
-		Game createdGame = new Game();
-		Player currentPlayer = new Player("TestGuy", true);
+	public void Start() {
 		
-		createdGame.Players.Add(currentPlayer);
+	}
+	
+	public void CreateGame() {
+		Application.LoadLevel("Game");
 	}
 }
