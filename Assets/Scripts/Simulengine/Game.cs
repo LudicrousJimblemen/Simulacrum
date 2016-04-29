@@ -14,8 +14,8 @@ public class Game : MonoBehaviour {
 		
 		MapGenerator map = FindObjectOfType<MapGenerator>();
 		
-		map.mapWidth = 128;
-		map.mapHeight = 128;
+		map.mapWidth = 64;
+		map.mapHeight = 64;
 		map.noiseScale = 20;
 		map.octaves = 3;
 		map.persistance = 0.35f;
@@ -25,17 +25,17 @@ public class Game : MonoBehaviour {
 			new TerrainType {
 				name = "Water",
 				height = 0.32f,
-				color = new Color(0, 181, 155)
+				color = new Color(56f, 132f, 255f)
 			},
 			new TerrainType {
 				name = "Sand",
 				height = 0.4f,
-				color = new Color(255, 255, 122)
+				color = new Color(255f, 249f, 139f)
 			},
 			new TerrainType {
 				name = "Grass",
 				height = 1f,
-				color = new Color(42, 236, 92)
+				color = new Color(57f, 199f, 44f)
 			}
 		};
 		
