@@ -15,6 +15,7 @@ public class CameraMove : MonoBehaviour {
 
 	void Awake() {
 		LookDirection = transform.forward;
+		zoomControl = ZoomControl.Keys;
 	}
 
 	void LateUpdate() {
@@ -24,10 +25,10 @@ public class CameraMove : MonoBehaviour {
 		transform.position += FlatLook * Input.GetAxis("Vertical") * PanSpeed
 			+ Vector3.Cross(-FlatLook, Vector3.up) * Input.GetAxis("Horizontal") * PanSpeed;
 		if (zoomControl == ZoomControl.ScrollWheel) {
-			GetComponent<Camera>().orthographicSize = (Input.GetAxis("Mouse ScrollWheel") * ZoomSpeed);
+			GetComponent<Camera>().orthographicSize += (Input.GetAxis("Mouse ScrollWheel") * ZoomSpeed);
 			GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize.Clamp(5, 40);
 		} else if (zoomControl == ZoomControl.Keys) {
-			GetComponent<Camera>().orthographicSize = (Input.GetAxis("Alternate Zoom") * ZoomSpeed);
+			GetComponent<Camera>().orthographicSize += (Input.GetAxis("Alternate Zoom") * ZoomSpeed);
 			GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize.Clamp(5, 40);
 		}
 	}
