@@ -6,22 +6,10 @@ using System.Linq;
 public class GameGUI : MonoBehaviour {
 	public UnityEngine.Object personPrefab;
 	
-	public Player GetCurrentPlayer() {
-		return FindObjectsOfType<Player>().Where(
-			x => x.GetComponent<Player>().PlayerInfo.IsCurrent
-		).ToList().First();
-	}
-	
-	public void SummonPerson() {
-		Player player = GetCurrentPlayer();
-		
-		GameObject createdPerson = Instantiate(
-			personPrefab, Vector3.zero, Quaternion.identity
-		) as GameObject;
-		
+	public Material GetPlayerMaterial() {
 		Color playerColor = new Color();
 		
-		switch (player.PlayerInfo.PlayerNumber) {
+		switch (GetCurrentPlayer().PlayerInfo.PlayerNumber) {
 			default:
 				playerColor = Color.grey;
 				break;
@@ -48,9 +36,21 @@ public class GameGUI : MonoBehaviour {
 		Material newMaterial = new Material(Shader.Find("Standard"));
 		 
 		newMaterial.color = playerColor + new Color(0.1f, 0.1f, 0.1f);
+	}
+	
+	public Player GetCurrentPlayer() {
+		return FindObjectsOfType<Player>().Where(
+			x => x.GetComponent<Player>().PlayerInfo.IsCurrent
+		).ToList().First();
+	}
+	
+	public void SummonPerson() {
+		GameObject createdPerson = Instantiate(
+			personPrefab, Vector3.zero, Quaternion.identity
+		) as GameObject;
 		
 		createdPerson
 			.GetComponentInChildren<SkinnedMeshRenderer>()
-			.material = newMaterial;
+			.material = GetPlayerMaterial();
 	}
 }

@@ -16,10 +16,9 @@ public class Select : MonoBehaviour {
 	GameObject SelectedResource;
 
 	void Start	() {
-		PersonParent = FindObjectsOfType<Player>()
-			.Where(x => x.PlayerInfo.IsCurrent)
-			.First()
-			.gameObject;
+		PersonParent = FindObjectsOfType<Player>().Where(
+			x => x.GetComponent<Player>().PlayerInfo.IsCurrent
+		).ToList().First().gameObject;
 		persons = new GameObject[500];
 		MarqueeRect = new Rect();
 	}
