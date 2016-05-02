@@ -4,18 +4,23 @@ using System.Linq;
 
 public class Game : MonoBehaviour {
 	public void Start() {
+		int playerNumber = 1;
+		
 		GameConfig config = FindObjectOfType<GameConfig>();
 		
 		foreach (PlayerInfo configPlayer in config.players) {
 			GameObject playerObject = new GameObject();
 			playerObject.AddComponent<Player>().PlayerInfo = configPlayer;
+			playerObject.GetComponent<Player>().PlayerInfo.PlayerNumber = playerNumber;
 			playerObject.name = "Player";
+			
+			playerNumber++;
 		}
 		
 		MapGenerator map = FindObjectOfType<MapGenerator>();
 		
-		map.mapWidth = 64;
-		map.mapHeight = 64;
+		map.mapWidth = 32;
+		map.mapHeight = 32;
 		map.noiseScale = 13;
 		map.octaves = 3;
 		map.persistance = 0.45f;

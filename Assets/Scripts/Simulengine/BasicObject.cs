@@ -9,7 +9,6 @@ public class BasicObject : MonoBehaviour {
 	public float InteractRange = 2f;
 
 	public virtual void Awake() {
-		//
 	}
 
 	public virtual void Update() {
