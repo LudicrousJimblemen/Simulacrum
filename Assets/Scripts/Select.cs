@@ -10,13 +10,16 @@ public class Select : MonoBehaviour {
 
 	public Vector3 Marquee1;
 	public Vector3 Marquee2;
-	public bool inMarquee = false;
+	public bool inMarquee;
 	Rect MarqueeRect;
 
 	GameObject SelectedResource;
 
-	void Awake() {
-		PersonParent = GameObject.Find("Player");
+	void Start	() {
+		Debug.Log(FindObjectsOfType<GameObject>().Any());
+		PersonParent = FindObjectsOfType<GameObject>()
+			.Where(x => x.GetComponent<Player>() != null)
+			.First(x => x.GetComponent<Player>().PlayerInfo.IsCurrent);
 		persons = new GameObject[500];
 		MarqueeRect = new Rect();
 	}
