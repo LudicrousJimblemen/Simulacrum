@@ -57,7 +57,7 @@ public class Citizen : Unit {
 			GetComponent<Animator>().SetBool("working", false);
 
 			if (Load < MaxLoad) {
-				CurrentTarget = FindClosestChildOf<StoneMine>(GameObject.Find ("Resources").transform);
+				CurrentTarget = FindClosestChildOf<StoneMine> (transform.parent);
 
 				if (CurrentTarget == null) {
 					if (Load > 0) {
