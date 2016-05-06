@@ -51,7 +51,7 @@ public class BasicObject : MonoBehaviour {
 		Vector3 currentPosition = transform.position;
 		float currentClosestDistanceSquaredToTarget = Mathf.Infinity; 
 
-		foreach (GameObject potentialTarget in GameObject.FindObjectsOfType<GameObject>().ToList()
+		foreach (GameObject potentialTarget in FindObjectsOfType<GameObject>().ToList()
 			.Where(x => x.GetComponent<Type>() != null)
 			.Where(x => x.transform.IsChildOf(input))) {
 			Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
