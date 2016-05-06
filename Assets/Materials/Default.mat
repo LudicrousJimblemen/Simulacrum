@@ -153,11 +153,11 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
       data:
         first:
           name: _ZWrite
@@ -193,7 +193,7 @@ Material:
       data:
         first:
           name: _Outline
-        second: .0299999993
+        second: 0.03
     m_Colors:
       data:
         first:
@@ -206,4 +206,4 @@ Material:
       data:
         first:
           name: _OutlineColor
-        second: {r: 0, g: .627586305, b: 1, a: 1}
+        second: {r: 0, g: 0.6275863, b: 1, a: 1}

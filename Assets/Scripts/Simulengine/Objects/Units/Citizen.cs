@@ -15,6 +15,8 @@ public class Citizen : Unit {
 	public GameObject CurrentTarget = null;
 
 	NavMeshAgent navAgent;
+	
+	Transform OwnerPlayer;
 
 	public override void Awake() {
 		base.Awake();
@@ -23,6 +25,14 @@ public class Citizen : Unit {
 		CurrentAction = CitizenState.Idle;
 		navAgent = GetComponent<NavMeshAgent>();
 		navAgent.stoppingDistance = 0;
+	}
+	
+	public override void Start () {
+		OwnerPlayer = FindObjectsOfType<GameObject> ()
+			.Where (x => x.GetComponent<Player> () != null)
+			.Where (x => x.GetComponent<Player> ().PlayerInfo.IsCurrent)
+			.First ()
+			.transform;
 	}
 
 	public override void Update() {
@@ -57,12 +67,14 @@ public class Citizen : Unit {
 			GetComponent<Animator>().SetBool("working", false);
 
 			if (Load < MaxLoad) {
-				CurrentTarget = FindClosestChildOf<StoneMine>(transform.parent);
+				CurrentTarget = FindClosestChildOf<StoneMine>(GameObject.Find ("Resources").transform);
 
 				if (CurrentTarget == null) {
 					if (Load > 0) {
-						CurrentTarget = FindClosestChildOf<Storehouse>(transform.parent.parent);
-						CurrentAction = CitizenState.Depositing;
+						if (FindClosestChildOf<Storehouse> (OwnerPlayer) != null) {
+							CurrentTarget = FindClosestChildOf<Storehouse>(OwnerPlayer);
+							CurrentAction = CitizenState.Depositing;
+						}
 						return;
 					}
 				} else {
@@ -72,7 +84,7 @@ public class Citizen : Unit {
 				}
 			} else {
 				GetComponent<Animator>().SetBool("working", false);
-				CurrentTarget = FindClosestChildOf<Storehouse>(transform.parent.parent);
+				CurrentTarget = FindClosestChildOf<Storehouse>(OwnerPlayer);
 
 				if (CurrentTarget != null) {
 					navAgent.destination = CurrentTarget.transform.position;
