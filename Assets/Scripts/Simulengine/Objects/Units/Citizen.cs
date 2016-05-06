@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 public class Citizen : Unit {
-	public BehaviourType Behaviour;
+	public BehaviorType Behavior;
 	public int Load;
 
 	public int CollectionDelay = 20;
@@ -19,9 +19,9 @@ public class Citizen : Unit {
 	public override void Awake() {
 		base.Awake();
 
-		Behaviour = BehaviourType.Idle;
+		Behavior = BehaviorType.Idle;
 		CurrentAction = CitizenState.Idle;
-		navAgent = GetComponent<NavMeshAgent> ();
+		navAgent = GetComponent<NavMeshAgent>();
 		navAgent.stoppingDistance = 0;
 	}
 
@@ -32,21 +32,21 @@ public class Citizen : Unit {
 
 		navAgent.speed = Speed;
 		navAgent.angularSpeed = Speed * 216;
-		if (Behaviour == BehaviourType.Idle) {
+		if (Behavior == BehaviorType.Idle) {
 			//eg
-		} else if (Behaviour == BehaviourType.StoneMiner) {
-			StoneMinerBehaviour();
-		} else if (Behaviour == BehaviourType.Fighter) {
+		} else if (Behavior == BehaviorType.StoneMiner) {
+			StoneMinerBehavior();
+		} else if (Behavior == BehaviorType.Fighter) {
 			//eg
 		}
 	}
 
 	public void SelectResource(GameObject ResourceObj) {
-		if (Util.EvaluateResource(Behaviour, ResourceObj.GetComponent<Resource>().Type))
+		if (Util.EvaluateResource(Behavior, ResourceObj.GetComponent<Resource>().Type))
 			CurrentTarget = ResourceObj;
 	} //TODO make more of these
 
-	void StoneMinerBehaviour() {
+	void StoneMinerBehavior() {
 		if (CurrentAction == CitizenState.Idle) {
 			/*
 			if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("CitizenDepositingState")) {
@@ -57,11 +57,11 @@ public class Citizen : Unit {
 			GetComponent<Animator>().SetBool("working", false);
 
 			if (Load < MaxLoad) {
-				CurrentTarget = FindClosestChildOf<StoneMine>(GameObject.Find ("Resources").transform);
+				CurrentTarget = FindClosestChildOf<StoneMine>(GameObject.Find("Resources").transform); //TODO kill this stupid code
 
 				if (CurrentTarget == null) {
 					if (Load > 0) {
-						CurrentTarget = FindClosestChildOf<Storehouse> (transform.parent.parent);
+						CurrentTarget = FindClosestChildOf<Storehouse>(transform.parent.parent);
 						CurrentAction = CitizenState.Depositing;
 						return;
 					}

@@ -90,7 +90,7 @@ public class Select : MonoBehaviour {
 				}
 			}
 		}
-		ChangeUnitBehaviour();
+		ChangeUnitBehavior();
 	}
 	void OnDrawGizmosSelected() {
 		Gizmos.DrawSphere(selection, 1);
@@ -136,8 +136,8 @@ public class Select : MonoBehaviour {
 		foreach (GameObject person in persons.Where(x => x != null && x.GetComponent<Citizen> ().Selected)) {
 			SelectedAgents.Add (person.GetComponent<NavMeshAgent> ());
 		}
-		FighterAgents = SelectedAgents.Where (x => x.GetComponent<Citizen> ().Behaviour == BehaviourType.Fighter).ToList ();
-		StonerAgents = SelectedAgents.Where (x => x.GetComponent<Citizen> ().Behaviour == BehaviourType.StoneMiner).ToList ();
+		FighterAgents = SelectedAgents.Where (x => x.GetComponent<Citizen> ().Behavior == BehaviorType.Fighter).ToList ();
+		StonerAgents = SelectedAgents.Where (x => x.GetComponent<Citizen> ().Behavior == BehaviorType.StoneMiner).ToList ();
 		if (FighterAgents.Count > 0) {
 			Vector3[] Destinations = UnitOrganization.FighterOrganization.OrganizeFighters(FighterAgents.ToArray(), selection);
 			for (int i = 0; i < FighterAgents.Count; i++) {
@@ -159,17 +159,17 @@ public class Select : MonoBehaviour {
 		}
 	}
 
-	void ChangeUnitBehaviour() {
-		BehaviourType newBehaviour = BehaviourType.Idle;
-		bool didChangeBehaviour = Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2);
+	void ChangeUnitBehavior() {
+		BehaviorType newBehavior = BehaviorType.Idle;
+		bool didChangeBehavior = Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2);
 		if (Input.GetKeyDown(KeyCode.Alpha1)) {
-			newBehaviour = BehaviourType.Fighter;
+			newBehavior = BehaviorType.Fighter;
 		} else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-			newBehaviour = BehaviourType.StoneMiner;
+			newBehavior = BehaviorType.StoneMiner;
 		}
-		if (didChangeBehaviour) {
+		if (didChangeBehavior) {
 			foreach (GameObject unit in persons.Where(x => x.GetComponent<Citizen>().Selected)) {
-				unit.GetComponent<Citizen>().Behaviour = newBehaviour;
+				unit.GetComponent<Citizen>().Behavior = newBehavior;
 			}
 		}
 	}

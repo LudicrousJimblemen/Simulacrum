@@ -9,9 +9,21 @@ public class BasicObject : MonoBehaviour {
 	public float InteractRange = 2f;
 
 	public virtual void Awake() {
+		//
 	}
 
 	public virtual void Update() {
+		Color playerColor = GetCurrentPlayer().GetPlayerMaterial().color;
+
+		if (Selected) {
+			GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(
+				playerColor.r + 0.3f,
+				playerColor.g + 0.3f,
+				playerColor.b + 0.3f
+			);
+		} else {
+			GetComponentInChildren<SkinnedMeshRenderer>().material.color = playerColor;
+		}
 	}
 
 	public GameObject FindClosestObject<Type>() {
@@ -23,12 +35,6 @@ public class BasicObject : MonoBehaviour {
 			.Where(x => x.GetComponent<Type>() != null)) {
 			Vector3 heading = potentialTarget.transform.position - currentPosition;
 			float distanceSquaredToTarget = heading.sqrMagnitude;
-
-			/*
-			if (distanceSquaredToTarget > Sight * Sight) {
-				break;
-			}
-			*/
 
 			if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget && distanceSquaredToTarget < Sight * Sight) {
 				currentClosestDistanceSquaredToTarget = distanceSquaredToTarget;
@@ -50,11 +56,6 @@ public class BasicObject : MonoBehaviour {
 			.Where(x => x.transform.IsChildOf(input))) {
 			Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
 			float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
-			/*
-			if (distanceSquaredToTarget > Sight * Sight) { //dumb
-				break;
-			}
-			*/
 
 			if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget && distanceSquaredToTarget < Sight * Sight) {
 				currentClosestDistanceSquaredToTarget = distanceSquaredToTarget;
@@ -63,5 +64,10 @@ public class BasicObject : MonoBehaviour {
 		}
 
 		return finalObject;
+	}
+
+	public Player GetCurrentPlayer() {
+		return FindObjectsOfType<Player>().Where(x => x.PlayerInfo.IsCurrent)
+			.First();
 	}
 }

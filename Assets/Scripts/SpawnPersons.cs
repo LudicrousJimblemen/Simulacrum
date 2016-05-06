@@ -17,19 +17,19 @@ public class SpawnPersons : MonoBehaviour {
 	void Update() {
 		if (units.childCount < Camera.main.GetComponent<Select>().persons.Length) {
 			if (Input.GetKeyDown(KeyCode.Q)) {
-				SummonCitizen(BehaviourType.StoneMiner);
+				SummonCitizen(BehaviorType.StoneMiner);
             }
 		}
 		if (units.childCount < Camera.main.GetComponent<Select> ().persons.Length) {
 			if (Input.GetKeyDown (KeyCode.E)) {
-				SummonCitizen (BehaviourType.Fighter);
+				SummonCitizen (BehaviorType.Fighter);
 			}
 		}
 	}
 
-	public void SummonCitizen(BehaviourType type) {
+	public void SummonCitizen(BehaviorType type) {
 		GameObject newUnit = (GameObject) Instantiate(citizenPrefab, Vector3.zero, Quaternion.identity);
-		newUnit.GetComponent<Citizen>().Behaviour = type;
+		newUnit.GetComponent<Citizen>().Behavior = type;
 		newUnit.transform.parent = units.transform;
 	}
 }

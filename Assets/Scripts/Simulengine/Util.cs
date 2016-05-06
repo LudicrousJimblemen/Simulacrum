@@ -8,7 +8,7 @@ public static class Util {
 		return ray;
 	}
 
-	public static bool EvaluateResource(BehaviourType CitizenBehaviour, ResourceType Resource) {
-		return (CitizenBehaviour == BehaviourType.StoneMiner && Resource == ResourceType.Stone) /* || (b == btype && r = rtype) || ...*/;
+	public static bool EvaluateResource(BehaviorType CitizenBehavior, ResourceType Resource) {
+		return (CitizenBehavior == BehaviorType.StoneMiner && Resource == ResourceType.Stone) /* || (b == btype && r = rtype) || ...*/;
 	}
 }
