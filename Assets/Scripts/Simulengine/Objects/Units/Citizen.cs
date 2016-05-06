@@ -27,6 +27,11 @@ public class Citizen : Unit {
 
 	public override void Update() {
 		base.Update();
+		
+		AITimer++;
+		if (AITimer > AITime) {
+			AITimer = 0;
+		}
 
 		GetComponent<Animator>().SetBool("running", navAgent.velocity.sqrMagnitude > 0.3f);
 
@@ -48,12 +53,10 @@ public class Citizen : Unit {
 
 	void StoneMinerBehavior() {
 		if (CurrentAction == CitizenState.Idle) {
-			/*
-			if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("CitizenDepositingState")) {
+			if (AITimer != AITime) {
 				return;
 			}
-			*/
-
+			
 			GetComponent<Animator>().SetBool("working", false);
 
 			if (Load < MaxLoad) {
