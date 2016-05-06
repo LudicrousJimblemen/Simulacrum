@@ -11,6 +11,10 @@ public class BasicObject : MonoBehaviour {
 	public virtual void Awake() {
 		//
 	}
+	
+	public virtual void Start() {
+		//
+	}
 
 	public virtual void Update() {
 		Color playerColor = GetCurrentPlayer().GetPlayerMaterial().color;
@@ -36,7 +40,7 @@ public class BasicObject : MonoBehaviour {
 			Vector3 heading = potentialTarget.transform.position - currentPosition;
 			float distanceSquaredToTarget = heading.sqrMagnitude;
 
-			if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget && distanceSquaredToTarget < Sight * Sight) {
+			if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget) {
 				currentClosestDistanceSquaredToTarget = distanceSquaredToTarget;
 				finalObject = potentialTarget;
 			}
@@ -57,7 +61,7 @@ public class BasicObject : MonoBehaviour {
 			Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
 			float distanceSquaredToTarget = directionToTarget.sqrMagnitude;
 
-			if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget && distanceSquaredToTarget < Sight * Sight) {
+			if (distanceSquaredToTarget < currentClosestDistanceSquaredToTarget) {
 				currentClosestDistanceSquaredToTarget = distanceSquaredToTarget;
 				finalObject = potentialTarget;
 			}

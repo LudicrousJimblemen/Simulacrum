@@ -65,6 +65,7 @@ public class Game : MonoBehaviour {
 				0,
 				Random.Range(-map.mapWidth, map.mapWidth)
 			);
+			newRock.transform.parent = GameObject.Find ("Resources").transform;
 		}
 	}
 }
