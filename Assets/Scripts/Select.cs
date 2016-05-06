@@ -15,17 +15,11 @@ public class Select : MonoBehaviour {
 
 	GameObject SelectedResource;
 
-	void Start	() {
-<<<<<<< HEAD
+	void Start() {
 		Debug.Log(FindObjectsOfType<GameObject>().Any());
 		PersonParent = FindObjectsOfType<GameObject>()
 			.Where(x => x.GetComponent<Player>() != null)
 			.First(x => x.GetComponent<Player>().PlayerInfo.IsCurrent);
-=======
-		PersonParent = FindObjectsOfType<Player>().Where(
-			x => x.GetComponent<Player>().PlayerInfo.IsCurrent
-		).ToList().First().gameObject;
->>>>>>> 6da7a56c030a60e34dfad477609c53b8cbf43e05
 		persons = new GameObject[500];
 		MarqueeRect = new Rect();
 	}
@@ -151,7 +145,7 @@ public class Select : MonoBehaviour {
 			if (SelectedResource == null) {
 				Vector3[] Destinations = UnitOrganization.FighterOrganization.OrganizeWorkers(StonerAgents.ToArray(), selection);
 				for (int i = 0; i < StonerAgents.Count; i++) {
-					StonerAgents[i].GetComponent<Citizen> ().CurrentAction = CitizenState.Idle;
+					StonerAgents[i].GetComponent<Citizen>().CurrentAction = CitizenState.Idle;
 					StonerAgents[i].destination = Destinations[i];
 				}
 			} else {

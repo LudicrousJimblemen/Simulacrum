@@ -36,21 +36,14 @@ public class GameGUI : MonoBehaviour {
 		Material newMaterial = new Material(Shader.Find("Standard"));
 		 
 		newMaterial.color = playerColor + new Color(0.1f, 0.1f, 0.1f);
-<<<<<<< HEAD
 		
 		return newMaterial;
-=======
->>>>>>> 6da7a56c030a60e34dfad477609c53b8cbf43e05
 	}
 	
 	public Player GetCurrentPlayer() {
-		return FindObjectsOfType<Player>().Where(
-<<<<<<< HEAD
-			x => x.PlayerInfo.IsCurrent
-=======
-			x => x.GetComponent<Player>().PlayerInfo.IsCurrent
->>>>>>> 6da7a56c030a60e34dfad477609c53b8cbf43e05
-		).ToList().First();
+		return FindObjectsOfType<Player>().Where(x => x.PlayerInfo.IsCurrent)
+			.ToList()
+			.First();
 	}
 	
 	public void SummonPerson() {
