@@ -17,20 +17,29 @@ public class Select : MonoBehaviour {
 
 	void Start() {
 		Debug.Log(FindObjectsOfType<GameObject>().Any());
-		PersonParent = FindObjectsOfType<GameObject>()
-			.Where(x => x.GetComponent<Player>() != null)
-			.First(x => x.GetComponent<Player>().PlayerInfo.IsCurrent);
+		PersonParent = FindObjectsOfType<GameObject> ()
+			.Where (x => x.GetComponent<Player> () != null)
+			.Where (x => x.GetComponent<Player> ().PlayerInfo.IsCurrent)
+			.First ();
+			//.First(x => x.GetComponent<Player>().PlayerInfo.IsCurrent);
+		if (PersonParent != null) {
+			Debug.Log ("nice");
+		} else {
+			Debug.Log ("not nice");
+		}
 		persons = new GameObject[500];
 		MarqueeRect = new Rect();
 	}
 
 	void Update() {
-		for (int i = 0; i < PersonParent.transform.GetChild(0).childCount; i++) {
-			persons[i] = PersonParent.transform.GetChild(0).GetChild(i).gameObject;
+		for (int i = 0; i < PersonParent.transform.childCount; i++) {
+			GameObject CurrentCheck = PersonParent.transform.GetChild (i).gameObject;
+            if (CurrentCheck.GetComponent<Citizen> () != null) persons[i] = CurrentCheck;
 		}
 		RaycastHit UnitHit;
 		if (Input.GetMouseButtonDown(0)) {
 			if (Physics.Raycast(OrthoRay(), out UnitHit, Mathf.Infinity, 1 << 9)) {
+				Debug.Log ("ayy");
 				UnitHit.collider.gameObject.GetComponent<BasicObject>().Selected = true;
 				foreach (GameObject p in persons.Where(x => x != null && x != UnitHit.collider.gameObject)) {
 					if (p.GetComponent<BasicObject>().Selected && !Input.GetKey(KeyCode.LeftShift))
@@ -121,20 +130,14 @@ public class Select : MonoBehaviour {
 	}
 
 	void movePersons() {
+		List<NavMeshAgent> SelectedAgents = new List<NavMeshAgent> ();
 		List<NavMeshAgent> FighterAgents = new List<NavMeshAgent>();
 		List<NavMeshAgent> StonerAgents = new List<NavMeshAgent>(); //420 blaze it
-		foreach (GameObject person in persons.Where(x => x != null)) {
-			if (person.GetComponent<BasicObject>().Selected) {
-				switch (person.GetComponent<Citizen>().Behaviour) {
-					case BehaviourType.Fighter:
-					FighterAgents.Add(person.GetComponent<NavMeshAgent>());
-					break;
-					case BehaviourType.StoneMiner:
-					StonerAgents.Add(person.GetComponent<NavMeshAgent>());
-					break;
-				}
-			}
+		foreach (GameObject person in persons.Where(x => x != null && x.GetComponent<Citizen> ().Selected)) {
+			SelectedAgents.Add (person.GetComponent<NavMeshAgent> ());
 		}
+		FighterAgents = SelectedAgents.Where (x => x.GetComponent<Citizen> ().Behaviour == BehaviourType.Fighter).ToList ();
+		StonerAgents = SelectedAgents.Where (x => x.GetComponent<Citizen> ().Behaviour == BehaviourType.StoneMiner).ToList ();
 		if (FighterAgents.Count > 0) {
 			Vector3[] Destinations = UnitOrganization.FighterOrganization.OrganizeFighters(FighterAgents.ToArray(), selection);
 			for (int i = 0; i < FighterAgents.Count; i++) {

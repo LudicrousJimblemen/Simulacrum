@@ -46,13 +46,15 @@ public class GameGUI : MonoBehaviour {
 			.First();
 	}
 	
-	public void SummonPerson() {
-		GameObject createdPerson = Instantiate(
-			personPrefab, Vector3.zero, Quaternion.identity
-		) as GameObject;
+	public void SummonPerson(int Behaviour) {
+		GameObject createdPerson = Instantiate (personPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+		createdPerson.layer = LayerMask.NameToLayer ("Units");
+		createdPerson.tag = "Unit";
+		createdPerson.GetComponent<Citizen> ().Behaviour = (BehaviourType) Behaviour;
 		
 		createdPerson
 			.GetComponentInChildren<SkinnedMeshRenderer>()
 			.material = GetPlayerMaterial();
+		createdPerson.transform.parent = GetCurrentPlayer ().transform;
 	}
 }

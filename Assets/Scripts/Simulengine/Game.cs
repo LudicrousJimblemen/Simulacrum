@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class Game : MonoBehaviour {
-	public void Start() {
+	public void Awake() {
 		int playerNumber = 1;
 		
 		GameConfig config = FindObjectOfType<GameConfig>();
@@ -12,8 +12,8 @@ public class Game : MonoBehaviour {
 			GameObject playerObject = new GameObject();
 			playerObject.AddComponent<Player>().PlayerInfo = configPlayer;
 			playerObject.GetComponent<Player>().PlayerInfo.PlayerNumber = playerNumber;
-			playerObject.name = "Player";
-			
+			playerObject.name = "Player " + playerNumber;
+
 			playerNumber++;
 		}
 		
