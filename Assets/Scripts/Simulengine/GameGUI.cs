@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 public class GameGUI : MonoBehaviour {
-	public UnityEngine.Object personPrefab;
-	public UnityEngine.Object storehousePrefab;
+	public Object personPrefab;
+	public Object storehousePrefab;
 
-	public void SummonPerson(BehaviorType behavior) {
+	public void SummonPerson(int behavior) {
 		GameObject createdPerson = Instantiate(personPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 		createdPerson.layer = LayerMask.NameToLayer("Units");
 		createdPerson.tag = "Unit";
-		createdPerson.GetComponent<Citizen>().Behavior = behavior;
+		createdPerson.GetComponent<Citizen>().Behavior = (BehaviorType) behavior;
 
 		createdPerson.GetComponentInChildren<SkinnedMeshRenderer>().material =
 			FindObjectsOfType<Player>()

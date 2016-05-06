@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 
 public class Game : MonoBehaviour {
+	public Object stoneMinePrefab;
+
 	public void Awake() {
 		int playerNumber = 1;
 		
@@ -46,7 +46,7 @@ public class Game : MonoBehaviour {
 				)
 			},
 			new TerrainType {
-				name = "Grass",	
+				name = "Grass",
 				height = 1f,
 				color = new Color(
 					57f / 256f,
@@ -57,5 +57,14 @@ public class Game : MonoBehaviour {
 		};
 		
 		map.GenerateMap();
+
+		for (int i = 0; i < map.mapWidth / 2; i++) {
+			GameObject newRock = Instantiate(stoneMinePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+			newRock.transform.Translate(
+				Random.Range(-map.mapWidth, map.mapWidth),
+				0,
+				Random.Range(-map.mapWidth, map.mapWidth)
+			);
+		}
 	}
 }

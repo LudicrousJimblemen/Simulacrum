@@ -8,8 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 401908}
-  - 33: {fileID: 3356166}
-  - 23: {fileID: 2373352}
+  - 137: {fileID: 13739372}
   - 114: {fileID: 11421854}
   m_Layer: 10
   m_Name: StoneMine
@@ -30,37 +29,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2373352
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136692}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 2100000, guid: 82316648aff650142be00248cda09a15, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &3356166
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 136692}
-  m_Mesh: {fileID: 4300002, guid: b55893bfa92662d439ae58354d327d38, type: 3}
 --- !u!114 &11421854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,6 +47,59 @@ MonoBehaviour:
   MaxStock: 20
   Stock: 20
   StockPercentage: 0
+--- !u!137 &13739372
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136692}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_Mesh: {fileID: 4300002, guid: b55893bfa92662d439ae58354d327d38, type: 3}
+  m_Bones:
+  - {fileID: 479440, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 454034, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 484834, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 467480, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 440622, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 412682, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 436908, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 433830, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 474874, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 499628, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 409262, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 479312, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 440566, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 498772, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 473778, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 400268, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 444606, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  - {fileID: 496552, guid: 3de0f52f9a113c740b8b206fbfc9f605, type: 2}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0, y: .075000003, z: 0}
+    m_Extent: {x: .600000024, y: .300000012, z: .600000024}
+  m_DirtyAABB: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -109,6 +130,30 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300002, guid: b55893bfa92662d439ae58354d327d38, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_AABB.m_Extent.x
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AABB.m_Extent.y
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AABB.m_Extent.z
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_RootBone
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
