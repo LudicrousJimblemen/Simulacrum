@@ -21,9 +21,9 @@ public class BasicObject : MonoBehaviour {
 
 		if (Selected) {
 			GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(
-				playerColor.r + 0.3f,
-				playerColor.g + 0.3f,
-				playerColor.b + 0.3f
+				playerColor.r + 0.5f,
+				playerColor.g + 0.5f,
+				playerColor.b + 0.5f
 			);
 		} else {
 			GetComponentInChildren<SkinnedMeshRenderer>().material.color = playerColor;
