@@ -27,7 +27,6 @@ public class GameGUI : MonoBehaviour {
 				
 				GameObject createdStorehouse = Instantiate(StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
 				createdStorehouse.layer = LayerMask.NameToLayer("Unit");
-				createdStorehouse.tag = "Unit";
 		
 				createdStorehouse.GetComponentInChildren<SkinnedMeshRenderer>().material = Util.GetCurrentPlayer().GetPlayerMaterial();
 		
@@ -41,7 +40,6 @@ public class GameGUI : MonoBehaviour {
 	public void SummonPerson(int behavior) {
 		GameObject createdPerson = Instantiate(PersonPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 		createdPerson.layer = LayerMask.NameToLayer("Unit");
-		createdPerson.tag = "Unit";
 		createdPerson.GetComponent<Citizen>().Behavior = (BehaviorType) behavior;
 
 		createdPerson.GetComponentInChildren<SkinnedMeshRenderer>().material = Util.GetCurrentPlayer().GetPlayerMaterial();
