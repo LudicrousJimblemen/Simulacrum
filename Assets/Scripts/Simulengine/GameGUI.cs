@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using System.Linq;
 
 public class GameGUI : MonoBehaviour {
+	//TODO: MOVE ALL OF THIS STUFF INTO THE PLAYER CLASS
+	
 	public Object PersonPrefab;
 	public Object StorehousePrefab;
 	
