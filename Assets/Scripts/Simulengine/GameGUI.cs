@@ -7,6 +7,7 @@ public class GameGUI : MonoBehaviour {
 	
 	public Object PersonPrefab;
 	public Object StorehousePrefab;
+	public Object GhostHousePrefab;
 	
 	private GameObject ghostObject;
 	
@@ -53,7 +54,7 @@ public class GameGUI : MonoBehaviour {
 		if (Util.GetCurrentPlayer().Stone >= 50) {
 			summoning = true;
 			
-			ghostObject = Instantiate(StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+			ghostObject = Instantiate(GhostHousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
 			ghostObject.GetComponent<BasicObject>().IsGhost = true;
 		}
 	}
