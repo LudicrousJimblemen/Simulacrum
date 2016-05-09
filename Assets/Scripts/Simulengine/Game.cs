@@ -64,7 +64,7 @@ public class Game : MonoBehaviour {
 		
 		map.GenerateMap();
 
-		for (int i = 0; i < map.mapWidth * 2; i++) {
+		for (int i = 0; i < map.mapWidth * 4; i++) {
 			GameObject newRock = Instantiate(StoneMinePrefab, Vector3.zero, Quaternion.identity) as GameObject;
 			newRock.transform.Translate(
 				Random.Range(-map.mapWidth, map.mapWidth),
@@ -76,7 +76,10 @@ public class Game : MonoBehaviour {
 				Random.Range(0, 360),
 				0
 			);
-			newRock.transform.parent = GameObject.Find ("Resources").transform;
+			Resource rockResource = newRock.GetComponent<Resource> ();
+			rockResource.MaxStock = Random.Range (20,35);
+			rockResource.Stock = rockResource.MaxStock;
+            newRock.transform.parent = GameObject.Find ("Resources").transform;
 		}
 	}
 }
