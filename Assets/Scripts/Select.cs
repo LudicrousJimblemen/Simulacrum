@@ -16,13 +16,7 @@ public class Select : MonoBehaviour {
 	GameObject SelectedResource;
 
 	void Start() {
-		Debug.Log(FindObjectsOfType<GameObject>().Any());
 		PersonParent = Util.GetCurrentPlayer().gameObject;
-		if (PersonParent != null) {
-			Debug.Log ("nice");
-		} else {
-			Debug.Log ("not nice");
-		}
 		persons = new GameObject[500];
 		MarqueeRect = new Rect();
 	}
