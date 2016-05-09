@@ -4,9 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Unit
-  - Building
-  - Gaia
+  - UIStoneText
   layers:
   - Default
   - TransparentFX
@@ -17,7 +15,7 @@ TagManager:
   - 
   - 
   - Terrain
-  - Units
+  - Unit
   - Resource
   - 
   - 

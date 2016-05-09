@@ -1,40 +1,60 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 
 public class GameGUI : MonoBehaviour {
-	public Object personPrefab;
-	public Object storehousePrefab;
+	public Object PersonPrefab;
+	public Object StorehousePrefab;
+	
+	private GameObject ghostObject;
+	
+	private bool summoning;
+	
+	void Update() {
+		GetComponentsInChildren<Text>().First(x => x.tag == "UIStoneText").text = Util.GetCurrentPlayer().Stone.ToString();
+		
+		if (summoning) {
+			RaycastHit location;
+			if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out location, Mathf.Infinity, 1 <<  LayerMask.NameToLayer("Terrain"))) {
+				ghostObject.transform.position = location.point;
+			}
+			
+			if (Input.GetMouseButtonDown(0)) {
+				DestroyObject(ghostObject);
+				Util.GetCurrentPlayer().Stone -= 50;
+				
+				summoning = false;
+				
+				GameObject createdStorehouse = Instantiate(StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+				createdStorehouse.layer = LayerMask.NameToLayer("Unit");
+				createdStorehouse.tag = "Unit";
+		
+				createdStorehouse.GetComponentInChildren<SkinnedMeshRenderer>().material = Util.GetCurrentPlayer().GetPlayerMaterial();
+		
+				createdStorehouse.transform.parent = Util.GetCurrentPlayer().transform;
+				
+				createdStorehouse.transform.position = location.point;
+			}
+		}
+	}
 
 	public void SummonPerson(int behavior) {
-		GameObject createdPerson = Instantiate(personPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-		createdPerson.layer = LayerMask.NameToLayer("Units");
+		GameObject createdPerson = Instantiate(PersonPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+		createdPerson.layer = LayerMask.NameToLayer("Unit");
 		createdPerson.tag = "Unit";
 		createdPerson.GetComponent<Citizen>().Behavior = (BehaviorType) behavior;
 
-		createdPerson.GetComponentInChildren<SkinnedMeshRenderer>().material =
-			FindObjectsOfType<Player>()
-			.Where(x => x.PlayerInfo.IsCurrent)
-			.First()
-			.GetPlayerMaterial();
+		createdPerson.GetComponentInChildren<SkinnedMeshRenderer>().material = Util.GetCurrentPlayer().GetPlayerMaterial();
 
-		createdPerson.transform.parent = FindObjectsOfType<Player>()
-			.Where(x => x.PlayerInfo.IsCurrent)
-			.First().transform;
+		createdPerson.transform.parent = Util.GetCurrentPlayer().transform;
 	}
 
 	public void SummonStorehouse() {
-		GameObject createdPerson = Instantiate(storehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
-		createdPerson.layer = LayerMask.NameToLayer("Units");
-		createdPerson.tag = "Unit";
-
-		createdPerson.GetComponentInChildren<SkinnedMeshRenderer>().material =
-			FindObjectsOfType<Player>()
-			.Where(x => x.PlayerInfo.IsCurrent)
-			.First()
-			.GetPlayerMaterial();
-
-		createdPerson.transform.parent = FindObjectsOfType<Player>()
-			.Where(x => x.PlayerInfo.IsCurrent)
-			.First().transform;
+		if (Util.GetCurrentPlayer().Stone >= 50) {
+			summoning = true;
+			
+			ghostObject = Instantiate(StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+			ghostObject.GetComponent<BasicObject>().IsGhost = true;
+		}
 	}
 }

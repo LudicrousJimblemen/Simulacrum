@@ -13,7 +13,8 @@ public class Game : MonoBehaviour {
 			playerObject.AddComponent<Player>().PlayerInfo = configPlayer;
 			playerObject.GetComponent<Player>().PlayerInfo.PlayerNumber = playerNumber;
 			playerObject.name = "Player " + playerNumber;
-
+			playerObject.GetComponent<Player>().Stone = 200;
+			
 			playerNumber++;
 		}
 		
@@ -58,7 +59,7 @@ public class Game : MonoBehaviour {
 		
 		map.GenerateMap();
 
-		for (int i = 0; i < map.mapWidth / 2; i++) {
+		for (int i = 0; i < map.mapWidth; i++) {
 			GameObject newRock = Instantiate(stoneMinePrefab, Vector3.zero, Quaternion.identity) as GameObject;
 			newRock.transform.Translate(
 				Random.Range(-map.mapWidth, map.mapWidth),

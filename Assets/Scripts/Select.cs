@@ -17,11 +17,7 @@ public class Select : MonoBehaviour {
 
 	void Start() {
 		Debug.Log(FindObjectsOfType<GameObject>().Any());
-		PersonParent = FindObjectsOfType<GameObject> ()
-			.Where (x => x.GetComponent<Player> () != null)
-			.Where (x => x.GetComponent<Player> ().PlayerInfo.IsCurrent)
-			.First ();
-			//.First(x => x.GetComponent<Player>().PlayerInfo.IsCurrent);
+		PersonParent = Util.GetCurrentPlayer().gameObject;
 		if (PersonParent != null) {
 			Debug.Log ("nice");
 		} else {
@@ -38,7 +34,7 @@ public class Select : MonoBehaviour {
 		}
 		RaycastHit UnitHit;
 		if (Input.GetMouseButtonDown(0)) {
-			if (Physics.Raycast(OrthoRay(), out UnitHit, Mathf.Infinity, 1 << 9)) {
+			if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out UnitHit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Unit"))) {
 				Debug.Log ("ayy");
 				UnitHit.collider.gameObject.GetComponent<BasicObject>().Selected = true;
 				foreach (GameObject p in persons.Where(x => x != null && x != UnitHit.collider.gameObject)) {
@@ -72,11 +68,11 @@ public class Select : MonoBehaviour {
 		if (Input.GetMouseButton(1)) {
 			RaycastHit TerrainHit;
 			RaycastHit ResourceHit;
-			if (Physics.Raycast(OrthoRay(), out ResourceHit, Mathf.Infinity, 1 << 10)) {
+			if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out ResourceHit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Resource"))) {
 				SelectedResource = ResourceHit.collider.gameObject;
 				SelectedResource.GetComponent<Resource>().Selected = true;
 				movePersons();
-			} else if (Physics.Raycast(OrthoRay(), out TerrainHit, Mathf.Infinity, 1 << 8)) {
+			} else if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out TerrainHit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Terrain"))) {
 				selection = TerrainHit.point;
 				if (SelectedResource != null) {
 					SelectedResource.GetComponent<Resource>().Selected = false;
@@ -96,10 +92,6 @@ public class Select : MonoBehaviour {
 		Gizmos.DrawSphere(selection, 1);
 		Gizmos.DrawSphere(Camera.main.ScreenToWorldPoint(Marquee1), .1f);
 		Gizmos.DrawSphere(Camera.main.ScreenToWorldPoint(Marquee2), .1f);
-	}
-	Ray OrthoRay() {
-		Ray ray = new Ray(Camera.main.ScreenToWorldPoint(Input.mousePosition), Camera.main.gameObject.transform.forward);
-		return ray;
 	}
 
 	void MarqueeSelection() {

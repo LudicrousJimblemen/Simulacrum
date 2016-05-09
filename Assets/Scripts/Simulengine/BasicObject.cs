@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class BasicObject : MonoBehaviour {
+	public bool IsGhost;
+	
 	public bool Selected;
 
 	public float Sight = 9f;
@@ -17,7 +19,11 @@ public class BasicObject : MonoBehaviour {
 	}
 
 	public virtual void Update() {
-		Color playerColor = GetCurrentPlayer().GetPlayerMaterial().color;
+		if (IsGhost) {
+			return;
+		}
+		
+		Color playerColor = Util.GetCurrentPlayer().GetPlayerMaterial().color;
 
 		if (Selected) {
 			GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(
@@ -68,10 +74,5 @@ public class BasicObject : MonoBehaviour {
 		}
 
 		return finalObject;
-	}
-
-	public Player GetCurrentPlayer() {
-		return FindObjectsOfType<Player>().Where(x => x.PlayerInfo.IsCurrent)
-			.First();
 	}
 }

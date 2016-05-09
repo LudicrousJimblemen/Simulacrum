@@ -4,12 +4,17 @@ using System.Linq;
 
 public static class Util {
 	public static Ray OrthoRay(Vector3 MousePosition) {
-		Ray ray = new Ray(Camera.main.ScreenToWorldPoint(MousePosition), Camera.main.transform.forward);
+		Ray ray = new Ray(Camera.main.ScreenToWorldPoint(MousePosition), Camera.main.gameObject.transform.forward);
 		return ray;
 	}
 
 	public static bool EvaluateResource(BehaviorType CitizenBehavior, ResourceType Resource) {
 		return (CitizenBehavior == BehaviorType.StoneMiner && Resource == ResourceType.Stone) /* || (b == btype && r = rtype) || ...*/;
+	}
+	
+	public static Player GetCurrentPlayer() {
+		return GameObject.FindObjectsOfType<Player>()
+			.First(x => x.PlayerInfo.IsCurrent);
 	}
 
 	public static GameObject WaterObstacle () {

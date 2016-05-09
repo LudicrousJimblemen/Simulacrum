@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
 		PlayerInfo = playerInfo;
 	}
 
-	public Material GetPlayerMaterial() {
+	public Material GetPlayerMaterial(bool ghost = false) {
 		Color playerColor = new Color();
 
 		switch (PlayerInfo.PlayerNumber) {
@@ -37,9 +37,9 @@ public class Player : MonoBehaviour {
 			playerColor = Color.magenta;
 			break;
 		}
-
+		
 		Material newMaterial = new Material(Shader.Find("Standard"));
-
+		
 		newMaterial.color = playerColor + new Color(0.1f, 0.1f, 0.1f);
 
 		return newMaterial;
