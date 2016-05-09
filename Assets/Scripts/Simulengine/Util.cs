@@ -17,6 +17,26 @@ public static class Util {
 			.First(x => x.PlayerInfo.IsCurrent);
 	}
 
+	public static Vector3[] WaterSquares;
+	public static bool IsOnWater (Vector3 Position, float Padding) {
+		float WaterX;
+		float WaterY;
+        foreach (Vector3 v in WaterSquares) {
+			WaterX = v.x;
+			WaterY = v.z;
+			if (Position.x < WaterX + (1.25f + Padding) && 
+				Position.x > WaterX - (1.25f + Padding) &&
+				Position.z < WaterY + (1.25f + Padding) && 
+				Position.z > WaterY - (1.25f + Padding)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	//:ng:
+	//do not use
+	//necrosis ridden skeleton of a dead function
 	public static GameObject WaterObstacle () {
 		GameObject obstacle = new GameObject ();
 		obstacle.AddComponent<NavMeshObstacle> ();

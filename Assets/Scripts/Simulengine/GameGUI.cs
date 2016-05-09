@@ -20,9 +20,10 @@ public class GameGUI : MonoBehaviour {
 			RaycastHit location;
 			if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out location, Mathf.Infinity, 1 <<  LayerMask.NameToLayer("Terrain"))) {
 				ghostObject.transform.position = location.point;
+				print (Util.IsOnWater (location.point, 0));
 			}
 			
-			if (Input.GetMouseButtonDown(0)) {
+			if (Input.GetMouseButtonDown(0) && !Util.IsOnWater (location.point, 2.5f)) {
 				DestroyObject(ghostObject);
 				Util.GetCurrentPlayer().Stone -= 50;
 				
