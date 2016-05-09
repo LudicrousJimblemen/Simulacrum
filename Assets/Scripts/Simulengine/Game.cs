@@ -66,6 +66,11 @@ public class Game : MonoBehaviour {
 				0,
 				Random.Range(-map.mapWidth, map.mapWidth)
 			);
+			newRock.transform.Rotate(
+				0,
+				Random.Range(0, 360),
+				0
+			);
 			newRock.transform.parent = GameObject.Find ("Resources").transform;
 		}
 	}

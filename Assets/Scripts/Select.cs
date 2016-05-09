@@ -29,7 +29,6 @@ public class Select : MonoBehaviour {
 		RaycastHit UnitHit;
 		if (Input.GetMouseButtonDown(0)) {
 			if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out UnitHit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Unit"))) {
-				Debug.Log ("ayy");
 				UnitHit.collider.gameObject.GetComponent<BasicObject>().Selected = true;
 				foreach (GameObject p in persons.Where(x => x != null && x != UnitHit.collider.gameObject)) {
 					if (p.GetComponent<BasicObject>().Selected && !Input.GetKey(KeyCode.LeftShift))
