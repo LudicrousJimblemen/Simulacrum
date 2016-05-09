@@ -8,19 +8,27 @@ public class GameConfig : MonoBehaviour {
 	public void Start() {
 		players = new List<PlayerInfo>();
 		
-		PlayerInfo testPlayer = new PlayerInfo {
+		players.Add(new PlayerInfo {
 			Username = "testbro1",
 			IsHuman = true,
 			IsCurrent = true
-		};
+		});
 		
-		PlayerInfo testPlayer2 = new PlayerInfo {
-			Username = "testbro2",
-			IsHuman = true
-		};
+		players.Add(new PlayerInfo {
+			Username = "testbro2"
+		});
 		
-		players.Add(testPlayer);
-		players.Add(testPlayer2);
+		players.Add(new PlayerInfo {
+			Username = "testbro3"
+		});
+		
+		players.Add(new PlayerInfo {
+			Username = "testbro4"
+		});
+		
+		players.Add(new PlayerInfo {
+			Username = "testbro5"
+		});
 		
 		DontDestroyOnLoad(gameObject);
 	}

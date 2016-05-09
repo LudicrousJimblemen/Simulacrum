@@ -28,11 +28,7 @@ public class Citizen : Unit {
 	}
 	
 	public override void Start () {
-		OwnerPlayer = FindObjectsOfType<GameObject> ()
-			.Where (x => x.GetComponent<Player> () != null)
-			.Where (x => x.GetComponent<Player> ().PlayerInfo.IsCurrent)
-			.First ()
-			.transform;
+		OwnerPlayer = GetComponentsInParent<Player>().First().transform;
 	}
 
 	public override void Update() {

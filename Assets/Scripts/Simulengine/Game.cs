@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
 public class Game : MonoBehaviour {
-	public Object stoneMinePrefab;
+	public Object StoneMinePrefab;
+	public Object PersonPrefab;
+	public Object StorehousePrefab;
 
 	public void Awake() {
 		int playerNumber = 1;
@@ -14,6 +16,9 @@ public class Game : MonoBehaviour {
 			playerObject.GetComponent<Player>().PlayerInfo.PlayerNumber = playerNumber;
 			playerObject.name = "Player " + playerNumber;
 			playerObject.GetComponent<Player>().Stone = 200;
+			
+			playerObject.GetComponent<Player>().PersonPrefab = PersonPrefab;
+			playerObject.GetComponent<Player>().StorehousePrefab = StorehousePrefab;
 			
 			playerNumber++;
 		}
@@ -59,8 +64,8 @@ public class Game : MonoBehaviour {
 		
 		map.GenerateMap();
 
-		for (int i = 0; i < map.mapWidth; i++) {
-			GameObject newRock = Instantiate(stoneMinePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+		for (int i = 0; i < map.mapWidth * 2; i++) {
+			GameObject newRock = Instantiate(StoneMinePrefab, Vector3.zero, Quaternion.identity) as GameObject;
 			newRock.transform.Translate(
 				Random.Range(-map.mapWidth, map.mapWidth),
 				0,

@@ -23,7 +23,7 @@ public class BasicObject : MonoBehaviour {
 			return;
 		}
 		
-		Color playerColor = Util.GetCurrentPlayer().GetPlayerMaterial().color;
+		Color playerColor = GetComponentInParent<Player>().GetPlayerMaterial().color;
 
 		if (Selected) {
 			GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(
