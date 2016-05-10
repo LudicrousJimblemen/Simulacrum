@@ -65,6 +65,7 @@ public class Game : MonoBehaviour {
 		
 		map.GenerateMap();
 
+		for (int i = 0; i < map.mapWidth * 20; i++) {
 			GameObject newRock = Instantiate(StoneMinePrefab, Vector3.zero, Quaternion.identity) as GameObject;
 			Vector3 SpawnPosition = new Vector3 (
 				Random.Range(-map.mapWidth, map.mapWidth),
