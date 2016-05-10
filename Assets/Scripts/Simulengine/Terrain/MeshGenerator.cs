@@ -4,6 +4,7 @@ using System.Collections;
 public static class MeshGenerator {
 	public static MeshData GenerateTerrainMesh(float[,] heightMap) {
 		int width = heightMap.GetLength (0);
+		Debug.Log (width);
 		int height = heightMap.GetLength (1);
 		float topLeftX = (width - 1) / -2f;
 		float topLeftZ = (height - 1) / 2f;

@@ -71,7 +71,7 @@ public class Game : MonoBehaviour {
 				Random.Range(-map.mapWidth, map.mapWidth),
 				0,
 				Random.Range(-map.mapWidth, map.mapWidth)
-			) * 1.25f;
+			) * 1.15f;
 			newRock.transform.Translate (SpawnPosition);
 			newRock.transform.Rotate(
 				0,

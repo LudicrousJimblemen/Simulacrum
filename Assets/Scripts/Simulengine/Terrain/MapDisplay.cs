@@ -11,11 +11,12 @@ public class MapDisplay : MonoBehaviour {
 
 	public void DrawMesh(MeshData meshData, Texture2D texture) {
 		currentTexture = texture;
+		//print (currentTexture.width + " " + currentTexture.height);
 		
 		meshFilter.sharedMesh = meshData.CreateMesh ();
 		meshRenderer.sharedMaterial.mainTexture = texture;
 	}
-	
+	/* bad
 	void OnDrawGizmosSelected() {
 		Debug.Log("it me");
 		for (int i = -40; i < 40; i++) {
@@ -25,4 +26,5 @@ public class MapDisplay : MonoBehaviour {
 			}
 		}
 	}
+	*/ 
 }

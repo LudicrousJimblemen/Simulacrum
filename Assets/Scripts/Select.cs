@@ -59,12 +59,14 @@ public class Select : MonoBehaviour {
 			inMarquee = false;
 		}
 		if (Input.GetMouseButton(1)) {
+			print (Input.mousePosition.ToString ());
 			RaycastHit TerrainHit;
 			RaycastHit ResourceHit;
 			if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out ResourceHit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Resource"))) {
 				SelectedResource = ResourceHit.collider.gameObject;
 				SelectedResource.GetComponent<Resource>().Selected = true;
 				movePersons();
+				
 			} else if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out TerrainHit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Terrain"))) {
 				selection = TerrainHit.point;
 				if (SelectedResource != null) {
@@ -72,6 +74,7 @@ public class Select : MonoBehaviour {
 					SelectedResource = null;
 				}
 				movePersons();
+				print ("ee");
 			} else {
 				if (SelectedResource != null) {
 					SelectedResource.GetComponent<Resource>().Selected = false;

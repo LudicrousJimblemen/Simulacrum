@@ -29,9 +29,10 @@ public class MapGenerator : MonoBehaviour {
 				for (int i = 0; i < regions.Length; i++) {
 					if (currentHeight <= regions [i].height) {
 						if (regions[i].name == "Water") {
-							WaterSquares.Add (-new Vector3 ((x - mapWidth / 2) * 2.5f + 1.25f,0,(y - mapHeight / 2) * 2.5f + 1.25f));
+							WaterSquares.Add (new Vector3 ((x - mapWidth / 2) * 2.5f + 2.5f,0,-((y - mapHeight / 2) * 2.5f + 2.5f)));
 						}
 						colorMap [y * mapWidth + x] = regions [i].color;
+						//print (y * mapWidth + x);
 						break;
 					}
 				}
