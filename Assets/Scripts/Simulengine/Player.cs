@@ -64,16 +64,16 @@ public class Player : MonoBehaviour {
 		
 		switch (PlayerInfo.PlayerNumber) {
 			case 2:
-				createdStorehouse.transform.position = new Vector3(-35, 0, -35);
+				createdStorehouse.transform.position = new Vector3(-35 + 1.25f, 0, -35 + 1.25f);
 			break;
 			case 3:
-				createdStorehouse.transform.position = new Vector3(35, 0, 35);
+				createdStorehouse.transform.position = new Vector3(35 - 1.25f, 0,35 - 1.25f);
 			break;
 			case 4:
-				createdStorehouse.transform.position = new Vector3(-35, 0, 35);
+				createdStorehouse.transform.position = new Vector3(-35 + 1.25f, 0,35 - 1.25f);
 			break;
 			case 5:
-				createdStorehouse.transform.position = new Vector3(35, 0, -35);
+				createdStorehouse.transform.position = new Vector3(35 - 1.25f, 0, -35 + 1.25f);
 			break;
 		}
 	}

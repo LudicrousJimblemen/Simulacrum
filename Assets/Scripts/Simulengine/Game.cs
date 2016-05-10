@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Game : MonoBehaviour {
 	public Object StoneMinePrefab;
@@ -64,13 +65,17 @@ public class Game : MonoBehaviour {
 		
 		map.GenerateMap();
 
-		for (int i = 0; i < map.mapWidth * 30; i++) {
+		for (int i = 0; i < map.mapWidth * 4; i++) {
 			GameObject newRock = Instantiate(StoneMinePrefab, Vector3.zero, Quaternion.identity) as GameObject;
-			newRock.transform.Translate(
-				Random.Range(-map.mapWidth * 1.25f, map.mapWidth * 1.25f),
-				0,
-				Random.Range(-map.mapWidth * 1.25f, map.mapWidth * 1.25f)
-			);
+			Vector3 SpawnPosition = new Vector3 (Random.Range(-map.mapWidth, map.mapWidth),
+												0,
+												Random.Range(-map.mapWidth, map.mapWidth)) * 1.25f;
+			while (Util.IsOnWater (SpawnPosition, 2.5f)) {
+				SpawnPosition = new Vector3 (Random.Range(-map.mapWidth, map.mapWidth),
+												0,
+												Random.Range(-map.mapWidth, map.mapWidth)) * 1.25f;
+			}
+			newRock.transform.Translate (SpawnPosition);
 			newRock.transform.Rotate(
 				0,
 				Random.Range(0f, 360f),

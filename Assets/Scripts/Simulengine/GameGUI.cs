@@ -20,9 +20,10 @@ public class GameGUI : MonoBehaviour {
 			RaycastHit location;
 			if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out location, Mathf.Infinity, 1 <<  LayerMask.NameToLayer("Terrain"))) {
 				ghostObject.transform.position = location.point;
+				print (Util.IsOnWater (location.point, 0));
 			}
 			
-			if (Input.GetMouseButtonDown(0)) {
+			if (Input.GetMouseButtonDown(0) && !Util.IsOnWater (location.point, 2.5f)) {
 				DestroyObject(ghostObject);
 				Util.GetCurrentPlayer().Stone -= 50;
 				
@@ -44,8 +45,14 @@ public class GameGUI : MonoBehaviour {
 		GameObject createdPerson = Instantiate(PersonPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 		createdPerson.layer = LayerMask.NameToLayer("Unit");
 		createdPerson.GetComponent<Citizen>().Behavior = (BehaviorType) behavior;
+		Player CurrentPlayer = Util.GetCurrentPlayer ();
+		createdPerson.GetComponentInChildren<SkinnedMeshRenderer>().material = CurrentPlayer.GetPlayerMaterial();
 
-		createdPerson.GetComponentInChildren<SkinnedMeshRenderer>().material = Util.GetCurrentPlayer().GetPlayerMaterial();
+		Storehouse[] PlayerStorehouses = CurrentPlayer.transform.GetComponentsInChildren<Storehouse> ();
+		Transform ParentStorehouse = PlayerStorehouses[Random.Range (0,PlayerStorehouses.Count ())].transform;
+		createdPerson.transform.Translate (
+			ParentStorehouse.position + new Vector3 (Random.Range (-2.5f, 2.5f), 0, Random.Range (-2.5f,2.5f))
+		);
 
 		createdPerson.transform.parent = Util.GetCurrentPlayer().transform;
 	}
