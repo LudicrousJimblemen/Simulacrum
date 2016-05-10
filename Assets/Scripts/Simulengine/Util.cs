@@ -16,6 +16,19 @@ public static class Util {
 		return GameObject.FindObjectsOfType<Player>()
 			.First(x => x.PlayerInfo.IsCurrent);
 	}
+	
+	public static Color GetTerrainAtPosition(Vector3 position) {
+		int width = GameObject.FindObjectOfType<MapGenerator>().mapWidth;
+		int height = GameObject.FindObjectOfType<MapGenerator>().mapHeight;
+		
+		return (GameObject.FindObjectOfType<MapDisplay>()
+			.meshRenderer
+			.material
+			.mainTexture as Texture2D).GetPixelBilinear(
+				(position.x + (width/2))/width,
+				(position.z + (height/2))/height
+			);
+	}
 
 	public static GameObject WaterObstacle () {
 		GameObject obstacle = new GameObject ();

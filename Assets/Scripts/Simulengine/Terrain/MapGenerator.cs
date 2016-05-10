@@ -2,10 +2,6 @@
 using System.Collections;
 
 public class MapGenerator : MonoBehaviour {
-
-	public enum DrawMode {NoiseMap, ColorMap, Mesh};
-	public DrawMode drawMode;
-
 	public int mapWidth;
 	public int mapHeight;
 	public float noiseScale;
@@ -17,7 +13,7 @@ public class MapGenerator : MonoBehaviour {
 
 	public int seed;
 	public Vector2 offset;
-
+	
 	public bool autoUpdate;
 
 	public TerrainType[] regions;
@@ -39,28 +35,7 @@ public class MapGenerator : MonoBehaviour {
 		}
 
 		MapDisplay display = FindObjectOfType<MapDisplay> ();
-		if (drawMode == DrawMode.NoiseMap) {
-			display.DrawTexture (TextureGenerator.TextureFromHeightMap (noiseMap));
-		} else if (drawMode == DrawMode.ColorMap) {
-			display.DrawTexture (TextureGenerator.TextureFromColorMap (colorMap, mapWidth, mapHeight));
-		} else if (drawMode == DrawMode.Mesh) {
-			display.DrawMesh (MeshGenerator.GenerateTerrainMesh (noiseMap), TextureGenerator.TextureFromColorMap (colorMap, mapWidth, mapHeight));
-		}
-	}
-
-	void OnValidate() {
-		if (mapWidth < 1) {
-			mapWidth = 1;
-		}
-		if (mapHeight < 1) {
-			mapHeight = 1;
-		}
-		if (lacunarity < 1) {
-			lacunarity = 1;
-		}
-		if (octaves < 0) {
-			octaves = 0;
-		}
+		display.DrawMesh (MeshGenerator.GenerateTerrainMesh (noiseMap), TextureGenerator.TextureFromColorMap (colorMap, mapWidth, mapHeight));
 	}
 }
 

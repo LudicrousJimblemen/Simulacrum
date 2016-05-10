@@ -64,16 +64,16 @@ public class Game : MonoBehaviour {
 		
 		map.GenerateMap();
 
-		for (int i = 0; i < map.mapWidth * 4; i++) {
+		for (int i = 0; i < map.mapWidth * 30; i++) {
 			GameObject newRock = Instantiate(StoneMinePrefab, Vector3.zero, Quaternion.identity) as GameObject;
 			newRock.transform.Translate(
-				Random.Range(-map.mapWidth, map.mapWidth),
+				Random.Range(-map.mapWidth * 1.25f, map.mapWidth * 1.25f),
 				0,
-				Random.Range(-map.mapWidth, map.mapWidth)
+				Random.Range(-map.mapWidth * 1.25f, map.mapWidth * 1.25f)
 			);
 			newRock.transform.Rotate(
 				0,
-				Random.Range(0, 360),
+				Random.Range(0f, 360f),
 				0
 			);
 			Resource rockResource = newRock.GetComponent<Resource> ();

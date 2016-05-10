@@ -9,7 +9,7 @@ public class MeshData {
 	int triangleIndex;
 
 	public MeshData(int meshWidth, int meshHeight) {
-		vertices = new Vector3[meshWidth  * meshHeight];
+		vertices = new Vector3[meshWidth * meshHeight];
 		uvs = new Vector2[meshWidth * meshHeight];
 		triangles = new int[(meshWidth-1)*(meshHeight-1)*6];
 	}

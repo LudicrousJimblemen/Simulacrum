@@ -11,6 +11,8 @@
 	}
 
 	public override void Update() {
+		base.Update();
+
 		if (Stock <= 0) {
 			Destroy(this.gameObject);
 		} else {

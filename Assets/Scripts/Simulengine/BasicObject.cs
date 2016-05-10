@@ -15,7 +15,8 @@ public class BasicObject : MonoBehaviour {
 	}
 	
 	public virtual void Start() {
-		//
+		GetComponentInChildren<SkinnedMeshRenderer>().material.color = 
+			Util.GetTerrainAtPosition(transform.position);
 	}
 
 	public virtual void Update() {
@@ -23,17 +24,18 @@ public class BasicObject : MonoBehaviour {
 			return;
 		}
 		
+		/*
 		Color playerColor = GetComponentInParent<Player>().GetPlayerMaterial().color;
 
 		if (Selected) {
-			GetComponentInChildren<SkinnedMeshRenderer>().material.color = new Color(
+				new Color(
 				playerColor.r + 0.5f,
 				playerColor.g + 0.5f,
 				playerColor.b + 0.5f
 			);
 		} else {
 			GetComponentInChildren<SkinnedMeshRenderer>().material.color = playerColor;
-		}
+		}*/
 	}
 
 	public GameObject FindClosestObject<Type>() {
