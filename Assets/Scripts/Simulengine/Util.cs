@@ -17,45 +17,53 @@ public static class Util {
 			.First(x => x.PlayerInfo.IsCurrent);
 	}
 	
-	public static Color GetTerrainAtPosition(Vector3 position) {
-		int width = GameObject.FindObjectOfType<MapGenerator>().mapWidth;
-		int height = GameObject.FindObjectOfType<MapGenerator>().mapHeight;
+	public static List<TerrainType> GetTerrainAtPosition(Vector3 position, float radius = 0) {
+		List<TerrainType> terrains = new List<TerrainType>();
 		
-		return (GameObject.FindObjectOfType<MapDisplay>()
-			.meshRenderer
-			.material
-			.mainTexture as Texture2D).GetPixelBilinear(
-				(position.x + (width/2))/width,
-				(position.z + (height/2))/height
-			);
-	}
-
-	public static Vector3[] WaterSquares;
-	public static bool IsOnWater (Vector3 Position, float Padding) {
-		float WaterX;
-		float WaterY;
-        foreach (Vector3 v in WaterSquares) {
-			WaterX = v.x;
-			WaterY = v.z;
-			if (Position.x < WaterX + (1.25f + Padding) && 
-				Position.x > WaterX - (1.25f + Padding) &&
-				Position.z < WaterY + (1.25f + Padding) && 
-				Position.z > WaterY - (1.25f + Padding)) {
-				return true;
+		for (int i = 0; i < 4; i++) {
+			RaycastHit hit;
+			
+			Ray ray;
+			
+			ray = new Ray(position, Vector3.down);
+			
+			switch (i) {
+				case 0:
+					ray = new Ray(position + new Vector3(0 + radius, 1, 0 + radius), Vector3.down);
+					break;
+				case 1:
+					ray = new Ray(position + new Vector3(0 - radius, 1, 0 - radius), Vector3.down);
+					break;
+				case 2:
+					ray = new Ray(position + new Vector3(0 - radius, 1, 0 + radius), Vector3.down);
+					break;
+				case 3:
+					ray = new Ray(position + new Vector3(0 + radius, 1, 0 - radius), Vector3.down);
+					break;
 			}
+			
+			Physics.Raycast(
+				ray,
+				out hit, Mathf.Infinity,
+				1 << LayerMask.NameToLayer("Terrain")
+			);
+			
+			Renderer rend = hit.transform.GetComponent<Renderer>();
+			
+			Texture2D tex = rend.material.mainTexture as Texture2D;
+			Vector2 pixelUV = hit.textureCoord;
+			pixelUV.x *= tex.width;
+			pixelUV.y *= tex.height;
+			
+			terrains.Add(
+				GameObject.FindObjectOfType<MapGenerator>().regions.First(
+					x => x.color == tex.GetPixel(
+						(int)pixelUV.x,
+						(int)pixelUV.y
+					)
+				)
+			);
 		}
-		return false;
-	}
-
-	//:ng:
-	//do not use
-	//necrosis ridden skeleton of a dead function
-	public static GameObject WaterObstacle () {
-		GameObject obstacle = new GameObject ();
-		obstacle.AddComponent<NavMeshObstacle> ();
-		obstacle.GetComponent<NavMeshObstacle> ().shape = NavMeshObstacleShape.Box;
-		obstacle.GetComponent<NavMeshObstacle> ().center = Vector3.zero;
-		obstacle.GetComponent<NavMeshObstacle> ().size = new Vector3 (2.5f, .1f, 2.5f);
-		return obstacle;
+		return terrains.Distinct().ToList();
 	}
 }
