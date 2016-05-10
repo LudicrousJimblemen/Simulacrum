@@ -15,7 +15,8 @@ public class BasicObject : MonoBehaviour {
 	}
 	
 	public virtual void Start() {
-		//
+		GetComponentInChildren<SkinnedMeshRenderer>().material.color = 
+			Util.GetTerrainAtPosition(transform.position);
 	}
 
 	public virtual void Update() {
