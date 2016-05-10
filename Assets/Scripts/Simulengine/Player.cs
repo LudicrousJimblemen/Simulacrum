@@ -5,9 +5,16 @@ using System.Linq;
 public class Player : MonoBehaviour {
 	public PlayerInfo PlayerInfo;
 	
-	public int Stone;
+	public Resources OwnedResources;
+	
+	public Object PersonPrefab;
+	public Object StorehousePrefab;
+	public Object GhostHousePrefab;
+	
+	private bool summoning;
+	private GameObject ghostObject;
 
-	public Player (PlayerInfo playerInfo) {
+	public Player(PlayerInfo playerInfo) {
 		PlayerInfo = playerInfo;
 	}
 
@@ -47,64 +54,61 @@ public class Player : MonoBehaviour {
 		
 	//=========DEMO AI=========\\
 	
-	public Object PersonPrefab;
-	public Object StorehousePrefab;
-	
 	void Start() {
-		if (PlayerInfo.IsHuman) {
-			return;
-		}
 		
-		GameObject createdStorehouse = Instantiate(StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
-		createdStorehouse.layer = LayerMask.NameToLayer("Unit");
-
-		createdStorehouse.GetComponentInChildren<SkinnedMeshRenderer>().material = GetPlayerMaterial();
-
-		createdStorehouse.transform.parent = transform;
-		
-		switch (PlayerInfo.PlayerNumber) {
-			case 2:
-				createdStorehouse.transform.position = new Vector3(-35 + 1.25f, 0, -35 + 1.25f);
-			break;
-			case 3:
-				createdStorehouse.transform.position = new Vector3(35 - 1.25f, 0,35 - 1.25f);
-			break;
-			case 4:
-				createdStorehouse.transform.position = new Vector3(-35 + 1.25f, 0,35 - 1.25f);
-			break;
-			case 5:
-				createdStorehouse.transform.position = new Vector3(35 - 1.25f, 0, -35 + 1.25f);
-			break;
-		}
 	}
 	
 	void Update() {
-		if (PlayerInfo.IsHuman) {
-			return;
-		}
-		
-		if (Random.value * 60 * 10 >= 599) { // 1/600 chance, 60FPS, i.e. once per ~10 seconds
-			GameObject createdPerson = Instantiate(PersonPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-			createdPerson.layer = LayerMask.NameToLayer("Unit");
-			createdPerson.GetComponent<Citizen>().Behavior = (BehaviorType) 1;
-	
-			createdPerson.GetComponentInChildren<SkinnedMeshRenderer>().material = GetPlayerMaterial();
-			createdPerson.transform.parent = transform;
-		
-			switch (PlayerInfo.PlayerNumber) {
-				case 2:
-					createdPerson.transform.position = new Vector3(-35, 0, -35);
-				break;
-				case 3:
-					createdPerson.transform.position = new Vector3(35, 0, 35);
-				break;
-				case 4:
-					createdPerson.transform.position = new Vector3(-35, 0, 35);
-				break;
-				case 5:
-					createdPerson.transform.position = new Vector3(35, 0, -35);
-				break;
+		if (summoning) {
+			RaycastHit location;
+			if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out location, Mathf.Infinity, 1 << LayerMask.NameToLayer("Terrain"))
+			    && !Util.GetTerrainAtPosition(location.point).Select(x => x.name).Contains("Water")) {
+				ghostObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
+				ghostObject.transform.position = location.point;
+			} else {
+				ghostObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+			}
+			
+			if (Input.GetMouseButtonDown(0) && !Util.GetTerrainAtPosition(location.point, 1f).Select(x => x.name).Contains("Water")) {
+				DestroyObject(ghostObject);
+				OwnedResources.Stone -= 50;
+				
+				summoning = false;
+				
+				GameObject createdStorehouse = Instantiate(StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+				createdStorehouse.layer = LayerMask.NameToLayer("Unit"); //TODO NOT HARDCODE
+				createdStorehouse.GetComponentInChildren<SkinnedMeshRenderer>().material = GetPlayerMaterial();
+				createdStorehouse.transform.parent = transform;
+				createdStorehouse.transform.position = location.point;
 			}
 		}
+	}
+
+	public void SummonBuilding<T>() where T : Building {
+		//if (OwnedResources > T.Cost) { TODO IT
+		ghostObject = Instantiate(GhostHousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+		ghostObject.GetComponent<BasicObject>().IsGhost = true; //TODO MAKE HOUSE NOT HARDCODED
+		summoning = true;
+		//}
+	}
+	
+	public void SummonUnit<T>(BasicObject parent = null) where T : Unit {
+		//if (OwnedResources > T.Cost) {
+		Unit createdUnit = Instantiate(PersonPrefab, Vector3.zero, Quaternion.identity) as Unit;
+		createdUnit.gameObject.layer = LayerMask.NameToLayer("Unit"); //TODO MAKE PERSON NOT HARDCODED
+		createdUnit.Parent = GetComponent<Player>();
+		createdUnit.GetComponentInChildren<SkinnedMeshRenderer>().material = GetPlayerMaterial();
+		createdUnit.transform.parent = transform;
+			
+		if (parent != null) {
+			createdUnit.transform.position = new Vector3(
+				Random.Range(-parent.InteractRange, parent.InteractRange) + parent.transform.position.x,
+				0,
+				Random.Range(-parent.InteractRange, parent.InteractRange) + parent.transform.position.z
+			);
+		}
+			
+		OwnedResources = OwnedResources - createdUnit.Cost;
+		//}
 	}
 }

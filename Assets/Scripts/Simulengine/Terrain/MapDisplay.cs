@@ -15,16 +15,7 @@ public class MapDisplay : MonoBehaviour {
 		
 		meshFilter.sharedMesh = meshData.CreateMesh ();
 		meshRenderer.sharedMaterial.mainTexture = texture;
+		
+		GetComponent<MeshCollider>().sharedMesh = meshFilter.sharedMesh;
 	}
-	/* bad
-	void OnDrawGizmosSelected() {
-		Debug.Log("it me");
-		for (int i = -40; i < 40; i++) {
-			for (int j = -40; j < 40; j++) {
-				Gizmos.color = Util.GetTerrainAtPosition(new Vector3(i,0,j));
-				Gizmos.DrawCube(new Vector3(i,0,j), new Vector3(1,1,1));
-			}
-		}
-	}
-	*/ 
 }

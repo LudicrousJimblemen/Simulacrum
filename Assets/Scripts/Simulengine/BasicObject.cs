@@ -9,14 +9,17 @@ public class BasicObject : MonoBehaviour {
 
 	public float Sight = 9f;
 	public float InteractRange = 2f;
+	
+	public Resources Cost;
+	
+	public Player Parent;
 
 	public virtual void Awake() {
 		//
 	}
 	
 	public virtual void Start() {
-		if (!IsGhost) GetComponentInChildren<SkinnedMeshRenderer>().material.color = 
-			Util.GetTerrainAtPosition(transform.position);
+		//
 	}
 
 	public virtual void Update() {
@@ -28,7 +31,13 @@ public class BasicObject : MonoBehaviour {
 			Color playerColor = GetComponentInParent<Player>().GetPlayerMaterial().color;
 		
 			if (Selected) {
-					new Color(
+				new Color(
+					playerColor.r + 0.5f,
+					playerColor.g + 0.5f,
+					playerColor.b + 0.5f
+				);
+				GetComponentInChildren<SkinnedMeshRenderer>().material.color = 
+				new Color(
 					playerColor.r + 0.5f,
 					playerColor.g + 0.5f,
 					playerColor.b + 0.5f
@@ -58,14 +67,14 @@ public class BasicObject : MonoBehaviour {
 		return finalObject;
 	}
 
-	public GameObject FindClosestChildOf<Type>(Transform input) {
+	public GameObject FindClosestChildOf<T>(Transform input) where T : MonoBehaviour {
 		GameObject finalObject = null;
 
 		Vector3 currentPosition = transform.position;
 		float currentClosestDistanceSquaredToTarget = Mathf.Infinity; 
 
 		foreach (GameObject potentialTarget in FindObjectsOfType<GameObject>().ToList()
-			.Where(x => x.GetComponent<Type>() != null)
+			.Where(x => x.GetComponent<T>() != null)
 			.Where(x => x.transform.IsChildOf(input))) {
 			Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
 			float distanceSquaredToTarget = directionToTarget.sqrMagnitude;

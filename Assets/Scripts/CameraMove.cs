@@ -5,7 +5,7 @@ public class CameraMove : MonoBehaviour {
 	private Vector3 LookDirection;
 
 	public float PanSpeed = 1.5f;
-	public float ZoomSpeed = 0.5f;
+	public float ZoomSpeed = 0f;
 
 	public enum ZoomControl {
 		ScrollWheel,
@@ -19,7 +19,7 @@ public class CameraMove : MonoBehaviour {
 	}
 
 	void LateUpdate() {
-		float Delta = Time.deltaTime * 40;
+		float Delta = Time.deltaTime * 20;
 		Vector3 FlatLook = LookDirection;
 		FlatLook.y = 0;
 		FlatLook.Normalize();

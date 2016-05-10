@@ -7,28 +7,26 @@ public class Citizen : Unit {
 	public int Load;
 
 	public int CollectionDelay = 20;
-	public int CollectionTimer = 0;
+	public int CollectionTimer;
 
 	public int MaxLoad = 10;
 
 	public CitizenState CurrentAction;
-	public GameObject CurrentTarget = null;
+	public GameObject CurrentTarget;
 
-	NavMeshAgent navAgent;
-	
-	Transform OwnerPlayer;
+	private NavMeshAgent navAgent;
 
 	public override void Awake() {
 		base.Awake();
+		
+		Cost = new Resources {
+			Stone = 0
+		};
 
 		Behavior = BehaviorType.Idle;
 		CurrentAction = CitizenState.Idle;
 		navAgent = GetComponent<NavMeshAgent>();
 		navAgent.stoppingDistance = 0;
-	}
-	
-	public override void Start () {
-		OwnerPlayer = GetComponentsInParent<Player>().First().transform;
 	}
 
 	public override void Update() {
@@ -40,6 +38,7 @@ public class Citizen : Unit {
 		}
 
 		GetComponent<Animator>().SetBool("running", navAgent.velocity.sqrMagnitude > 0.3f);
+		GetComponent<Animator>().SetBool("swimming", Util.GetTerrainAtPosition(transform.position).Select(x => x.name).Contains("Water"));
 
 		navAgent.speed = Speed;
 		navAgent.angularSpeed = Speed * 216;
@@ -55,7 +54,8 @@ public class Citizen : Unit {
 	public void SelectResource(GameObject ResourceObj) {
 		if (Util.EvaluateResource(Behavior, ResourceObj.GetComponent<Resource>().Type))
 			CurrentTarget = ResourceObj;
-	} //TODO make more of these
+	}
+	//TODO make more of these
 
 	void StoneMinerBehavior() {
 		if (CurrentAction == CitizenState.Idle) {
@@ -66,12 +66,12 @@ public class Citizen : Unit {
 			GetComponent<Animator>().SetBool("working", false);
 
 			if (Load < MaxLoad) {
-				CurrentTarget = FindClosestChildOf<StoneMine>(GameObject.Find ("Resources").transform);
+				CurrentTarget = FindClosestChildOf<StoneMine>(GameObject.Find("Resources").transform);
 
 				if (CurrentTarget == null) {
 					if (Load > 0) {
-						if (FindClosestChildOf<Storehouse> (OwnerPlayer) != null) {
-							CurrentTarget = FindClosestChildOf<Storehouse>(OwnerPlayer);
+						if (FindClosestChildOf<Storehouse>(Parent.transform) != null) {
+							CurrentTarget = FindClosestChildOf<Storehouse>(Parent.transform);
 							CurrentAction = CitizenState.Depositing;
 						}
 						return;
@@ -83,7 +83,7 @@ public class Citizen : Unit {
 				}
 			} else {
 				GetComponent<Animator>().SetBool("working", false);
-				CurrentTarget = FindClosestChildOf<Storehouse>(OwnerPlayer);
+				CurrentTarget = FindClosestChildOf<Storehouse>(Parent.transform);
 
 				if (CurrentTarget != null) {
 					navAgent.destination = CurrentTarget.transform.position;
@@ -106,11 +106,7 @@ public class Citizen : Unit {
 				return;
 			}
 
-			transform.LookAt(new Vector3(
-				CurrentTarget.transform.position.x,
-				0,
-				CurrentTarget.transform.position.z
-			));
+			transform.LookAt(new Vector3(CurrentTarget.transform.position.x, transform.position.y, CurrentTarget.transform.position.z));
 
 			if (CollectionTimer >= CollectionDelay) {
 				CollectionTimer = 0;
@@ -127,7 +123,7 @@ public class Citizen : Unit {
 		} else if (CurrentAction == CitizenState.Depositing) {
 			if (CurrentTarget != null) {
 				if (navAgent.remainingDistance < CurrentTarget.GetComponent<BasicObject>().InteractRange) {
-					transform.parent.transform.GetComponentInParent<Player>().Stone += Load;
+					Parent.GetComponent<Player>().OwnedResources.Stone += Load;
 					Load = 0;
 					CurrentAction = CitizenState.Idle;
 				}

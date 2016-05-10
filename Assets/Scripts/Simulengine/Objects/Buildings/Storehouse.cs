@@ -7,5 +7,9 @@ public class Storehouse : Building {
 		base.Awake();
 
 		InteractRange = 2.5f;
+		
+		Cost = new Resources {
+			Stone = 50
+		};
 	}
 }

@@ -3,7 +3,7 @@ guid: ed45ee5e4cf91d640831b25a34cb0504
 timeCreated: 1455936654
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 18
   fileIDToRecycleName:
     100000: Armature
     100002: Bust
@@ -56,6 +56,7 @@ ModelImporter:
     7400010: Armature|Working
     7400012: Armature|Dying
     7400014: Armature|Depositing
+    7400016: Armature|Swimming
     9500000: //RootNode
     13700000: Mesh
   materials:
@@ -65,17 +66,22 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
     optimizeGameObjects: 0
     motionNodeName: Armature/Root
-    animationImportErrors: 
+    animationImportErrors: '
+
+      Imported file ''Person'' conversion failed: Required human bone ''Hips'' not
+      found
+
+
+'
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 3
-    animationRotationError: 0.5
-    animationPositionError: 0.5
-    animationScaleError: 0.5
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations:
@@ -89,7 +95,6 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
@@ -149,7 +154,6 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Armature|Running
       takeName: Armature|Running
@@ -160,7 +164,6 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
@@ -220,7 +223,6 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Armature|Idle
       takeName: Armature|Idle
@@ -231,7 +233,6 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
@@ -291,7 +292,6 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Armature|Dying
       takeName: Armature|Dying
@@ -302,7 +302,6 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
@@ -362,7 +361,6 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Armature|Excited
       takeName: Armature|Excited
@@ -373,7 +371,6 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
@@ -433,7 +430,6 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Armature|Depositing
       takeName: Armature|Depositing
@@ -444,7 +440,6 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
@@ -504,7 +499,75 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Swimming
+      takeName: Armature|Swimming
+      firstFrame: 0
+      lastFrame: 47
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 0
+      - path: Armature/Root
+        weight: 0
+      - path: Armature/Root/Center
+        weight: 0
+      - path: Armature/Root/Center/Left Leg IK Bone
+        weight: 0
+      - path: Armature/Root/Center/Left Leg IK Bone/Left Leg IK Target
+        weight: 0
+      - path: Armature/Root/Center/Left Upper Leg
+        weight: 0
+      - path: Armature/Root/Center/Left Upper Leg/Left Foreleg
+        weight: 0
+      - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot
+        weight: 0
+      - path: Armature/Root/Center/Left Upper Leg/Left Foreleg/Left Foot/Left Toes
+        weight: 0
+      - path: Armature/Root/Center/Right Leg IK Bone
+        weight: 0
+      - path: Armature/Root/Center/Right Leg IK Bone/Right Leg IK Target
+        weight: 0
+      - path: Armature/Root/Center/Right Upper Leg
+        weight: 0
+      - path: Armature/Root/Center/Right Upper Leg/Right Foreleg
+        weight: 0
+      - path: Armature/Root/Center/Right Upper Leg/Right Foreleg/Right Foot
+        weight: 0
+      - path: Armature/Root/Center/Right Upper Leg/Right Foreleg/Right Foot/Right
+          Toes
+        weight: 0
+      - path: Armature/Root/Center/Waist
+        weight: 0
+      - path: Armature/Root/Center/Waist/Bust
+        weight: 0
+      - path: Armature/Root/Center/Waist/Bust/Neck
+        weight: 0
+      - path: Armature/Root/Center/Waist/Bust/Neck/Head
+        weight: 0
+      - path: Mesh
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -525,6 +588,7 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 0
   importAnimation: 1
@@ -532,18 +596,17 @@ ModelImporter:
   humanDescription:
     human: []
     skeleton: []
-    armTwist: 0.5
-    foreArmTwist: 0.5
-    upperLegTwist: 0.5
-    legTwist: 0.5
-    armStretch: 0.05
-    legStretch: 0.05
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: Armature
     hasTranslationDoF: 0
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 9f83fbf987b7f774ebc52955a0753daf,
-    type: 3}
-  animationType: 2
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
