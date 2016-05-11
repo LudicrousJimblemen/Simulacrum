@@ -20,7 +20,7 @@ public class Player : MonoBehaviour {
 	
 	void Start() {
 		if (PlayerInfo.IsHuman) {
-			gameObject.AddComponent<DefaultAI>();
+			//gameObject.AddComponent<DefaultAI>();
 		}
 	}
 	
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour {
 			
 			if (Input.GetMouseButtonDown(0) && !Util.GetTerrainAtPosition(location.point, 1f).Select(x => x.name).Contains("Water")) {
 				DestroyObject(ghostObject);
-				OwnedResources.Stone -= 50;
+				OwnedResources -= ghostObject.GetComponent<BasicObject>().Cost;
 				
 				summoning = false;
 				
@@ -84,18 +84,33 @@ public class Player : MonoBehaviour {
 		return newMaterial;
 	}
 
-	public void SummonBuilding<T>() where T : Building {
+	public GameObject SummonBuilding<T>() where T : Building { //TODO MAKE THE GHOSTING A SEPARATE FUNCTION
 		//if (OwnedResources > T.Cost) { TODO IT
-		ghostObject = Instantiate(GhostHousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
-		ghostObject.GetComponent<BasicObject>().IsGhost = true; //TODO MAKE HOUSE NOT HARDCODED
-		summoning = true;
+		if (PlayerInfo.IsHuman) {
+			ghostObject = Instantiate(GhostHousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+			ghostObject.GetComponent<BasicObject>().IsGhost = true; //TODO MAKE HOUSE NOT HARDCODED
+			summoning = true;
+			return ghostObject;
+		} else {
+			GameObject createdBuilding = Instantiate(StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+			Building building = createdBuilding.GetComponent<Building>();
+			building.gameObject.layer = LayerMask.NameToLayer("Unit"); //TODO MAKE PERSON NOT HARDCODED
+			building.Parent = GetComponent<Player>();
+			createdBuilding.GetComponentInChildren<SkinnedMeshRenderer>().material = GetPlayerMaterial();
+			createdBuilding.transform.parent = transform;
+				
+			OwnedResources -= building.Cost;
+			return createdBuilding;
+		}
+		//} else {
+		return null;
 		//}
 	}
 	
-	public void SummonUnit<T>(BasicObject parent = null) where T : Unit {
+	public GameObject SummonUnit<T>(BasicObject parent = null) where T : Unit {
 		//if (OwnedResources > T.Cost) {
 		GameObject createdUnit = Instantiate(PersonPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-		Unit unit = createdUnit.GetComponent<Unit> ();
+		Unit unit = createdUnit.GetComponent<Unit>();
 		unit.gameObject.layer = LayerMask.NameToLayer("Unit"); //TODO MAKE PERSON NOT HARDCODED
 		unit.Parent = GetComponent<Player>();
 		createdUnit.GetComponentInChildren<SkinnedMeshRenderer>().material = GetPlayerMaterial();
@@ -109,7 +124,10 @@ public class Player : MonoBehaviour {
 			);
 		}
 			
-		OwnedResources = OwnedResources - unit.Cost;
+		OwnedResources -= unit.Cost;
+		return createdUnit;
+		//} else {
+		return null;
 		//}
 	}
 }

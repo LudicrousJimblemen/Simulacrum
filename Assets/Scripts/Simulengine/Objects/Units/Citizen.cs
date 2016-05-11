@@ -23,7 +23,7 @@ public class Citizen : Unit {
 			Stone = 0
 		};
 
-		Behavior = BehaviorType.Idle;
+		Behavior = BehaviorType.StoneMiner;
 		CurrentAction = CitizenState.Idle;
 		navAgent = GetComponent<NavMeshAgent>();
 		navAgent.stoppingDistance = 0;
