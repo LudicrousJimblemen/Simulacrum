@@ -17,6 +17,38 @@ public class Player : MonoBehaviour {
 	public Player(PlayerInfo playerInfo) {
 		PlayerInfo = playerInfo;
 	}
+	
+	void Start() {
+		if (PlayerInfo.IsHuman) {
+			gameObject.AddComponent<DefaultAI>();
+		}
+	}
+	
+	void Update() {
+		if (summoning) {
+			RaycastHit location;
+			if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out location, Mathf.Infinity, 1 << LayerMask.NameToLayer("Terrain"))
+			    && !Util.GetTerrainAtPosition(location.point).Select(x => x.name).Contains("Water")) {
+				ghostObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
+				ghostObject.transform.position = location.point;
+			} else {
+				ghostObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+			}
+			
+			if (Input.GetMouseButtonDown(0) && !Util.GetTerrainAtPosition(location.point, 1f).Select(x => x.name).Contains("Water")) {
+				DestroyObject(ghostObject);
+				OwnedResources.Stone -= 50;
+				
+				summoning = false;
+				
+				GameObject createdStorehouse = Instantiate(StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+				createdStorehouse.layer = LayerMask.NameToLayer("Unit"); //TODO NOT HARDCODE
+				createdStorehouse.GetComponentInChildren<SkinnedMeshRenderer>().material = GetPlayerMaterial();
+				createdStorehouse.transform.parent = transform;
+				createdStorehouse.transform.position = location.point;
+			}
+		}
+	}
 
 	public Material GetPlayerMaterial(bool ghost = false) {
 		Color playerColor = new Color();
@@ -50,38 +82,6 @@ public class Player : MonoBehaviour {
 		newMaterial.color = playerColor + new Color(0.1f, 0.1f, 0.1f);
 
 		return newMaterial;
-	}
-		
-	//=========DEMO AI=========\\
-	
-	void Start() {
-		
-	}
-	
-	void Update() {
-		if (summoning) {
-			RaycastHit location;
-			if (Physics.Raycast(Util.OrthoRay(Input.mousePosition), out location, Mathf.Infinity, 1 << LayerMask.NameToLayer("Terrain"))
-			    && !Util.GetTerrainAtPosition(location.point).Select(x => x.name).Contains("Water")) {
-				ghostObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
-				ghostObject.transform.position = location.point;
-			} else {
-				ghostObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
-			}
-			
-			if (Input.GetMouseButtonDown(0) && !Util.GetTerrainAtPosition(location.point, 1f).Select(x => x.name).Contains("Water")) {
-				DestroyObject(ghostObject);
-				OwnedResources.Stone -= 50;
-				
-				summoning = false;
-				
-				GameObject createdStorehouse = Instantiate(StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
-				createdStorehouse.layer = LayerMask.NameToLayer("Unit"); //TODO NOT HARDCODE
-				createdStorehouse.GetComponentInChildren<SkinnedMeshRenderer>().material = GetPlayerMaterial();
-				createdStorehouse.transform.parent = transform;
-				createdStorehouse.transform.position = location.point;
-			}
-		}
 	}
 
 	public void SummonBuilding<T>() where T : Building {
