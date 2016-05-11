@@ -94,9 +94,10 @@ public class Player : MonoBehaviour {
 	
 	public void SummonUnit<T>(BasicObject parent = null) where T : Unit {
 		//if (OwnedResources > T.Cost) {
-		Unit createdUnit = Instantiate(PersonPrefab, Vector3.zero, Quaternion.identity) as Unit;
-		createdUnit.gameObject.layer = LayerMask.NameToLayer("Unit"); //TODO MAKE PERSON NOT HARDCODED
-		createdUnit.Parent = GetComponent<Player>();
+		GameObject createdUnit = Instantiate(PersonPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+		Unit unit = createdUnit.GetComponent<Unit> ();
+		unit.gameObject.layer = LayerMask.NameToLayer("Unit"); //TODO MAKE PERSON NOT HARDCODED
+		unit.Parent = GetComponent<Player>();
 		createdUnit.GetComponentInChildren<SkinnedMeshRenderer>().material = GetPlayerMaterial();
 		createdUnit.transform.parent = transform;
 			
@@ -108,7 +109,7 @@ public class Player : MonoBehaviour {
 			);
 		}
 			
-		OwnedResources = OwnedResources - createdUnit.Cost;
+		OwnedResources = OwnedResources - unit.Cost;
 		//}
 	}
 }
