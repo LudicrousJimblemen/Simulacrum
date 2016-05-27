@@ -39,6 +39,17 @@ ModelImporter:
     100062: Left_Leg_IK_Target
     100064: Right_Leg_IK_Bone
     100066: Right_Leg_IK_Target
+    100068: Left_Foreleg_001
+    100070: Left_Leg
+    100072: Left_Toe
+    100074: Pelvist
+    100076: Person
+    100078: PersonArmature
+    100080: Right_Foreleg_001
+    100082: Right_Leg
+    100084: Right_Toe
+    100086: Sternum
+    100088: Pelvis
     400000: Armature
     400002: Bone
     400004: Bone_001
@@ -73,29 +84,45 @@ ModelImporter:
     400062: Left_Leg_IK_Target
     400064: Right_Leg_IK_Bone
     400066: Right_Leg_IK_Target
+    400068: Left_Foreleg_001
+    400070: Left_Leg
+    400072: Left_Toe
+    400074: Pelvist
+    400076: Person
+    400078: PersonArmature
+    400080: Right_Foreleg_001
+    400082: Right_Leg
+    400084: Right_Toe
+    400086: Sternum
+    400088: Pelvis
     2300000: Mesh
     2300002: //RootNode
     3300000: Mesh
     3300002: //RootNode
     4300000: Cube
     4300002: Mesh
+    4300004: Person
     7400000: Default Take
     7400002: Excited
     7400004: Run
     7400006: Run0
     7400008: Running
+    7400010: Idle
+    7400012: Swimming
+    7400014: Working
     9500000: //RootNode
     13700000: Cube
     13700002: Mesh
+    13700004: Person
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
-    motionNodeName: Armature/Root
+    motionNodeName: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -111,14 +138,14 @@ ModelImporter:
       name: Excited
       takeName: Excited
       firstFrame: -1
-      lastFrame: 43
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -133,41 +160,45 @@ ModelImporter:
       transformMask:
       - path: 
         weight: 1
-      - path: Armature
+      - path: Person
         weight: 1
-      - path: Armature/Root
+      - path: PersonArmature
         weight: 1
-      - path: Armature/Root/Bust
+      - path: PersonArmature/Center
         weight: 1
-      - path: Armature/Root/Bust/Neck
+      - path: PersonArmature/Center/Left_Leg
         weight: 1
-      - path: Armature/Root/Bust/Neck/Head
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg
         weight: 1
-      - path: Armature/Root/Left_Upper_Leg
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg/Left_Foot
         weight: 1
-      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg/Left_Foot/Left_Toe
         weight: 1
-      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg/Left_Foot
+      - path: PersonArmature/Center/Pelvis
         weight: 1
-      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg/Left_Foot/Left_Toes
+      - path: PersonArmature/Center/Pelvis/Sternum
         weight: 1
-      - path: Armature/Root/Right_Upper_Leg
+      - path: PersonArmature/Center/Pelvis/Sternum/Neck
         weight: 1
-      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg
+      - path: PersonArmature/Center/Pelvis/Sternum/Neck/Head
         weight: 1
-      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg/Right_Foot
+      - path: PersonArmature/Center/Right_Leg
         weight: 1
-      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg/Right_Foot/Right_Toes
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg
         weight: 1
-      - path: Mesh
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg/Right_Foot
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg/Right_Foot/Right_Toe
+        weight: 1
+      - path: PersonArmature/Root
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Running
-      takeName: Running
-      firstFrame: -1
-      lastFrame: 22
+      name: Idle
+      takeName: Idle
+      firstFrame: 222
+      lastFrame: 489
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -189,47 +220,231 @@ ModelImporter:
       transformMask:
       - path: 
         weight: 1
-      - path: Armature
+      - path: Person
         weight: 1
-      - path: Armature/Root
+      - path: PersonArmature
         weight: 1
-      - path: Armature/Root/Bust
+      - path: PersonArmature/Center
         weight: 1
-      - path: Armature/Root/Bust/Neck
+      - path: PersonArmature/Center/Left_Leg
         weight: 1
-      - path: Armature/Root/Bust/Neck/Head
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg
         weight: 1
-      - path: Armature/Root/Left_Upper_Leg
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg/Left_Foot
         weight: 1
-      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg/Left_Foot/Left_Toe
         weight: 1
-      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg/Left_Foot
+      - path: PersonArmature/Center/Pelvis
         weight: 1
-      - path: Armature/Root/Left_Upper_Leg/Left_Foreleg/Left_Foot/Left_Toes
+      - path: PersonArmature/Center/Pelvis/Sternum
         weight: 1
-      - path: Armature/Root/Right_Upper_Leg
+      - path: PersonArmature/Center/Pelvis/Sternum/Neck
         weight: 1
-      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg
+      - path: PersonArmature/Center/Pelvis/Sternum/Neck/Head
         weight: 1
-      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg/Right_Foot
+      - path: PersonArmature/Center/Right_Leg
         weight: 1
-      - path: Armature/Root/Right_Upper_Leg/Right_Foreleg/Right_Foot/Right_Toes
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg
         weight: 1
-      - path: Mesh
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg/Right_Foot
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg/Right_Foot/Right_Toe
+        weight: 1
+      - path: PersonArmature/Root
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-    isReadable: 1
+    - serializedVersion: 16
+      name: Running
+      takeName: Running
+      firstFrame: -1
+      lastFrame: 26
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Person
+        weight: 1
+      - path: PersonArmature
+        weight: 1
+      - path: PersonArmature/Center
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg/Left_Foot
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg/Left_Foot/Left_Toe
+        weight: 1
+      - path: PersonArmature/Center/Pelvis
+        weight: 1
+      - path: PersonArmature/Center/Pelvis/Sternum
+        weight: 1
+      - path: PersonArmature/Center/Pelvis/Sternum/Neck
+        weight: 1
+      - path: PersonArmature/Center/Pelvis/Sternum/Neck/Head
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg/Right_Foot
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg/Right_Foot/Right_Toe
+        weight: 1
+      - path: PersonArmature/Root
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Swimming
+      takeName: Swimming
+      firstFrame: -1
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Person
+        weight: 1
+      - path: PersonArmature
+        weight: 1
+      - path: PersonArmature/Center
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg/Left_Foot
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg/Left_Foot/Left_Toe
+        weight: 1
+      - path: PersonArmature/Center/Pelvis
+        weight: 1
+      - path: PersonArmature/Center/Pelvis/Sternum
+        weight: 1
+      - path: PersonArmature/Center/Pelvis/Sternum/Neck
+        weight: 1
+      - path: PersonArmature/Center/Pelvis/Sternum/Neck/Head
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg/Right_Foot
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg/Right_Foot/Right_Toe
+        weight: 1
+      - path: PersonArmature/Root
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Working
+      takeName: Working
+      firstFrame: -1
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Person
+        weight: 1
+      - path: PersonArmature
+        weight: 1
+      - path: PersonArmature/Center
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg/Left_Foot
+        weight: 1
+      - path: PersonArmature/Center/Left_Leg/Left_Foreleg/Left_Foot/Left_Toe
+        weight: 1
+      - path: PersonArmature/Center/Pelvis
+        weight: 1
+      - path: PersonArmature/Center/Pelvis/Sternum
+        weight: 1
+      - path: PersonArmature/Center/Pelvis/Sternum/Neck
+        weight: 1
+      - path: PersonArmature/Center/Pelvis/Sternum/Neck/Head
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg/Right_Foot
+        weight: 1
+      - path: PersonArmature/Center/Right_Leg/Right_Foreleg/Right_Foot/Right_Toe
+        weight: 1
+      - path: PersonArmature/Root
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
+    optimizeMeshForGPU: 0
     keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
@@ -239,9 +454,9 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
+    splitTangentsAcrossUV: 0
     normalImportMode: 0
-    tangentImportMode: 4
+    tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -254,7 +469,7 @@ ModelImporter:
     armStretch: .0500000007
     legStretch: .0500000007
     feetSpacing: 0
-    rootMotionBoneName: Armature
+    rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2

@@ -19,8 +19,8 @@ public class Player : MonoBehaviour {
 	}
 	
 	void Start() {
-		if (PlayerInfo.IsHuman) {
-			//gameObject.AddComponent<DefaultAI>();
+		if (!PlayerInfo.IsHuman) {
+			gameObject.AddComponent<DefaultAI>();
 		}
 	}
 	
