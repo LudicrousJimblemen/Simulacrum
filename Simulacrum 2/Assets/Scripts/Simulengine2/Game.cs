@@ -34,6 +34,6 @@ public class Game : MonoBehaviour {
 		terrainConfig.Lacunarity = 1.6f;
 		terrainConfig.Seed = Mathf.RoundToInt(Random.value * 1000000);
 
-		FindObjectOfType<TerrainGenerator>().Generate(terrainConfig);
+		ObjectExtension.FindComponent<TerrainGenerator>().Generate(terrainConfig);
 	}
 }

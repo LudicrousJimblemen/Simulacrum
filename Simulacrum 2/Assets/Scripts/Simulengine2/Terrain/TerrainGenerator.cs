@@ -80,13 +80,16 @@ public class TerrainGenerator : MonoBehaviour {
 			}
 		}
 
-		currentTexture = texture;
-		//print (currentTexture.width + " " + currentTexture.height);
+		Texture2D texture = new Texture2D(width, height);
+		texture.filterMode = FilterMode.Point;
+		texture.wrapMode = TextureWrapMode.Clamp;
+		texture.SetPixels(colorMap);
+		texture.Apply();
 
-		meshFilter.sharedMesh = meshData.CreateMesh();
-		meshRenderer.sharedMaterial.mainTexture = texture;
+		GetComponent<MeshFilter>().sharedMesh = meshData.CreateMesh();
+		GetComponent<MeshRenderer>().sharedMaterial.mainTexture = texture;
 
-		GetComponent<MeshCollider>().sharedMesh = meshFilter.sharedMesh;
+		GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().sharedMesh;
 	}
 
 	void Start() {
