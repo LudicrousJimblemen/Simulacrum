@@ -38,7 +38,10 @@ public class Citizen : Unit {
 		}
 
 		GetComponent<Animator>().SetBool("running", navAgent.velocity.sqrMagnitude > 0.3f);
-		GetComponent<Animator>().SetBool("swimming", Util.GetTerrainAtPosition(transform.position).Select(x => x.name).Contains("Water"));
+
+		if (AITimer % 4 == 0) {
+			GetComponent<Animator>().SetBool("swimming", Util.GetTerrainAtPosition(transform.position).Select(x => x.name).Contains("Water"));
+		}
 
 		navAgent.speed = Speed;
 		navAgent.angularSpeed = Speed * 216;

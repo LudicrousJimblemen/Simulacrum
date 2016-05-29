@@ -7,12 +7,10 @@ public class Player : MonoBehaviour {
 	
 	public Resources OwnedResources;
 	
-	public Object PersonPrefab;
-	public Object StorehousePrefab;
-	public Object GhostHousePrefab;
-	
 	private bool summoning;
 	private GameObject ghostObject;
+
+	private Game game;
 
 	public Player(PlayerInfo playerInfo) {
 		PlayerInfo = playerInfo;
@@ -22,6 +20,8 @@ public class Player : MonoBehaviour {
 		if (!PlayerInfo.IsHuman) {
 			gameObject.AddComponent<DefaultAI>();
 		}
+
+		this.game = FindObjectOfType<Game>();
 	}
 	
 	void Update() {
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour {
 				
 				summoning = false;
 				
-				GameObject createdStorehouse = Instantiate(StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+				GameObject createdStorehouse = Instantiate(game.StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
 				createdStorehouse.layer = LayerMask.NameToLayer("Unit"); //TODO NOT HARDCODE
 				createdStorehouse.GetComponentInChildren<SkinnedMeshRenderer>().material = GetPlayerMaterial();
 				createdStorehouse.transform.parent = transform;
@@ -87,12 +87,12 @@ public class Player : MonoBehaviour {
 	public GameObject SummonBuilding<T>() where T : Building { //TODO MAKE THE GHOSTING A SEPARATE FUNCTION
 		//if (OwnedResources > T.Cost) { TODO IT
 		if (PlayerInfo.IsHuman) {
-			ghostObject = Instantiate(GhostHousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+			ghostObject = Instantiate(game.GhostHousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
 			ghostObject.GetComponent<BasicObject>().IsGhost = true; //TODO MAKE HOUSE NOT HARDCODED
 			summoning = true;
 			return ghostObject;
 		} else {
-			GameObject createdBuilding = Instantiate(StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
+			GameObject createdBuilding = Instantiate(game.StorehousePrefab, Vector3.zero, Quaternion.identity) as GameObject;
 			Building building = createdBuilding.GetComponent<Building>();
 			building.gameObject.layer = LayerMask.NameToLayer("Unit"); //TODO MAKE PERSON NOT HARDCODED
 			building.Parent = GetComponent<Player>();
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour {
 	
 	public GameObject SummonUnit<T>(BasicObject parent = null) where T : Unit {
 		//if (OwnedResources > T.Cost) {
-		GameObject createdUnit = Instantiate(PersonPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+		GameObject createdUnit = Instantiate(game.PersonPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 		Unit unit = createdUnit.GetComponent<Unit>();
 		unit.gameObject.layer = LayerMask.NameToLayer("Unit"); //TODO MAKE PERSON NOT HARDCODED
 		unit.Parent = GetComponent<Player>();

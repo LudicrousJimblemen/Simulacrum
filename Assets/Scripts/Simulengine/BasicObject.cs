@@ -14,6 +14,8 @@ public class BasicObject : MonoBehaviour {
 	
 	public Player Parent;
 
+	public Sprite Icon;
+
 	public virtual void Awake() {
 		//
 	}

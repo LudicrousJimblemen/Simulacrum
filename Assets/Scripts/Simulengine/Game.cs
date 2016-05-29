@@ -21,10 +21,6 @@ public class Game : MonoBehaviour {
 				Stone = 200
 			};
 			
-			playerObject.GetComponent<Player>().PersonPrefab = PersonPrefab;
-			playerObject.GetComponent<Player>().StorehousePrefab = StorehousePrefab;
-			playerObject.GetComponent<Player>().GhostHousePrefab = GhostHousePrefab;
-			
 			playerNumber++;
 		}
 		
