@@ -24,7 +24,7 @@ public class Game : MonoBehaviour {
 			playerNumber++; //add 1 to player number, for next player
 		}
 
-		TerrainConfig terrainConfig = new TerrainConfig();
+		TerrainConfig terrainConfig = new TerrainConfig(); //configure map
 
 		terrainConfig.MapWidth = 32;
 		terrainConfig.MapHeight = 32;
@@ -34,6 +34,6 @@ public class Game : MonoBehaviour {
 		terrainConfig.Lacunarity = 1.6f;
 		terrainConfig.Seed = Mathf.RoundToInt(Random.value * 1000000);
 
-		ObjectExtension.FindComponent<TerrainGenerator>().Generate(terrainConfig);
+		ObjectExtension.FindComponent<TerrainGenerator>().Generate(terrainConfig); //finally, generate map
 	}
 }
