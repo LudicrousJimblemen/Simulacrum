@@ -26,8 +26,8 @@ public class Game : MonoBehaviour {
 
 		TerrainConfig terrainConfig = new TerrainConfig(); //configure map
 
-		terrainConfig.MapWidth = 32;
-		terrainConfig.MapHeight = 32;
+		terrainConfig.MapWidth = 16;
+		terrainConfig.MapHeight = 16;
 		terrainConfig.NoiseScale = 13;
 		terrainConfig.Octaves = 3;
 		terrainConfig.Persistance = 0.45f;

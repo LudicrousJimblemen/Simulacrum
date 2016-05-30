@@ -1,30 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour {
+	public Texture2D Texture;
+
+	public TerrainConfig Config;
+
 	public TerrainType[] TerrainTypes = new TerrainType[] {
-		new TerrainType {
-			name = "Water",
-			height = 0.32f,
-			color = new Color(
+		new TerrainType { //TODO terraintypes > regions
+			Name = "Water",
+			Height = 0.32f,
+			Color = new Color(
 				56f / 255f,
 				132f / 255f,
 				255f / 255f
 			)
 		},
 		new TerrainType {
-			name = "Sand",
-			height = 0.4f,
-			color = new Color(
+			Name = "Sand",
+			Height = 0.4f,
+			Color = new Color(
 				255f / 255f,
 				249f / 255f,
 				139f / 255f
 			)
 		},
 		new TerrainType {
-			name = "Grass",
-			height = 1f,
-			color = new Color(
+			Name = "Grass",
+			Height = 1f,
+			Color = new Color(
 				57f / 255f,
 				199f / 255f,
 				44f / 255f
@@ -33,6 +38,11 @@ public class TerrainGenerator : MonoBehaviour {
 	};
 
 	public void Generate(TerrainConfig config) {
+		config.MapHeight += 1;
+		config.MapWidth += 1;
+
+		Config = config;
+
 		float[,] noiseMap = Noise.GenerateNoiseMap(
 			config.MapWidth,
 			config.MapHeight,
@@ -48,8 +58,8 @@ public class TerrainGenerator : MonoBehaviour {
 			for (int x = 0; x < config.MapWidth; x++) {
 				float currentHeight = noiseMap[x, y];
 				for (int i = 0; i < TerrainTypes.Length; i++) {
-					if (currentHeight <= TerrainTypes[i].height) {
-						colorMap[y * config.MapWidth + x] = TerrainTypes[i].color;
+					if (currentHeight <= TerrainTypes[i].Height) {
+						colorMap[y * config.MapWidth + x] = TerrainTypes[i].Color;
 						//print (y * config.MapWidth + x);
 						break;
 					}
@@ -80,16 +90,29 @@ public class TerrainGenerator : MonoBehaviour {
 			}
 		}
 
-		Texture2D texture = new Texture2D(width, height);
-		texture.filterMode = FilterMode.Point;
-		texture.wrapMode = TextureWrapMode.Clamp;
-		texture.SetPixels(colorMap);
-		texture.Apply();
+		Texture = new Texture2D(width, height);
+		Texture.filterMode = FilterMode.Point;
+		Texture.wrapMode = TextureWrapMode.Clamp;
+		Texture.SetPixels(colorMap);
+		Texture.SetPixel(0,0, new Color(1f,0f,0f));
+		Texture.Apply();
 
-		GetComponent<MeshFilter>().sharedMesh = meshData.CreateMesh();
-		GetComponent<MeshRenderer>().sharedMaterial.mainTexture = texture;
+		Mesh finalMesh = meshData.CreateMesh();
 
-		GetComponent<MeshCollider>().sharedMesh = GetComponent<MeshFilter>().sharedMesh;
+		GetComponent<MeshFilter>().sharedMesh = finalMesh;
+		GetComponent<MeshRenderer>().sharedMaterial.mainTexture = Texture;
+
+		GetComponent<MeshCollider>().sharedMesh = finalMesh;
+	}
+
+	public TerrainType GetTerrainAtPosition(float xPos, float zPos) {
+		Debug.Log(xPos + " " + zPos);
+		return TerrainTypes.FirstOrDefault(t =>
+			Texture.GetPixel(
+				(int) Math.Ceiling(xPos + (Config.MapWidth / 2)) - 1,
+				(int) (-Math.Ceiling(zPos - (Config.MapHeight / 2)))
+			) == t.Color
+		);
 	}
 
 	void Start() {
