@@ -100,13 +100,12 @@ public class TerrainGenerator : MonoBehaviour {
 		Mesh finalMesh = meshData.CreateMesh();
 
 		GetComponent<MeshFilter>().sharedMesh = finalMesh;
-		GetComponent<MeshRenderer>().sharedMaterial.mainTexture = Texture;
+		GetComponent<MeshRenderer>().material.mainTexture = Texture;
 
 		GetComponent<MeshCollider>().sharedMesh = finalMesh;
 	}
 
 	public TerrainType GetTerrainAtPosition(Vector3 input) {
-		Debug.Log(input.x + " " + input.z);
 		return TerrainTypes.FirstOrDefault(t =>
 			Texture.GetPixel(
 				(int) Math.Ceiling(input.x + (Config.MapWidth / 2)) - 1,
@@ -116,7 +115,6 @@ public class TerrainGenerator : MonoBehaviour {
 	}
 
 	public TerrainType[] GetTerrainNearPosition(Vector3 input, float bufferRadius) {
-		Debug.Log(input.x + " " + input.z);
 		List<TerrainType> returned = new List<TerrainType>();
 		returned.Add(TerrainTypes.FirstOrDefault(t =>
 			Texture.GetPixel(

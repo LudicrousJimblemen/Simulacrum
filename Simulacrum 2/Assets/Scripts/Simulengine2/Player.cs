@@ -37,4 +37,30 @@ public class Player : MonoBehaviour {
 			);
 		}
 	}
+
+	public GameObject SummonObject(Object toSummon, Vector3 location, bool takeResource = true) {
+		if (GetComponentInChildren<Ghost>() != null) {
+			return null;
+		}
+
+		GameObject summonedObject = Instantiate(toSummon, location, Quaternion.identity) as GameObject;
+		summonedObject.transform.parent = transform;
+		summonedObject.GetComponent<BasicObject>().Parent = GetComponent<Player>();
+		if (takeResource) {
+			if (summonedObject.GetComponent<BasicObject>().Cost > OwnedResources) {
+				Destroy(summonedObject);
+				return null; //TODO add feedback to show that player cannot afford
+			} else {
+				if (summonedObject.GetComponent<Building>() == null || !PlayerInfo.IsHuman) {
+					OwnedResources -= summonedObject.GetComponent<BasicObject>().Cost;
+					return summonedObject;
+				} else {
+					summonedObject.AddComponent<Ghost>();
+					return summonedObject;
+				}
+			}
+		} else {
+			return summonedObject;
+		}
+	}
 }

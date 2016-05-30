@@ -14,11 +14,7 @@ public class CameraMovement : MonoBehaviour {
 		transform.position += FlatLook * Input.GetAxis("Vertical") * PanSpeed * Delta
 			+ Vector3.Cross(-FlatLook, Vector3.up) * Input.GetAxis("Horizontal") * PanSpeed * Delta;
 
-		GetComponent<Camera>().orthographicSize -= (Input.GetAxis("Zoom") * ZoomSpeed * Delta);
-		GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize.Clamp(5, 25);
-
-		GetComponent<Camera>().orthographicSize += (Input.GetAxis("Zoom Keys") * ZoomSpeed * Delta);
-		GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize.Clamp(5, 25);
-		//}
+		GetComponent<Camera>().orthographicSize -= (Input.GetAxis("Zoom") * ZoomSpeed * Delta).Clamp(5, 25);
+		GetComponent<Camera>().orthographicSize += (Input.GetAxis("Zoom Keys") * ZoomSpeed * Delta).Clamp(5, 25); //TODO fix zoom
 	}
 }

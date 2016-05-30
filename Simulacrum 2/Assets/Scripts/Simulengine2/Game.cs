@@ -5,6 +5,7 @@ public class Game : MonoBehaviour {
 	public Object CitizenPrefab;
 
 	public Object StoneMinePrefab;
+
 	public Object StorehousePrefab;
 
 	public void Awake() {
@@ -35,5 +36,16 @@ public class Game : MonoBehaviour {
 		terrainConfig.Seed = Mathf.RoundToInt(Random.value * 1000000);
 
 		ObjectExtension.FindComponent<TerrainGenerator>().Generate(terrainConfig); //finally, generate map
+	}
+
+	void Update() {
+		if (Input.GetKeyDown("q")) {
+			ObjectExtension.FindComponent<Player>(x => x.PlayerInfo.IsHuman).SummonObject(StorehousePrefab, Vector3.zero);
+		}
+	}
+
+	public Color GetPlayerColor(int playerNumber) {
+		float colorDivision = 1 / FindObjectOfType<GameConfig>().Players.Count;
+		return Color.HSVToRGB(colorDivision * (playerNumber - 1), 1, 1);
 	}
 }
