@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -94,7 +95,6 @@ public class TerrainGenerator : MonoBehaviour {
 		Texture.filterMode = FilterMode.Point;
 		Texture.wrapMode = TextureWrapMode.Clamp;
 		Texture.SetPixels(colorMap);
-		Texture.SetPixel(0,0, new Color(1f,0f,0f));
 		Texture.Apply();
 
 		Mesh finalMesh = meshData.CreateMesh();
@@ -105,14 +105,44 @@ public class TerrainGenerator : MonoBehaviour {
 		GetComponent<MeshCollider>().sharedMesh = finalMesh;
 	}
 
-	public TerrainType GetTerrainAtPosition(float xPos, float zPos) {
-		Debug.Log(xPos + " " + zPos);
+	public TerrainType GetTerrainAtPosition(Vector3 input) {
+		Debug.Log(input.x + " " + input.z);
 		return TerrainTypes.FirstOrDefault(t =>
 			Texture.GetPixel(
-				(int) Math.Ceiling(xPos + (Config.MapWidth / 2)) - 1,
-				(int) (-Math.Ceiling(zPos - (Config.MapHeight / 2)))
+				(int) Math.Ceiling(input.x + (Config.MapWidth / 2)) - 1,
+				(int) (-Math.Ceiling(input.z - (Config.MapHeight / 2)))
 			) == t.Color
 		);
+	}
+
+	public TerrainType[] GetTerrainNearPosition(Vector3 input, float bufferRadius) {
+		Debug.Log(input.x + " " + input.z);
+		List<TerrainType> returned = new List<TerrainType>();
+		returned.Add(TerrainTypes.FirstOrDefault(t =>
+			Texture.GetPixel(
+				(int) Math.Ceiling(input.x + bufferRadius + (Config.MapWidth / 2)) - 1,
+				(int) (-Math.Ceiling(input.z + bufferRadius - (Config.MapHeight / 2)))
+			) == t.Color
+		));
+		returned.Add(TerrainTypes.FirstOrDefault(t =>
+			Texture.GetPixel(
+				(int) Math.Ceiling(input.x + bufferRadius + (Config.MapWidth / 2)) - 1,
+				(int) (-Math.Ceiling(input.z - bufferRadius - (Config.MapHeight / 2)))
+			) == t.Color
+		));
+		returned.Add(TerrainTypes.FirstOrDefault(t =>
+			Texture.GetPixel(
+				(int) Math.Ceiling(input.x - bufferRadius + (Config.MapWidth / 2)) - 1,
+				(int) (-Math.Ceiling(input.z + bufferRadius - (Config.MapHeight / 2)))
+			) == t.Color
+		));
+		returned.Add(TerrainTypes.FirstOrDefault(t =>
+			Texture.GetPixel(
+				(int) Math.Ceiling(input.x - bufferRadius + (Config.MapWidth / 2)) - 1,
+				(int) (-Math.Ceiling(input.z - bufferRadius - (Config.MapHeight / 2)))
+			) == t.Color
+		));
+		return returned.ToArray();
 	}
 
 	void Start() {
