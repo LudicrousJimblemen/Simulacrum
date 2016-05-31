@@ -9,6 +9,18 @@ public class Game : MonoBehaviour {
 	public Object StorehousePrefab;
 
 	public void Awake() {
+		TerrainConfig terrainConfig = new TerrainConfig(); //configure map
+
+		terrainConfig.MapWidth = 64;
+		terrainConfig.MapHeight = 64;
+		terrainConfig.NoiseScale = 13;
+		terrainConfig.Octaves = 3;
+		terrainConfig.Persistance = 0.45f;
+		terrainConfig.Lacunarity = 1.6f;
+		terrainConfig.Seed = Mathf.RoundToInt(Random.value * 1000000);
+
+		ObjectExtension.FindComponent<TerrainGenerator>().Generate(terrainConfig); //finally, generate map
+
 		int playerNumber = 1; //used to assign numbers to players
 
 		GameConfig config = FindObjectOfType<GameConfig>(); //finds config data passed from menu
@@ -23,19 +35,19 @@ public class Game : MonoBehaviour {
 			};
 
 			playerNumber++; //add 1 to player number, for next player
+
+			playerObject.GetComponent<Player>().SummonObject( //summon starting storehouse in random place
+				StorehousePrefab,
+				new Vector3(
+					Random.Range(-(terrainConfig.MapWidth / 2), terrainConfig.MapWidth / 2),
+					0f,
+					Random.Range(-(terrainConfig.MapHeight / 2), terrainConfig.MapHeight / 2)
+				),
+				false
+			);
+
+			Camera.main.transform.position = ObjectExtension.FindComponent<CameraMovement>();
 		}
-
-		TerrainConfig terrainConfig = new TerrainConfig(); //configure map
-
-		terrainConfig.MapWidth = 64;
-		terrainConfig.MapHeight = 64;
-		terrainConfig.NoiseScale = 13;
-		terrainConfig.Octaves = 3;
-		terrainConfig.Persistance = 0.45f;
-		terrainConfig.Lacunarity = 1.6f;
-		terrainConfig.Seed = Mathf.RoundToInt(Random.value * 1000000);
-
-		ObjectExtension.FindComponent<TerrainGenerator>().Generate(terrainConfig); //finally, generate map
 	}
 
 	void Update() {

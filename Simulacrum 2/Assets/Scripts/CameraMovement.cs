@@ -17,4 +17,12 @@ public class CameraMovement : MonoBehaviour {
 		GetComponent<Camera>().orthographicSize -= (Input.GetAxis("Zoom") * ZoomSpeed * Delta).Clamp(5, 25);
 		GetComponent<Camera>().orthographicSize += (Input.GetAxis("Zoom Keys") * ZoomSpeed * Delta).Clamp(5, 25); //TODO fix zoom
 	}
+	/*
+	Vector3 LookAt(Vector3 position) {
+		Vector3 forward = transform.forward;
+		forward.Normalize();
+		transform.position = position;
+		//TODO
+	}
+	*/
 }
