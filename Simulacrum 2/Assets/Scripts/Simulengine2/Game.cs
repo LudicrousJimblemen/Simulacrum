@@ -46,7 +46,7 @@ public class Game : MonoBehaviour {
 				false
 			);
 
-			Camera.main.transform.position = ObjectExtension.FindComponent<CameraMovement>();
+			//Camera.main.transform.position = ObjectExtension.FindComponent<CameraMovement>();
 		}
 	}
 
@@ -57,7 +57,43 @@ public class Game : MonoBehaviour {
 	}
 
 	public Color GetPlayerColor(int playerNumber) {
+		/*
 		float colorDivision = 1 / FindObjectOfType<GameConfig>().Players.Count;
 		return Color.HSVToRGB(colorDivision * (playerNumber - 1), 1, 1);
+		*/
+
+		Color returnedColor;
+
+		switch (playerNumber) {
+			case 1:
+				returnedColor = Color.red;
+				break;
+			case 2:
+				returnedColor = Color.blue;
+				break;
+			case 3:
+				returnedColor = Color.green;
+				break;
+			case 4:
+				returnedColor = Color.yellow;
+				break;
+			case 5:
+				returnedColor = new Color (1f, 0.5f, 0f); //orange
+				break;
+			case 6:
+				returnedColor = new Color(1f, 0f, 0.5f); //purple
+				break;
+			case 7:
+				returnedColor = Color.cyan;
+				break;
+			case 8:
+				returnedColor = Color.gray;
+				break;
+			default:
+				returnedColor = Color.white;
+				break;
+		}
+
+		return returnedColor;
 	}
 }

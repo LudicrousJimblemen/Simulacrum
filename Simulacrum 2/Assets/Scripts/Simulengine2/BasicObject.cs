@@ -4,8 +4,6 @@ using UnityEngine;
 public class BasicObject : MonoBehaviour {
 	public bool IsGhost;
 
-	public bool Selected;
-
 	public float Sight = 9f;
 
 	public Resources Cost;

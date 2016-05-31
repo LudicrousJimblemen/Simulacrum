@@ -63,7 +63,7 @@ public class Player : MonoBehaviour {
 				}
 			}
 		} else {
-			summonedObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
+			summonedObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
 			return summonedObject;
 		}
 	}
