@@ -46,6 +46,8 @@ public class Player : MonoBehaviour {
 		GameObject summonedObject = Instantiate(toSummon, location, Quaternion.identity) as GameObject;
 		summonedObject.transform.parent = transform;
 		summonedObject.GetComponent<BasicObject>().Parent = GetComponent<Player>();
+		summonedObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+
 		if (takeResource) {
 			if (summonedObject.GetComponent<BasicObject>().Cost > OwnedResources) {
 				Destroy(summonedObject);
@@ -53,6 +55,7 @@ public class Player : MonoBehaviour {
 			} else {
 				if (summonedObject.GetComponent<Building>() == null || !PlayerInfo.IsHuman) {
 					OwnedResources -= summonedObject.GetComponent<BasicObject>().Cost;
+					summonedObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
 					return summonedObject;
 				} else {
 					summonedObject.AddComponent<Ghost>();
@@ -60,6 +63,7 @@ public class Player : MonoBehaviour {
 				}
 			}
 		} else {
+			summonedObject.GetComponent<SkinnedMeshRenderer>().enabled = true;
 			return summonedObject;
 		}
 	}
